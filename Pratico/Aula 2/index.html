@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscrição para Evento</title>
+
+    <!-- Fase 2: Ficheiro CSS externo -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Fase 2: Ficheiro JavaScript externo em modo async -->
+    <!-- async: descarregado em paralelo e executado assim que disponível,
+         sem esperar pelo parsing do HTML. Ideal para scripts independentes (ex: analytics). -->
+    <script src="script.js" async></script>
+
+    <!-- Exemplo com defer (comentado para referência):
+         defer: descarregado em paralelo mas só executado após o HTML estar completamente analisado.
+         Ideal para scripts que dependem do DOM ou de outros scripts. -->
+    <!-- <script src="script.js" defer></script> -->
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* ── Header ── */
+        header {
+            background: linear-gradient(135deg, #1a237e, #283593);
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        header .logo {
+            width: 70px;
+            height: 70px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1a237e;
+            flex-shrink: 0;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-top: 4px;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            background-color: #283593;
+            padding: 0 40px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li a {
+            display: block;
+            color: #c5cae9;
+            text-decoration: none;
+            padding: 14px 20px;
+            font-size: 0.95rem;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        nav ul li a:hover {
+            background-color: #1a237e;
+            color: #fff;
+        }
+
+        /* ── Main ── */
+        main {
+            max-width: 860px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+        }
+
+        /* ── Cards (sections inside main) ── */
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            color: #1a237e;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #e8eaf6;
+            padding-bottom: 10px;
+        }
+
+        .card p.intro {
+            color: #666;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        /* ── Form ── */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #444;
+            font-size: 0.9rem;
+        }
+
+        form label .required {
+            color: #e53935;
+            margin-left: 3px;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="tel"],
+        form input[type="url"],
+        form input[type="file"],
+        form select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background-color: #fafafa;
+        }
+
+        form input:focus,
+        form select:focus {
+            outline: none;
+            border-color: #3949ab;
+            box-shadow: 0 0 0 3px rgba(57, 73, 171, 0.15);
+            background-color: #fff;
+        }
+
+        form .hint {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #3949ab;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-weight: normal;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .checkbox-group label a {
+            color: #3949ab;
+            text-decoration: underline;
+        }
+
+        .submit-group {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(135deg, #1a237e, #3949ab);
+            color: white;
+            border: none;
+            padding: 14px 48px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        input[type="submit"]:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        input[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        /* ── External files section ── */
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #283593;
+            margin: 24px 0 8px;
+        }
+
+        .media-container {
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 12px 0 20px;
+            background: #f5f5f5;
+        }
+
+        .media-container img,
+        .media-container video {
+            max-width: 100%;
+            display: block;
+        }
+
+        .note {
+            background-color: #e8eaf6;
+            border-left: 4px solid #3949ab;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            margin: 10px 0 20px;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        code {
+            background: #e0e0e0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+
+        /* ── Footer ── */
+        footer {
+            background-color: #1a237e;
+            color: #c5cae9;
+            text-align: center;
+            padding: 24px 40px;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 4px 0;
+        }
+
+        footer a {
+            color: #9fa8da;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══════════════════════════════════════════
+         Cabeçalho da página
+    ══════════════════════════════════════════ -->
+    <header>
+        <div class="logo" aria-label="Logotipo da organização">EV</div>
+        <div>
+            <h1>TechEvent 2025</h1>
+            <p>Conferência Internacional de Tecnologia e Inovação</p>
+        </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════
+         Barra de navegação
+    ══════════════════════════════════════════ -->
+    <nav aria-label="Navegação principal">
+        <ul>
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Programação</a></li>
+            <li><a href="#">Localização</a></li>
+        </ul>
+    </nav>
+
+    <!-- ══════════════════════════════════════════
+         Conteúdo principal
+    ══════════════════════════════════════════ -->
+    <main>
+
+        <!-- ── FASE 1: Formulário de Inscrição ── -->
+        <div class="card">
+            <h2>Formulário de Inscrição</h2>
+            <p class="intro">
+                Preencha os campos abaixo para se inscrever no evento.
+                Os campos marcados com <span style="color:#e53935;">*</span> são obrigatórios.
+            </p>
+
+            <form action="#" method="post">
+
+                <!-- Nome completo -->
+                <div class="form-group">
+                    <label for="nome">Nome completo <span class="required">*</span></label>
+                    <input type="text" id="nome" name="nome" placeholder="Ex: João Silva" minlength="3" maxlength="50"
+                        required>
+                    <p class="hint">Entre 3 e 50 caracteres.</p>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Ex: joao@exemplo.com" required>
+                </div>
+
+                <!-- Telefone -->
+                <div class="form-group">
+                    <label for="telefone">Telefone <span class="required">*</span></label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="Ex: +351 912 345 678" required>
+                </div>
+
+                <!-- Página pessoal -->
+                <div class="form-group">
+                    <label for="website">Página pessoal / Website</label>
+                    <input type="url" id="website" name="website" placeholder="Ex: https://www.meusite.com">
+                </div>
+
+                <!-- Código postal -->
+                <div class="form-group">
+                    <label for="codigo_postal">Código postal <span class="required">*</span></label>
+                    <input type="text" id="codigo_postal" name="codigo_postal" placeholder="Ex: 1000-001"
+                        pattern="^\d{4}-\d{3}$" required>
+                    <p class="hint">Formato: XXXX-XXX (ex: 1000-001)</p>
+                </div>
+
+                <!-- Tipo de ingresso -->
+                <div class="form-group">
+                    <label for="ingresso">Tipo de ingresso <span class="required">*</span></label>
+                    <select id="ingresso" name="ingresso" required>
+                        <option value="" disabled selected>-- Selecione um tipo --</option>
+                        <option value="geral">Geral</option>
+                        <option value="estudante">Estudante</option>
+                        <option value="profissional">Profissional</option>
+                        <option value="vip">VIP</option>
+                    </select>
+                </div>
+
+                <!-- Ficheiro com foto -->
+                <div class="form-group">
+                    <label for="foto">Foto de perfil</label>
+                    <input type="file" id="foto" name="foto" accept="image/*">
+                    <p class="hint">Formatos aceites: JPG, PNG, GIF (máx. 5 MB).</p>
+                </div>
+
+                <!-- Termos e condições -->
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="termos" name="termos" required>
+                        <label for="termos">
+                            Aceito os <a href="#">Termos e Condições</a> e a
+                            <a href="#">Política de Privacidade</a>. <span class="required">*</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Botão de envio -->
+                <div class="submit-group">
+                    <input type="submit" value="Enviar Inscrição">
+                </div>
+
+            </form>
+        </div>
+
+        <!-- ── FASE 2: Inclusão de Ficheiros Externos ── -->
+        <div class="card">
+            <h2>Inclusão de Ficheiros Externos</h2>
+            <p class="intro">Esta secção demonstra a inclusão de diferentes tipos de ficheiros externos.</p>
+
+            <!-- CSS externo -->
+            <p class="section-title">1. Folha de Estilos CSS Externa</p>
+            <p>
+                A tag <code>&lt;link rel="stylesheet" href="style.css"&gt;</code> no <code>&lt;head&gt;</code>
+                carrega um ficheiro CSS externo.
+            </p>
+            <div class="note">
+                <strong>A tag <code>&lt;link&gt;</code> bloqueia a renderização da página?</strong><br>
+                Sim. O browser bloqueia a renderização até que todos os ficheiros CSS via
+                <code>&lt;link rel="stylesheet"&gt;</code> sejam descarregados e processados,
+                evitando o FOUC (Flash of Unstyled Content). Para CSS não crítico podem usar-se
+                técnicas como <code>rel="preload"</code> ou <code>media="print"</code>.
+            </div>
+
+            <!-- JavaScript externo -->
+            <p class="section-title">2. Script JavaScript Externo</p>
+            <p>
+                A tag <code>&lt;script src="script.js" async&gt;</code> no <code>&lt;head&gt;</code>
+                carrega um ficheiro JavaScript externo.
+            </p>
+            <div class="note">
+                <strong>async vs defer:</strong><br>
+                • <strong>async</strong>: descarregado em paralelo e executado imediatamente quando disponível,
+                podendo interromper o parsing. Ideal para scripts independentes (ex: analytics, publicidade).<br><br>
+                • <strong>defer</strong>: descarregado em paralelo mas executado apenas após o HTML estar
+                completamente analisado, mantendo a ordem entre scripts. Ideal para scripts que dependem
+                do DOM ou de outros scripts (ex: frameworks, bibliotecas de UI).
+            </div>
+
+            <!-- Imagem com lazy loading -->
+            <p class="section-title">3. Imagem Externa com Lazy Loading</p>
+            <p>
+                O atributo <code>loading="lazy"</code> adia o carregamento da imagem até que esta
+                esteja próxima da área visível (viewport).
+            </p>
+            <div class="media-container">
+                <img src="https://picsum.photos/800/350?random=42"
+                    alt="Imagem de demonstração carregada com lazy loading" loading="lazy" width="800" height="350">
+            </div>
+            <div class="note">
+                <strong>Quando usar lazy loading?</strong><br>
+                • Em páginas com muitas imagens (galerias, feeds, lojas online).<br>
+                • Em imagens abaixo da dobra (below the fold), fora da área visível inicial.<br>
+                • Para reduzir o tempo de carregamento inicial e o consumo de dados.<br>
+                • <strong>Não usar</strong> em imagens críticas acima da dobra (hero images, logótipos),
+                pois causaria atrasos visíveis.
+            </div>
+
+            <!-- Vídeo externo -->
+            <p class="section-title">4. Vídeo Externo</p>
+            <p>
+                A tag <code>&lt;video&gt;</code> permite incorporar vídeos diretamente na página HTML.
+            </p>
+            <div class="media-container">
+                <video controls width="800" preload="metadata" poster="https://picsum.photos/800/450?random=7">
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+                    O seu browser não suporta a reprodução de vídeo HTML5.
+                </video>
+            </div>
+            <p>
+                O atributo <code>preload="metadata"</code> instrui o browser a carregar apenas os
+                metadados do vídeo (duração, dimensões) sem descarregar o ficheiro completo.
+            </p>
+
+        </div>
+
+    </main>
+
+    <!-- ══════════════════════════════════════════
+         Rodapé da página
+    ══════════════════════════════════════════ -->
+    <footer>
+        <p>Contacto: <a href="mailto:info@techevent2025.pt">info@techevent2025.pt</a> | Tel: +351 210 000 000</p>
+        <p>&copy; 2025 TechEvent. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+
+</html>

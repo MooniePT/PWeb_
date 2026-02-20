@@ -1,0 +1,61 @@
+/* style.css - Folha de estilos externa para fase2.html */
+
+/* Este ficheiro é carregado via <link rel="stylesheet"> no <head> */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.7;
+}
+
+h1 {
+    color: #1a237e;
+    border-bottom: 3px solid #3949ab;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #283593;
+    margin-top: 36px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 14px;
+}
+
+.media-container {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+img, video {
+    max-width: 100%;
+    border-radius: 6px;
+    display: block;
+}
+
+.note {
+    background-color: #e8eaf6;
+    border-left: 4px solid #3949ab;
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    margin: 16px 0;
+    font-size: 0.92rem;
+}
+
+code {
+    background: #e0e0e0;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.88rem;
+}

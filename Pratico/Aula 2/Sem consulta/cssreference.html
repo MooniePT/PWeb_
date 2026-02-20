@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <title>Referência CSS e JSON</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/pt/a/af/UBI_Logo_Symbol.png" alt="Logo da UBI">
+        <h1>Referência CSS &amp; JSON</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="about.html">Programação</a></li>
+            <li><a href="contact.html">Localização</a></li>
+            <li><a href="externfiles.html">Ficheiros Externos</a></li>
+            <li><a href="cssreference.html">Referência CSS/JSON</a></li>
+        </ul>
+    </nav>
+    <main>
+
+        <!-- ============================================
+             SECÇÃO 1 — O QUE É CSS E COMO LIGAR
+             ============================================ -->
+        <div class="ref-section">
+            <span class="tag">CSS Básico</span>
+            <h2>1. O que é CSS e como ligar ao HTML?</h2>
+            <p>
+                CSS (Cascading Style Sheets) é a linguagem usada para definir o aspeto visual de uma página HTML.
+                Para ligar um ficheiro CSS externo, coloca a tag <code>&lt;link&gt;</code> dentro do <code>&lt;head&gt;</code>:
+            </p>
+            <div class="code-block">
+<span class="com">&lt;!-- Dentro do &lt;head&gt; do HTML --&gt;</span>
+<span class="kw">&lt;link</span> <span class="sel">rel</span>=<span class="val">"stylesheet"</span> <span class="sel">href</span>=<span class="val">"style.css"</span><span class="kw">&gt;</span>
+            </div>
+            <p>
+                ⚠️ Esta tag <strong>bloqueia a renderização</strong> (render-blocking) até o CSS estar carregado —
+                isso é intencional para evitar que a página apareça sem estilos (FOUC).
+            </p>
+            <p><strong>Onde foi usado:</strong> Em todas as páginas deste projeto (<code>index.html</code>, <code>externfiles.html</code>, <code>cssreference.html</code>).</p>
+        </div>
+
+        <!-- ============================================
+             SECÇÃO 2 — SELETORES
+             ============================================ -->
+        <div class="ref-section">
+            <span class="tag">Seletores</span>
+            <h2>2. Seletores CSS</h2>
+            <p>Os seletores indicam a quais elementos HTML as regras CSS se aplicam.</p>
+            <div class="code-block">
+<span class="com">/* Seletor de tag — aplica a TODOS os parágrafos */</span>
+<span class="sel">p</span> { <span class="kw">color</span>: <span class="val">#333</span>; }
+
+<span class="com">/* Seletor de classe — aplica a elementos com class="destaque" */</span>
+<span class="sel">.destaque</span> { <span class="kw">background</span>: <span class="val">yellow</span>; }
+
+<span class="com">/* Seletor de ID — aplica ao elemento com id="titulo" */</span>
+<span class="sel">#titulo</span> { <span class="kw">font-size</span>: <span class="val">2rem</span>; }
+
+<span class="com">/* Pseudo-classe — aplica quando o rato passa por cima */</span>
+<span class="sel">a:hover</span> { <span class="kw">text-decoration</span>: <span class="val">underline</span>; }
+
+<span class="com">/* Pseudo-classe — linhas pares de uma tabela */</span>
+<span class="sel">tr:nth-child(even)</span> { <span class="kw">background</span>: <span class="val">#f0f4f8</span>; }
+            </div>
+            <p><strong>Onde foi usado:</strong> <code>nav ul li a:hover</code>, <code>tr:nth-child(even)</code> e <code>form button[type="submit"]</code> no <code>style.css</code>.</p>
+        </div>
+
+        <!-- ============================================
+             SECÇÃO 3 — BOX MODEL
+             ============================================ -->
+        <div class="ref-section">
+            <span class="tag">Box Model</span>
+            <h2>3. Box Model (Margin, Padding, Border)</h2>
+            <p>
+                Cada elemento HTML é uma "caixa" composta por 4 camadas, de dentro para fora:
+                <strong>conteúdo → padding → border → margin</strong>.
+            </p>
+            <div class="code-block">
+<span class="sel">div</span> {
+    <span class="kw">width</span>: <span class="val">300px</span>;            <span class="com">/* largura do conteúdo */</span>
+    <span class="kw">padding</span>: <span class="val">1rem</span>;          <span class="com">/* espaço interior */</span>
+    <span class="kw">border</span>: <span class="val">2px solid #003366</span>; <span class="com">/* contorno */</span>
+    <span class="kw">margin</span>: <span class="val">1rem auto</span>;      <span class="com">/* espaço exterior + centrar */</span>
+    <span class="kw">box-sizing</span>: <span class="val">border-box</span>; <span class="com">/* padding incluído na largura */</span>
+}
+            </div>
+            <p><strong>Onde foi usado:</strong> Em todo o <code>style.css</code> — <code>padding</code> no <code>header</code>, <code>form</code>, <code>table th/td</code>; <code>margin: auto</code> nas imagens e <code>form</code>.</p>
+        </div>
+
+        <!-- ============================================
+             SECÇÃO 4 — FLEXBOX
+             ============================================ -->
+        <div class="ref-section">
+            <span class="tag">Flexbox</span>
+            <h2>4. Flexbox — Alinhamento e Layout</h2>
+            <p>Flexbox é o sistema de layout CSS para alinhar elementos em linha ou coluna facilmente.</p>
+            <div class="code-block">
+<span class="sel">.container</span> {
+    <span class="kw">display</span>: <span class="val">flex</span>;               <span class="com">/* ativa flexbox */</span>
+    <span class="kw">flex-direction</span>: <span class="val">row</span>;        <span class="com">/* direção: linha (padrão) ou column */</span>
+    <span class="kw">justify-content</span>: <span class="val">center</span>;   <span class="com">/* alinha no eixo principal */</span>
+    <span class="kw">align-items</span>: <span class="val">center</span>;       <span class="com">/* alinha no eixo cruzado */</span>
+    <span class="kw">gap</span>: <span class="val">1rem</span>;                  <span class="com">/* espaço entre filhos */</span>
+    <span class="kw">flex-wrap</span>: <span class="val">wrap</span>;           <span class="com">/* permite quebra de linha */</span>
+}
+            </div>
+            <p><strong>Onde foi usado:</strong> <code>header</code> (logo + título lado a lado), <code>nav ul</code> (links em linha), <code>form</code> (<code>flex-direction: column</code> para campos em coluna).</p>
+        </div>
+
+        <!-- ============================================
+             SECÇÃO 5 — TIPOGRAFIA
+             ============================================ -->
+        <div class="ref-section">
+            <span class="tag">Tipografia</span>
+            <h2>5. Tipografia (Fontes e Texto)</h2>
+            <p>Para usar fontes do Google Fonts, importa no topo do <code>style.css</code>:</p>
+            <div class="code-block">
+<span class="com">/* Importar fonte do Google Fonts */</span>
+<span class="kw">@import</span> <span class="val">url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap')</span>;
+
+<span class="sel">body</span> {
+    <span class="kw">font-family</span>: <span class="val">'Inter', sans-serif</span>;  <span class="com">/* fonte principal */</span>
+    <span class="kw">font-size</span>: <span class="val">1rem</span>;                  <span class="com">/* tamanho base (16px) */</span>
+    <span class="kw">font-weight</span>: <span class="val">400</span>;                 <span class="com">/* normal=400, bold=700 */</span>
+    <span class="kw">line-height</span>: <span class="val">1.6</span>;                 <span class="com">/* espaçamento entre linhas */</span>
+    <span class="kw">color</span>: <span class="val">#1a1a2e</span>;                   <span class="com">/* cor do texto */</span>
+}
+            </div>
+            <p><strong>Onde foi usado:</strong> <code>body</code> no <code>style.css</code> — fonte <em>Inter</em> para todas as páginas do projeto.</p>
+        </div>
+
+        <!-- ============================================
+             SECÇÃO 6 — CORES E FUNDOS
+             ============================================ -->
+        <div class="ref-section">
+            <span class="tag">Cores</span>
+            <h2>6. Cores e Fundos</h2>
+            <p>O CSS suporta vários formatos de cor:</p>
+            <div class="code-block">
+<span class="sel">div</span> {
+    <span class="kw">color</span>: <span class="val">#003366</span>;                  <span class="com">/* hexadecimal */</span>
+    <span class="kw">background-color</span>: <span class="val">rgb(0,51,102)</span>;  <span class="com">/* RGB */</span>
+    <span class="kw">background-color</span>: <span class="val">rgba(0,51,102,0.8)</span>; <span class="com">/* RGBA (com transparência) */</span>
+}
+
+<span class="com">/* Gradiente linear */</span>
+<span class="sel">header</span> {
+    <span class="kw">background</span>: <span class="val">linear-gradient(135deg, #003366, #0055aa)</span>;
+}
+            </div>
+            <p><strong>Onde foi usado:</strong> <code>header</code> e <code>footer</code> com <code>#003366</code>, fundo do <code>body</code> com <code>#f4f6f9</code>, <code>table th</code> com cor primária.</p>
+        </div>
+
+        <!-- ============================================
+             SECÇÃO 7 — SOMBRAS E BORDAS ARREDONDADAS
+             ============================================ -->
+        <div class="ref-section">
+            <span class="tag">Efeitos Visuais</span>
+            <h2>7. Sombras e Bordas Arredondadas</h2>
+            <p>Dois dos efeitos mais usados para dar profundidade e modernidade às páginas:</p>
+            <div class="code-block">
+<span class="sel">img</span> {
+    <span class="kw">border-radius</span>: <span class="val">10px</span>; <span class="com">/* cantos arredondados */</span>
+    <span class="kw">box-shadow</span>: <span class="val">0 4px 16px rgba(0,0,0,0.15)</span>;
+    <span class="com">/*            ^ deslocamento X
+                    ^ deslocamento Y
+                         ^ desfoque
+                                   ^ cor com transparência */</span>
+}
+
+<span class="com">/* Sombra de texto */</span>
+<span class="sel">h1</span> {
+    <span class="kw">text-shadow</span>: <span class="val">1px 1px 4px rgba(0,0,0,0.3)</span>;
+}
+            </div>
+            <p><strong>Onde foi usado:</strong> <code>img</code>, <code>iframe</code>, <code>table</code>, <code>form</code> e <code>.ref-section</code> no <code>style.css</code>.</p>
+        </div>
+
+        <!-- ============================================
+             SECÇÃO 8 — TRANSIÇÕES E HOVER
+             ============================================ -->
+        <div class="ref-section">
+            <span class="tag">Interatividade</span>
+            <h2>8. Transições e Efeitos de Hover</h2>
+            <p>As transições animam suavemente as mudanças de propriedades CSS:</p>
+            <div class="code-block">
+<span class="sel">button</span> {
+    <span class="kw">background-color</span>: <span class="val">#003366</span>;
+    <span class="kw">transition</span>: <span class="val">background-color 0.2s ease, transform 0.1s ease</span>;
+    <span class="com">/*               ^ propriedade   ^ duração  ^ tipo de animação */</span>
+}
+
+<span class="sel">button:hover</span> {
+    <span class="kw">background-color</span>: <span class="val">#0055aa</span>; <span class="com">/* muda cor no hover */</span>
+    <span class="kw">transform</span>: <span class="val">translateY(-1px)</span>; <span class="com">/* sobe 1px — efeito de elevação */</span>
+}
+            </div>
+            <p><strong>Onde foi usado:</strong> Botão do formulário, links da navegação e linhas da tabela no <code>style.css</code>.</p>
+        </div>
+
+        <!-- ============================================
+             SECÇÃO 9 — O QUE É JSON E COMO SE USA
+             ============================================ -->
+        <div class="ref-section">
+            <span class="tag">JSON</span>
+            <h2>9. O que é JSON e como se usa em HTML?</h2>
+            <p>
+                JSON (JavaScript Object Notation) é um formato leve de armazenamento e troca de dados.
+                É legível por humanos e facilmente processado por JavaScript.
+                Em HTML, é normalmente carregado via JavaScript com <code>fetch()</code>:
+            </p>
+            <div class="code-block">
+<span class="com">// Estrutura de um ficheiro JSON</span>
+{
+  <span class="sel">"nome"</span>: <span class="val">"UBI"</span>,
+  <span class="sel">"ano"</span>: <span class="val">2026</span>,
+  <span class="sel">"ativo"</span>: <span class="val">true</span>,
+  <span class="sel">"paginas"</span>: [
+    { <span class="sel">"id"</span>: <span class="val">"index"</span>, <span class="sel">"titulo"</span>: <span class="val">"Início"</span> },
+    { <span class="sel">"id"</span>: <span class="val">"externfiles"</span>, <span class="sel">"titulo"</span>: <span class="val">"Ficheiros Externos"</span> }
+  ]
+}
+
+<span class="com">// Carregar o JSON com JavaScript (fetch API)</span>
+<span class="kw">fetch</span>(<span class="val">'script.json'</span>)
+  .<span class="kw">then</span>(res => res.<span class="kw">json</span>())
+  .<span class="kw">then</span>(data => <span class="kw">console</span>.<span class="kw">log</span>(data.nome)); <span class="com">// Output: "UBI"</span>
+            </div>
+
+            <p><strong>Tipos de dados em JSON:</strong></p>
+            <table>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Exemplo</th>
+                    <th>Notas</th>
+                </tr>
+                <tr>
+                    <td><code>string</code></td>
+                    <td><code>"UBI"</code></td>
+                    <td>Texto entre aspas duplas</td>
+                </tr>
+                <tr>
+                    <td><code>number</code></td>
+                    <td><code>2026</code></td>
+                    <td>Inteiro ou decimal, sem aspas</td>
+                </tr>
+                <tr>
+                    <td><code>boolean</code></td>
+                    <td><code>true</code> / <code>false</code></td>
+                    <td>Sem aspas, minúsculas</td>
+                </tr>
+                <tr>
+                    <td><code>array</code></td>
+                    <td><code>["a", "b"]</code></td>
+                    <td>Lista de valores entre <code>[ ]</code></td>
+                </tr>
+                <tr>
+                    <td><code>object</code></td>
+                    <td><code>{ "chave": "valor" }</code></td>
+                    <td>Pares chave/valor entre <code>{ }</code></td>
+                </tr>
+                <tr>
+                    <td><code>null</code></td>
+                    <td><code>null</code></td>
+                    <td>Valor vazio/ausente</td>
+                </tr>
+            </table>
+            <p><strong>Onde foi usado:</strong> <code>script.json</code> neste projeto contém metadados do site, lista de páginas e configurações de estilo.</p>
+        </div>
+
+        <!-- ============================================
+             SECÇÃO 10 — SCRIPT: ASYNC vs DEFER
+             ============================================ -->
+        <div class="ref-section">
+            <span class="tag">JavaScript</span>
+            <h2>10. Incluir JavaScript: async vs defer</h2>
+            <p>Tal como o CSS, o JavaScript pode ser ligado externamente. O atributo usado afeta quando o script é executado:</p>
+            <div class="code-block">
+<span class="com">&lt;!-- Bloqueia o parsing do HTML (evitar) --&gt;</span>
+<span class="kw">&lt;script</span> <span class="sel">src</span>=<span class="val">"script.js"</span><span class="kw">&gt;&lt;/script&gt;</span>
+
+<span class="com">&lt;!-- async: descarrega em paralelo, executa assim que pronto (pode interromper) --&gt;</span>
+<span class="kw">&lt;script</span> <span class="sel">src</span>=<span class="val">"analytics.js"</span> <span class="sel">async</span><span class="kw">&gt;&lt;/script&gt;</span>
+
+<span class="com">&lt;!-- defer: descarrega em paralelo, executa só depois do HTML estar pronto --&gt;</span>
+<span class="kw">&lt;script</span> <span class="sel">src</span>=<span class="val">"app.js"</span> <span class="sel">defer</span><span class="kw">&gt;&lt;/script&gt;</span>
+            </div>
+            <table>
+                <tr>
+                    <th>Atributo</th>
+                    <th>Quando executa</th>
+                    <th>Quando usar</th>
+                </tr>
+                <tr>
+                    <td><em>(nenhum)</em></td>
+                    <td>Imediatamente — bloqueia o HTML</td>
+                    <td>Evitar (legado)</td>
+                </tr>
+                <tr>
+                    <td><code>async</code></td>
+                    <td>Logo que descarregado</td>
+                    <td>Scripts independentes (analytics, ads)</td>
+                </tr>
+                <tr>
+                    <td><code>defer</code></td>
+                    <td>Após o HTML estar pronto</td>
+                    <td>Scripts que usam o DOM ou dependem de outros</td>
+                </tr>
+            </table>
+            <p><strong>Onde foi usado:</strong> <code>&lt;script src="script.js" async&gt;</code> em <code>index.html</code> e <code>externfiles.html</code>.</p>
+        </div>
+
+    </main>
+    <footer>
+        <p>&copy; 2026 UBI. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

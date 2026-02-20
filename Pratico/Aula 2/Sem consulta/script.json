@@ -1,0 +1,46 @@
+{
+    "site": {
+        "nome": "UBI - Programação Web - Aula 2",
+        "autor": "Estudante de Engenharia Informática",
+        "ano": 2026,
+        "universidade": "Universidade da Beira Interior",
+        "linguagem": "pt"
+    },
+    "paginas": [
+        {
+            "id": "index",
+            "ficheiro": "index.html",
+            "titulo": "Inscrição para Evento",
+            "descricao": "Formulário de inscrição com campos de texto, email, telefone, URL, código postal, radio button, checkbox e upload de ficheiro.",
+            "elementos": ["form", "input", "label", "button"]
+        },
+        {
+            "id": "externfiles",
+            "ficheiro": "externfiles.html",
+            "titulo": "Inclusão de Ficheiros Externos",
+            "descricao": "Demonstração de inclusão de recursos externos: imagem via URL, vídeo e áudio embebidos com iframe do YouTube, e tabela de respostas.",
+            "elementos": ["img", "iframe", "table", "th", "td"]
+        },
+        {
+            "id": "cssreference",
+            "ficheiro": "cssreference.html",
+            "titulo": "Referência CSS e JSON",
+            "descricao": "Página de consulta pessoal com exemplos práticos de CSS (seletores, box model, flexbox, tipografia, cores, sombras) e estrutura JSON.",
+            "elementos": ["div", "section", "code", "pre"]
+        }
+    ],
+    "estilos": {
+        "ficheiro": "style.css",
+        "fonte": "Inter (Google Fonts)",
+        "corPrimaria": "#003366",
+        "corFundo": "#f4f6f9",
+        "corTexto": "#1a1a2e"
+    },
+    "navegacao": [
+        { "label": "Início",             "href": "index.html" },
+        { "label": "Programação",        "href": "about.html" },
+        { "label": "Localização",        "href": "contact.html" },
+        { "label": "Ficheiros Externos", "href": "externfiles.html" },
+        { "label": "Referência CSS/JSON","href": "cssreference.html" }
+    ]
+}

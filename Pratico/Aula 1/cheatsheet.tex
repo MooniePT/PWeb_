@@ -1,0 +1,807 @@
+% ============================================================
+%  Web Dev Cheatsheet — HTML · CSS · JS · Node.js · MongoDB
+%  Compile with: pdflatex cheatsheet.tex
+% ============================================================
+\documentclass[10pt,a4paper,landscape]{article}
+
+% ── Packages ────────────────────────────────────────────────
+\usepackage[landscape, margin=1cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{mdframed}
+\usepackage{fontawesome5}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{hyperref}
+
+% ── Colours ─────────────────────────────────────────────────
+\definecolor{bg}{HTML}{0F1117}
+\definecolor{surface}{HTML}{1A1D27}
+\definecolor{card}{HTML}{22263A}
+\definecolor{accent}{HTML}{3B82F6}
+\definecolor{htmlcol}{HTML}{E44D26}
+\definecolor{csscol}{HTML}{6B8EF5}
+\definecolor{jscol}{HTML}{F7DF1E}
+\definecolor{nodecol}{HTML}{68A063}
+\definecolor{mongocol}{HTML}{4DB33D}
+\definecolor{shortcol}{HTML}{A78BFA}
+\definecolor{codebg}{HTML}{0D1117}
+\definecolor{codetext}{HTML}{79C0FF}
+\definecolor{keyword}{HTML}{FF7B72}
+\definecolor{string}{HTML}{A5D6FF}
+\definecolor{comment}{HTML}{8B949E}
+\definecolor{func}{HTML}{D2A8FF}
+\definecolor{tipbg}{HTML}{1E3A2F}
+\definecolor{tiptext}{HTML}{86EFAC}
+\definecolor{warnbg}{HTML}{3A2A1E}
+\definecolor{warntext}{HTML}{FCD34D}
+\definecolor{muted}{HTML}{8892A4}
+\definecolor{textcol}{HTML}{E2E8F0}
+
+% ── Page style ──────────────────────────────────────────────
+\pagecolor{bg}
+\color{textcol}
+\setlength{\columnsep}{8pt}
+\setlength{\columnseprule}{0.4pt}
+\def\columnseprulecolor{\color{card}}
+
+% ── Code listings ───────────────────────────────────────────
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\scriptsize\color{codetext},
+  keywordstyle=\color{keyword}\bfseries,
+  stringstyle=\color{string},
+  commentstyle=\color{comment}\itshape,
+  breaklines=true,
+  breakatwhitespace=true,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{card},
+  xleftmargin=4pt,
+  xrightmargin=4pt,
+  aboveskip=3pt,
+  belowskip=3pt,
+  showstringspaces=false,
+  tabsize=2,
+}
+\lstdefinelanguage{JavaScript}{
+  keywords={const,let,var,function,async,await,return,if,else,try,catch,new,class,import,export,from,of,for,while,true,false,null,undefined},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  sensitive=true
+}
+
+% ── Section titles ──────────────────────────────────────────
+\titleformat{\section}[block]
+  {\normalfont\bfseries\small}
+  {}{0pt}
+  {\colorbox{surface}{\parbox{\dimexpr\linewidth-2\fboxsep}{\strut #1\strut}}}
+\titlespacing{\section}{0pt}{4pt}{2pt}
+
+\titleformat{\subsection}[block]
+  {\normalfont\bfseries\footnotesize\color{muted}}
+  {}{0pt}{#1}
+\titlespacing{\subsection}{0pt}{3pt}{1pt}
+
+% ── Card environment ────────────────────────────────────────
+\newmdenv[
+  backgroundcolor=card,
+  linecolor=surface,
+  linewidth=0.6pt,
+  innerleftmargin=5pt,
+  innerrightmargin=5pt,
+  innertopmargin=4pt,
+  innerbottommargin=4pt,
+  skipabove=3pt,
+  skipbelow=3pt,
+  roundcorner=3pt,
+]{card}
+
+% ── Tip / Warn boxes ────────────────────────────────────────
+\newmdenv[
+  backgroundcolor=tipbg,
+  linecolor=mongocol,
+  linewidth=1.5pt,
+  topline=false, rightline=false, bottomline=false,
+  innerleftmargin=5pt, innerrightmargin=4pt,
+  innertopmargin=2pt, innerbottommargin=2pt,
+  skipabove=2pt, skipbelow=2pt,
+]{tipbox}
+
+\newmdenv[
+  backgroundcolor=warnbg,
+  linecolor=warntext,
+  linewidth=1.5pt,
+  topline=false, rightline=false, bottomline=false,
+  innerleftmargin=5pt, innerrightmargin=4pt,
+  innertopmargin=2pt, innerbottommargin=2pt,
+  skipabove=2pt, skipbelow=2pt,
+]{warnbox}
+
+% ── Table helpers ───────────────────────────────────────────
+\newcolumntype{K}{>{\ttfamily\scriptsize\color{codetext}}l}
+\newcolumntype{D}{>{\scriptsize}X}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+
+% ── Colour dots ─────────────────────────────────────────────
+\newcommand{\cdot}[1]{\textcolor{#1}{\rule{6pt}{6pt}}\,}
+
+% ── Helpers ─────────────────────────────────────────────────
+\newcommand{\kbd}[1]{{\ttfamily\scriptsize\colorbox{surface}{\textcolor{codetext}{#1}}}}
+\newcommand{\tip}[1]{\begin{tipbox}\scriptsize\textcolor{tiptext}{#1}\end{tipbox}}
+\newcommand{\warn}[1]{\begin{warnbox}\scriptsize\textcolor{warntext}{#1}\end{warnbox}}
+
+% ── Suppress paragraph indent ───────────────────────────────
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+
+% ============================================================
+\begin{document}
+\begin{multicols}{4}
+
+% ── HEADER ──────────────────────────────────────────────────
+{\centering
+  {\large\bfseries\textcolor{accent}{⚡ Web Dev Cheatsheet}}\\[2pt]
+  {\scriptsize\textcolor{muted}{HTML · CSS · JavaScript · Node.js · MongoDB}}\\[4pt]
+}
+
+% ════════════════════════════════════════════════════════════
+%  HTML
+% ════════════════════════════════════════════════════════════
+\section{\textcolor{htmlcol}{■} HTML — Estrutura \& Semântica}
+
+\begin{card}
+\subsection{Estrutura Base (Emmet: \texttt{!} + Tab)}
+\begin{lstlisting}[language=HTML]
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width,
+             initial-scale=1.0">
+  <title>Título</title>
+</head>
+<body>
+</body>
+</html>
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Tags Semânticas HTML5}
+\begin{tabularx}{\linewidth}{KD}
+\toprule
+Tag & Uso \\
+\midrule
+<header>  & Cabeçalho da página \\
+<nav>     & Menu de navegação \\
+<main>    & Conteúdo principal \\
+<section> & Secção temática \\
+<article> & Conteúdo independente \\
+<aside>   & Barra lateral \\
+<footer>  & Rodapé \\
+<figure>  & Imagem com legenda \\
+\bottomrule
+\end{tabularx}
+\end{card}
+
+\begin{card}
+\subsection{Emmet — Atalhos HTML}
+\begin{tabularx}{\linewidth}{KD}
+\toprule
+Emmet & Resultado \\
+\midrule
+!              & Estrutura HTML completa \\
+div.classe     & <div class="classe"> \\
+ul>li*5        & ul com 5 li's \\
+a[href=\#]     & <a href="\#"> \\
+p\{Texto\}     & <p>Texto</p> \\
+input:email    & input type="email" \\
+nav>ul>li*4>a  & Nav com 4 links \\
+h\$*3\{T \$\}  & h1, h2, h3 com texto \\
+\bottomrule
+\end{tabularx}
+\end{card}
+
+\begin{card}
+\subsection{Formulário}
+\begin{lstlisting}[language=HTML]
+<form action="/enviar" method="POST">
+  <label for="nome">Nome:</label>
+  <input type="text" id="nome"
+         name="nome" required>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email"
+         name="email" required>
+
+  <button type="submit">Enviar</button>
+</form>
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Imagem Responsiva}
+\begin{lstlisting}[language=HTML]
+<picture>
+  <source media="(min-width:800px)"
+          srcset="grande.webp">
+  <img src="pequena.jpg"
+       alt="Descrição"
+       loading="lazy"
+       width="800" height="600">
+</picture>
+\end{lstlisting}
+\tip{Usa sempre \texttt{loading="lazy"} para melhor performance.}
+\end{card}
+
+% ════════════════════════════════════════════════════════════
+%  CSS
+% ════════════════════════════════════════════════════════════
+\section{\textcolor{csscol}{■} CSS — Estilo \& Layout}
+
+\begin{card}
+\subsection{Variáveis CSS}
+\begin{lstlisting}[language=CSS]
+:root {
+  --cor-primaria: #3b82f6;
+  --cor-texto:    #1e293b;
+  --espacamento:  1rem;
+  --radius:       8px;
+}
+.botao {
+  background: var(--cor-primaria);
+  padding: var(--espacamento);
+  border-radius: var(--radius);
+}
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Flexbox}
+\begin{lstlisting}[language=CSS]
+.container {
+  display: flex;
+  justify-content: center; /* eixo X */
+  align-items: center;     /* eixo Y */
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.item { flex: 1 1 200px; }
+\end{lstlisting}
+\tip{\texttt{gap} substitui margins entre itens flex.}
+\end{card}
+
+\begin{card}
+\subsection{CSS Grid}
+\begin{lstlisting}[language=CSS]
+.grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+/* 3 colunas fixas */
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Media Queries (Mobile First)}
+\begin{lstlisting}[language=CSS]
+.card { width: 100%; }
+
+@media (min-width: 768px) {
+  .card { width: 48%; }
+}
+@media (min-width: 1024px) {
+  .card { width: 32%; }
+}
+\end{lstlisting}
+\begin{tabularx}{\linewidth}{KD}
+480px  & Telemóvel \\
+768px  & Tablet \\
+1024px & Desktop \\
+1280px & Ecrã grande \\
+\end{tabularx}
+\end{card}
+
+\begin{card}
+\subsection{Animações \& Transições}
+\begin{lstlisting}[language=CSS]
+.btn {
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,.2);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.el { animation: fadeIn 0.5s ease forwards; }
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Seletores Avançados}
+\begin{tabularx}{\linewidth}{KD}
+\toprule
+Seletor & Significado \\
+\midrule
+p:first-child    & Primeiro filho \\
+li:nth-child(2n) & Elementos pares \\
+a:not(.ativo)    & Excluir classe \\
+input:focus      & Quando focado \\
+div > p          & Filho direto \\
+h2 + p           & Irmão adjacente \\
+{[}data-x="y"{]} & Por atributo \\
+::before         & Pseudo-elemento \\
+\bottomrule
+\end{tabularx}
+\end{card}
+
+\begin{card}
+\subsection{Reset Moderno}
+\begin{lstlisting}[language=CSS]
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+\end{lstlisting}
+\end{card}
+
+% ════════════════════════════════════════════════════════════
+%  JAVASCRIPT
+% ════════════════════════════════════════════════════════════
+\section{\textcolor{jscol}{■} JavaScript — Lógica \& DOM}
+
+\begin{card}
+\subsection{Selecionar Elementos}
+\begin{lstlisting}[language=JavaScript]
+const el  = document.querySelector('#id');
+const els = document.querySelectorAll('.cls');
+
+// Iterar
+els.forEach(el => el.classList.add('ativo'));
+
+// Manipular
+el.textContent = 'Novo texto';
+el.innerHTML   = '<strong>Bold</strong>';
+el.style.color = 'red';
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Eventos}
+\begin{lstlisting}[language=JavaScript]
+btn.addEventListener('click', (e) => {
+  e.preventDefault();
+  console.log('Clicado!');
+});
+
+// Delegação (eficiente)
+document.addEventListener('click', (e) => {
+  if (e.target.matches('.btn')) {
+    // lógica aqui
+  }
+});
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Fetch API}
+\begin{lstlisting}[language=JavaScript]
+// GET
+async function getData() {
+  try {
+    const res  = await fetch('/api/dados');
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.error('Erro:', err);
+  }
+}
+
+// POST
+await fetch('/api/criar', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ nome: 'Ana' })
+});
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Desestruturação \& Spread}
+\begin{lstlisting}[language=JavaScript]
+// Arrays
+const [a, b, ...resto] = [1, 2, 3, 4];
+
+// Objetos
+const { nome, idade = 18 } = utilizador;
+
+// Spread
+const novo = { ...obj1, ...obj2 };
+const arr  = [...arr1, ...arr2];
+
+// Default params
+function saudar(nome = 'Mundo') {
+  return `Olá, ${nome}!`;
+}
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Array — Métodos Essenciais}
+\begin{lstlisting}[language=JavaScript]
+const nums = [1, 2, 3, 4, 5];
+
+nums.map(n => n * 2);       // [2,4,6,8,10]
+nums.filter(n => n > 2);    // [3,4,5]
+nums.reduce((a,n) => a+n, 0); // 15
+nums.find(n => n > 3);      // 4
+nums.some(n => n > 4);      // true
+nums.every(n => n > 0);     // true
+nums.includes(3);            // true
+[...new Set(nums)];          // sem duplicados
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{LocalStorage}
+\begin{lstlisting}[language=JavaScript]
+// Guardar
+localStorage.setItem('user',
+  JSON.stringify({ nome: 'Ana' }));
+
+// Ler
+const user = JSON.parse(
+  localStorage.getItem('user'));
+
+// Remover
+localStorage.removeItem('user');
+localStorage.clear();
+\end{lstlisting}
+\warn{Nunca guardes senhas no localStorage!}
+\end{card}
+
+% ════════════════════════════════════════════════════════════
+%  NODE.JS
+% ════════════════════════════════════════════════════════════
+\section{\textcolor{nodecol}{■} Node.js — Servidor \& Backend}
+
+\begin{card}
+\subsection{Servidor Express Básico}
+\begin{lstlisting}[language=JavaScript]
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.json({ mensagem: 'Olá!' });
+});
+
+app.listen(3000, () => {
+  console.log('http://localhost:3000');
+});
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Estrutura de Projeto}
+\begin{lstlisting}
+projeto/
+├── src/
+│   ├── routes/      # rotas da API
+│   ├── models/      # modelos MongoDB
+│   ├── controllers/ # lógica negócio
+│   └── middleware/  # auth, etc.
+├── .env
+├── .gitignore
+├── package.json
+└── server.js
+\end{lstlisting}
+\tip{Instala: \texttt{npm init -y} → \texttt{npm i express mongoose dotenv}}
+\end{card}
+
+\begin{card}
+\subsection{Variáveis de Ambiente}
+\begin{lstlisting}
+# .env
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/bd
+JWT_SECRET=segredo_super_secreto
+\end{lstlisting}
+\begin{lstlisting}[language=JavaScript]
+require('dotenv').config();
+const port = process.env.PORT || 3000;
+const uri  = process.env.MONGODB_URI;
+\end{lstlisting}
+\warn{Adiciona \texttt{.env} ao \texttt{.gitignore} sempre!}
+\end{card}
+
+\begin{card}
+\subsection{CRUD com Express Router}
+\begin{lstlisting}[language=JavaScript]
+const router = require('express').Router();
+
+router.get('/',    listarTodos);
+router.get('/:id', obterUm);
+router.post('/',   criar);
+router.put('/:id', atualizar);
+router.delete('/:id', eliminar);
+
+module.exports = router;
+
+// server.js
+app.use('/api/utilizadores', router);
+\end{lstlisting}
+\end{card}
+
+% ════════════════════════════════════════════════════════════
+%  MONGODB
+% ════════════════════════════════════════════════════════════
+\section{\textcolor{mongocol}{■} MongoDB — Base de Dados NoSQL}
+
+\begin{card}
+\subsection{Ligação com Mongoose}
+\begin{lstlisting}[language=JavaScript]
+const mongoose = require('mongoose');
+
+async function ligar() {
+  try {
+    await mongoose.connect(
+      process.env.MONGODB_URI);
+    console.log('MongoDB ligado!');
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+}
+ligar();
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Schema \& Model}
+\begin{lstlisting}[language=JavaScript]
+const { Schema, model } = require('mongoose');
+
+const schema = new Schema({
+  nome:  { type: String, required: true },
+  email: { type: String, required: true,
+           unique: true, lowercase: true },
+  idade: { type: Number, min: 0 },
+  ativo: { type: Boolean, default: true }
+}, { timestamps: true });
+
+module.exports = model('User', schema);
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{CRUD — Operações}
+\begin{lstlisting}[language=JavaScript]
+const U = require('./models/User');
+
+// CREATE
+await U.create({ nome: 'Ana',
+                 email: 'ana@mail.pt' });
+// READ
+await U.find({ ativo: true });
+await U.findById(id);
+
+// UPDATE
+await U.findByIdAndUpdate(id,
+  { nome: 'Ana Silva' }, { new: true });
+
+// DELETE
+await U.findByIdAndDelete(id);
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Queries Avançadas}
+\begin{lstlisting}[language=JavaScript]
+// Filtros
+await U.find({ idade: { $gte: 18 } });
+await U.find({ nome: /ana/i });
+
+// Ordenar, limitar, paginar
+await U.find()
+  .sort({ nome: 1 })   // 1=ASC -1=DESC
+  .limit(10)
+  .skip(20)
+  .select('nome email');
+
+// Contar
+const total = await U.countDocuments();
+\end{lstlisting}
+\end{card}
+
+\begin{card}
+\subsection{Manual — Ligação Passo a Passo}
+\begin{enumerate}[leftmargin=*, itemsep=1pt, topsep=1pt, label=\textcolor{mongocol}{\small\bfseries\arabic*.}]
+  \item \textbf{Criar projeto:} \texttt{npm init -y}
+  \item \textbf{Instalar:} \texttt{npm i express mongoose dotenv}
+  \item \textbf{MongoDB Atlas:} criar cluster M0 gratuito em \texttt{mongodb.com/atlas}
+  \item \textbf{.env:} colar a connection string
+  \item \textbf{server.js:} \texttt{require('dotenv').config()} + \texttt{mongoose.connect(...)}
+  \item \textbf{Testar:} \texttt{npm run dev} + Postman/Thunder Client
+\end{enumerate}
+\end{card}
+
+% ════════════════════════════════════════════════════════════
+%  ATALHOS DE TECLADO
+% ════════════════════════════════════════════════════════════
+\section{\textcolor{shortcol}{■} Atalhos de Teclado \& Formatações Rápidas}
+
+\subsection{\textcolor{shortcol}{VS Code — Edição de Código}}
+\begin{card}
+\begin{tabularx}{\linewidth}{KD}
+\toprule
+Atalho & Ação \\
+\midrule
+Ctrl+/          & Comentar/descomentar linha \\
+Alt+↑/↓         & Mover linha \\
+Alt+Shift+↑/↓   & Duplicar linha \\
+Ctrl+Shift+K    & Apagar linha inteira \\
+Ctrl+Enter      & Nova linha abaixo \\
+Ctrl+Shift+Enter & Nova linha acima \\
+Ctrl+Z / Ctrl+Y & Desfazer / Refazer \\
+Ctrl+X / Ctrl+C & Cortar/Copiar linha \\
+\bottomrule
+\end{tabularx}
+\end{card}
+
+\subsection{\textcolor{shortcol}{VS Code — Navegação \& Pesquisa}}
+\begin{card}
+\begin{tabularx}{\linewidth}{KD}
+\toprule
+Atalho & Ação \\
+\midrule
+Ctrl+P          & Abrir ficheiro rapidamente \\
+Ctrl+Shift+P    & Paleta de comandos \\
+Ctrl+F          & Pesquisar no ficheiro \\
+Ctrl+H          & Substituir no ficheiro \\
+Ctrl+Shift+F    & Pesquisar em todos os ficheiros \\
+Ctrl+G          & Ir para linha número \\
+Ctrl+Tab        & Alternar ficheiros abertos \\
+Ctrl+\textbackslash & Dividir editor \\
+\bottomrule
+\end{tabularx}
+\end{card}
+
+\subsection{\textcolor{shortcol}{VS Code — Multi-cursor \& Seleção}}
+\begin{card}
+\begin{tabularx}{\linewidth}{KD}
+\toprule
+Atalho & Ação \\
+\midrule
+Ctrl+D          & Selecionar próxima ocorrência \\
+Ctrl+Shift+L    & Selecionar TODAS as ocorrências \\
+Alt+Click       & Adicionar cursor extra \\
+Ctrl+Alt+↑/↓    & Cursor acima/abaixo \\
+Shift+Alt+drag  & Seleção em coluna \\
+Ctrl+L          & Selecionar linha inteira \\
+Ctrl+Shift+[    & Fechar/Abrir bloco \\
+\bottomrule
+\end{tabularx}
+\end{card}
+
+\subsection{\textcolor{shortcol}{VS Code — Produtividade}}
+\begin{card}
+\begin{tabularx}{\linewidth}{KD}
+\toprule
+Atalho & Ação \\
+\midrule
+Ctrl+`          & Terminal integrado \\
+Ctrl+B          & Mostrar/esconder sidebar \\
+Alt+Shift+F     & Formatar documento \\
+F2              & Renomear símbolo \\
+F12             & Ir para definição \\
+Alt+F12         & Pré-visualizar definição \\
+Ctrl+Shift+V    & Pré-visualizar Markdown \\
+Ctrl+K Z        & Modo Zen (ecrã cheio) \\
+\bottomrule
+\end{tabularx}
+\end{card}
+
+\subsection{\textcolor{shortcol}{Emmet — HTML Rápido}}
+\begin{card}
+\begin{tabularx}{\linewidth}{KD}
+\toprule
+Emmet & Resultado \\
+\midrule
+!                        & HTML completo \\
+nav>ul>li*4>a            & Nav com 4 links \\
+div.container>div.card*3 & 3 cards \\
+table>tr*3>td*4          & Tabela 3×4 \\
+ul>li.item\$*5           & Lista item1..item5 \\
+section\#hero>h1+p+a.btn & Secção hero \\
+\bottomrule
+\end{tabularx}
+\end{card}
+
+\subsection{\textcolor{shortcol}{Emmet — CSS Rápido}}
+\begin{card}
+\begin{tabularx}{\linewidth}{KD}
+\toprule
+Abrev. & Propriedade \\
+\midrule
+df   & display: flex \\
+dg   & display: grid \\
+jcc  & justify-content: center \\
+aic  & align-items: center \\
+m:a  & margin: auto \\
+p10  & padding: 10px \\
+w100p & width: 100\% \\
+bgc  & background-color \\
+tac  & text-align: center \\
+pos:r & position: relative \\
+\bottomrule
+\end{tabularx}
+\end{card}
+
+\subsection{\textcolor{shortcol}{Browser DevTools (F12)}}
+\begin{card}
+\begin{tabularx}{\linewidth}{KD}
+\toprule
+Atalho & Ação \\
+\midrule
+F12             & Abrir DevTools \\
+Ctrl+Shift+I    & Abrir DevTools (alt.) \\
+Ctrl+Shift+C    & Inspecionar elemento \\
+Ctrl+Shift+J    & Consola JavaScript \\
+Ctrl+Shift+M    & Modo responsivo \\
+Ctrl+R          & Recarregar página \\
+Ctrl+Shift+R    & Recarregar sem cache \\
+Ctrl+U          & Ver código fonte \\
+\bottomrule
+\end{tabularx}
+\end{card}
+
+\subsection{\textcolor{shortcol}{Terminal / Linha de Comandos}}
+\begin{card}
+\begin{tabularx}{\linewidth}{KD}
+\toprule
+Comando & Ação \\
+\midrule
+Ctrl+C       & Parar processo \\
+Ctrl+L       & Limpar terminal \\
+↑ / ↓        & Histórico de comandos \\
+Tab          & Auto-completar \\
+Ctrl+A       & Início da linha \\
+Ctrl+E       & Fim da linha \\
+npm run dev  & Iniciar dev server \\
+node -e "…"  & Executar JS direto \\
+\bottomrule
+\end{tabularx}
+\end{card}
+
+\vfill
+{\centering\scriptsize\textcolor{muted}{Web Dev Cheatsheet · 2026 · Compilar com \texttt{pdflatex cheatsheet.tex}}\par}
+
+\end{multicols}
+\end{document}

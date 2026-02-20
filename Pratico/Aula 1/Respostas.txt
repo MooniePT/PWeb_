@@ -1,0 +1,228 @@
+Respostas às Questões — Lab HTML-01 (Fundamentos de HTML)
+==========================================================
+
+------------------------------------------------------------
+PARTE 1 — Estrutura HTML
+------------------------------------------------------------
+
+P: Quais são as tags essenciais num documento HTML?
+R: As tags essenciais são: <!DOCTYPE html>, <html>, <head>, <title> e <body>.
+   Estas formam o esqueleto mínimo de qualquer página HTML válida.
+
+P: Qual é a função de <!DOCTYPE html>?
+R: O <!DOCTYPE html> é uma declaração que informa o navegador que o documento
+   está escrito em HTML5. Não é uma tag HTML propriamente dita, mas sim uma
+   instrução ao navegador para que interprete o documento de acordo com as
+   normas do HTML5, evitando o "quirks mode".
+
+P: Qual é a função de <html>?
+R: A tag <html> é o elemento raiz que envolve todo o conteúdo do documento HTML.
+   Todos os outros elementos devem estar contidos dentro desta tag. O atributo
+   lang (ex: lang="pt") deve ser usado para definir o idioma da página.
+
+P: Qual é a função de <head>?
+R: A tag <head> contém metadados sobre o documento, como o título da página
+   (<title>), a codificação de caracteres (<meta charset="UTF-8">), ligações
+   a folhas de estilo CSS, scripts, e outras informações que não são visíveis
+   diretamente na página.
+
+P: Qual é a função de <title>?
+R: A tag <title> define o título do documento que aparece no separador do
+   navegador e é utilizado pelos motores de busca para indexação. Deve estar
+   dentro de <head>.
+
+P: Qual é a função de <body>?
+R: A tag <body> contém todo o conteúdo visível da página web — texto, imagens,
+   links, listas, etc. Tudo o que o utilizador vê e interage está dentro
+   desta tag.
+
+P: Porque é que o conteúdo visível deve estar dentro de <body>?
+R: Porque o navegador renderiza (apresenta visualmente) apenas o conteúdo que
+   está dentro de <body>. Os conteúdos colocados em <head> são metadados e não
+   são exibidos na página. Colocar conteúdo fora de <body> resultaria em
+   comportamento imprevisível e código inválido semanticamente.
+
+
+------------------------------------------------------------
+PARTE 2 — Tags Essenciais
+------------------------------------------------------------
+
+--- Cabeçalhos ---
+
+P: Qual é a diferença entre <h1> e <h6>?
+R: Os cabeçalhos vão de <h1> (mais importante/maior) a <h6> (menos importante/
+   menor). <h1> representa o título principal da página, enquanto <h6> é o
+   nível mais baixo de sub-cabeçalho. A diferença não é apenas visual (tamanho
+   do texto) — é sobretudo semântica, indicando a hierarquia e importância
+   do conteúdo.
+
+P: Porque é que deve existir tipicamente apenas um <h1> principal por página?
+R: Porque o <h1> representa o tema ou título principal da página. Ter apenas um
+   <h1> ajuda os motores de busca (SEO) e os leitores de ecrã (acessibilidade)
+   a compreender rapidamente o assunto principal da página. Vários <h1> criam
+   ambiguidade sobre qual é o conteúdo principal.
+
+P: Como é que a hierarquia dos cabeçalhos influencia a organização visual e semântica?
+R: Visualmente, cria uma estrutura clara com títulos e subtítulos de tamanhos
+   diferentes. Semanticamente, define a estrutura lógica do documento — como
+   um índice de um livro. Os leitores de ecrã utilizam esta hierarquia para
+   permitir aos utilizadores navegar rapidamente entre secções. Deve-se
+   seguir a ordem correta (h1 > h2 > h3...) sem saltar níveis.
+
+--- Parágrafos ---
+
+P: Quando se deve usar <p>?
+R: A tag <p> deve ser usada para delimitar blocos de texto que formam um
+   parágrafo — ou seja, uma unidade lógica de texto com uma ideia ou conceito.
+   Cada parágrafo é automaticamente separado dos outros com espaçamento.
+
+P: Qual é a diferença entre parágrafos e quebras de linha?
+R: O <p> cria um novo bloco de texto com espaçamento antes e depois (é um
+   elemento de bloco). A tag <br> apenas insere uma quebra de linha simples
+   dentro do mesmo bloco, sem criar espaçamento adicional. Usar <br> para
+   separar parágrafos é má prática; deve-se usar <p> para cada parágrafo
+   distinto.
+
+--- Formatação ---
+
+P: Qual é a diferença entre <strong> e <b>?
+R: <strong> indica que o texto tem forte importância semântica — é realçado
+   porque é importante para o significado do conteúdo. Os leitores de ecrã
+   podem enfatizar a leitura deste texto. <b> apenas aplica formatação visual
+   a negrito sem qualquer significado semântico adicional. Deve-se preferir
+   <strong> quando o texto é genuinamente importante.
+
+P: Qual é a diferença entre <em> e <i>?
+R: <em> indica ênfase semântica — o texto deve ser lido com ênfase, e os
+   leitores de ecrã alteram a entonação ao ler este texto. <i> apenas aplica
+   formatação visual em itálico sem significado semântico (usado, por exemplo,
+   para termos técnicos, palavras em língua estrangeira ou títulos de obras).
+   Deve-se usar <em> quando se quer transmitir ênfase real no conteúdo.
+
+
+------------------------------------------------------------
+PARTE 3 — Links e Imagens
+------------------------------------------------------------
+
+--- Links ---
+
+P: O que faz o atributo href?
+R: O atributo href (Hypertext Reference) especifica o URL de destino do link.
+   Quando o utilizador clica no link, o navegador navega para o endereço
+   indicado no href. Pode apontar para páginas externas, páginas internas,
+   secções da mesma página (âncoras), endereços de e-mail, etc.
+
+P: Porque é que o texto descritivo nos links é importante?
+R: Um texto descritivo ajuda o utilizador a perceber para onde o link o levará
+   antes de clicar. É essencial para acessibilidade, pois os leitores de ecrã
+   leem o texto do link fora de contexto (por exemplo, numa lista de todos os
+   links da página). Também melhora o SEO, pois os motores de busca utilizam
+   o texto do link para compreender o conteúdo da página de destino.
+
+P: Porque é que escrever apenas "clique aqui" é considerado má prática?
+R: Porque "clique aqui" não transmite qualquer informação sobre o destino do
+   link. Um utilizador de leitor de ecrã que ouça uma lista de links só
+   ouvirá "clique aqui" repetido várias vezes, sem contexto. É melhor usar
+   texto descritivo, como "consulte o programa da disciplina" em vez de
+   "clique aqui para ver o programa".
+
+--- Imagens ---
+
+P: O que faz o atributo src?
+R: O atributo src (source) especifica o caminho ou URL do ficheiro de imagem
+   a ser apresentado. Pode ser um caminho relativo (ex: "imagens/foto.jpg")
+   ou um URL absoluto (ex: "https://exemplo.com/foto.jpg").
+
+P: Porque é que o atributo alt é obrigatório nas boas práticas?
+R: O atributo alt fornece um texto alternativo que descreve a imagem. É
+   essencial por várias razões:
+   - Acessibilidade: os leitores de ecrã leem o texto alt para descrever a
+     imagem a utilizadores com deficiência visual.
+   - Fallback: se a imagem não carregar, o texto alt é exibido no seu lugar.
+   - SEO: os motores de busca utilizam o texto alt para indexar e compreender
+     o conteúdo das imagens.
+   Omitir o alt torna a página menos acessível e pode violar normas de
+   acessibilidade web (WCAG).
+
+
+------------------------------------------------------------
+PARTE 4 — Listas
+------------------------------------------------------------
+
+P: Qual é a diferença entre <ul>, <ol> e <li>?
+R: - <ul> (unordered list): cria uma lista não ordenada, apresentada com
+     marcadores (bullets). Usada quando a ordem dos itens não importa.
+   - <ol> (ordered list): cria uma lista ordenada, apresentada com números
+     ou letras. Usada quando a sequência dos itens é relevante.
+   - <li> (list item): define cada item individual dentro de uma lista,
+     seja <ul> ou <ol>. Deve estar sempre dentro de <ul> ou <ol>.
+
+P: Quando é mais apropriado usar uma lista ordenada em vez de uma não ordenada?
+R: Deve-se usar uma lista ordenada (<ol>) quando a sequência ou a ordem dos
+   itens é importante — por exemplo, passos de um tutorial, classificações,
+   rankings, instruções passo-a-passo, ou receitas. Usa-se uma lista não
+   ordenada (<ul>) quando os itens são equivalentes e a ordem não altera o
+   significado — por exemplo, uma lista de disciplinas, ingredientes sem
+   ordem específica, ou funcionalidades de um produto.
+
+
+------------------------------------------------------------
+PARTE 5 — Justificação Técnica (Perguntas Gerais)
+------------------------------------------------------------
+
+P: Porque é que escolheste esta tag?
+R: A escolha de cada tag deve basear-se no seu significado semântico e não
+   apenas na aparência visual. Por exemplo, usar <strong> em vez de <b>
+   quando o texto é realmente importante, ou usar <article> para conteúdo
+   independente em vez de uma <div> genérica.
+
+P: Que alternativa poderia existir?
+R: Para quase toda tag semântica existe uma alternativa genérica (como <div>
+   ou <span>), mas estas não transmitem significado ao navegador nem a
+   tecnologias de acessibilidade. A alternativa correta depende do contexto
+   semântico do conteúdo.
+
+P: Qual seria o impacto de escolher incorretamente?
+R: Escolher tags incorretas resulta em:
+   - Perda de acessibilidade (leitores de ecrã não interpretam corretamente)
+   - Pior SEO (motores de busca não compreendem a estrutura)
+   - Código mais difícil de manter e compreender
+   - Possível violação de normas web (W3C, WCAG)
+   - Visualização inconsistente entre navegadores
+
+
+------------------------------------------------------------
+CONCEITOS FUNDAMENTAIS (Resumo)
+------------------------------------------------------------
+
+P: O que é HTML?
+R: HTML (HyperText Markup Language) é a linguagem de marcação padrão para
+   criar e estruturar o conteúdo de páginas web. Define a estrutura e o
+   significado do conteúdo, mas não o seu estilo visual (isso é feito com CSS)
+   nem o seu comportamento dinâmico (isso é feito com JavaScript).
+
+P: O que significa "estrutura do documento" em HTML?
+R: Refere-se à organização hierárquica e semântica dos elementos HTML que
+   compõem uma página. Inclui a declaração DOCTYPE, o elemento raiz <html>,
+   os metadados em <head> e o conteúdo visível em <body>, bem como a
+   hierarquia correta de cabeçalhos, secções e outros elementos.
+
+P: Porque é importante respeitar a hierarquia das tags?
+R: Respeitar a hierarquia garante que o documento é semanticamente correto,
+   acessível para tecnologias assistivas, bem indexado pelos motores de busca
+   e apresentado de forma consistente em diferentes navegadores. Uma hierarquia
+   incorreta cria confusão na interpretação do conteúdo.
+
+P: Porque é que atributos como alt são importantes (acessibilidade)?
+R: O atributo alt é crucial para acessibilidade porque permite que utilizadores
+   com deficiência visual compreendam o conteúdo das imagens através de leitores
+   de ecrã. Sem alt, essas imagens são invisíveis para estes utilizadores.
+   Além disso, serve como texto de substituição quando a imagem não pode ser
+   carregada.
+
+P: Qual é a diferença entre estrutura e apresentação?
+R: Estrutura (HTML) define O QUE é o conteúdo e como está organizado (títulos,
+   parágrafos, listas, etc.). Apresentação (CSS) define COMO o conteúdo é
+   exibido visualmente (cores, tamanhos, espaçamentos, fontes, etc.). Esta
+   separação é um princípio fundamental do desenvolvimento web moderno,
+   permitindo manutenção mais fácil e melhor acessibilidade.

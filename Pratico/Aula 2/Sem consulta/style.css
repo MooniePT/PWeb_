@@ -1,0 +1,284 @@
+/* ============================================================
+   style.css — Folha de estilos partilhada (UBI - Aula 2)
+   Páginas: index.html | externfiles.html | cssreference.html
+   ============================================================ */
+
+/* --- 1. GOOGLE FONTS --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* --- 2. GLOBAL / RESET --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f4f6f9;
+    color: #1a1a2e;
+    line-height: 1.6;
+}
+
+/* --- 3. HEADER --- */
+header {
+    background-color: #8cdbd7;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
+}
+
+header img {
+    width: 250px;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    display: block;
+}
+
+header h1 {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 700;
+    flex: 1;
+}
+
+/* --- 4. NAVEGAÇÃO --- */
+nav {
+    width: 100%;
+    background-color: #002244;
+    padding: 0.5rem 2rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+nav ul li a {
+    color: #fcfcfc;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+nav ul li a:hover {
+    background-color: #0055aa;
+    color: #ffffff;
+}
+
+/* --- 5. MAIN --- */
+main {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* --- 6. IMAGEM --- */
+main > img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    display: block;
+    margin: 1.5rem auto;
+}
+
+/* --- 7. IFRAMES (Vídeo e Áudio) --- */
+iframe {
+    display: block;
+    margin: 1.5rem auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    border: none;
+    max-width: 100%;
+}
+
+/* --- 8. FORMULÁRIO --- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+form label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #003366;
+    margin-bottom: -0.4rem;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form input[type="url"],
+form input[type="file"] {
+    padding: 0.65rem 0.9rem;
+    border: 1.5px solid #c5d5ea;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    background: #f8fafd;
+    transition: border-color 0.2s ease;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #003366;
+    background: #fff;
+}
+
+form input[type="radio"],
+form input[type="checkbox"] {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: #003366;
+    margin-right: 0.4rem;
+}
+
+form .radio-row,
+form .check-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+form button[type="submit"] {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    background-color: #003366;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+form button[type="submit"]:hover {
+    background-color: #0055aa;
+    transform: translateY(-1px);
+}
+
+/* --- 9. TABELA --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+table th {
+    background-color: #003366;
+    color: #ffffff;
+    padding: 1rem 1.2rem;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+table td {
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid #dde4ee;
+    font-size: 0.9rem;
+    vertical-align: top;
+}
+
+table tr:nth-child(even) td {
+    background-color: #edf2f9;
+}
+
+table tr:hover td {
+    background-color: #d9e8ff;
+    transition: background-color 0.2s ease;
+}
+
+table code {
+    background: #e8f0fe;
+    color: #003366;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+/* --- 10. BLOCO DE CÓDIGO (página de referência) --- */
+.code-block {
+    background-color: #1a1a2e;
+    color: #abb2bf;
+    padding: 1.2rem 1.5rem;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    margin: 0.8rem 0 1.5rem;
+    overflow-x: auto;
+    line-height: 1.8;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.code-block .kw  { color: #c678dd; } /* keyword  */
+.code-block .sel { color: #61afef; } /* selector */
+.code-block .val { color: #98c379; } /* value    */
+.code-block .com { color: #5c6370; font-style: italic; } /* comment */
+
+/* --- 11. SECÇÕES DA PÁGINA DE REFERÊNCIA --- */
+.ref-section {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+    border-left: 5px solid #003366;
+}
+
+.ref-section h2 {
+    color: #003366;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.ref-section p {
+    color: #444;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.ref-section .tag {
+    display: inline-block;
+    background: #003366;
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+/* --- 12. FOOTER --- */
+footer {
+    background-color: #003366;
+    color: #cce0ff;
+    text-align: center;
+    padding: 1.5rem 2rem;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+}
+
+footer p {
+    margin: 0;
+}

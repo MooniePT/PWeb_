@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual de Referência Web — HTML, CSS, JSON</title>
+  <style>
+    :root {
+      --bg: #0f1117; --surface: #1a1d27; --card: #1e2435;
+      --border: #2a3350; --text: #e2e8f0; --muted: #8892a4;
+      --dim: #556070; --accent-html: #e44d26; --accent-css: #4a9eff;
+      --accent-js: #f7df1e; --gold: #c9a84c; --green: #22c55e;
+      --code-bg: #0d1117; --radius: 8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* ── Nav ── */
+    #top-nav {
+      position: sticky; top: 0; z-index: 50;
+      background: #1a1d27ee; backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 20px;
+    }
+    #top-nav a {
+      color: var(--muted); text-decoration: none; padding: 4px 12px;
+      border-radius: 20px; font-size: .82rem; font-weight: 600;
+      transition: all .15s;
+    }
+    #top-nav a:hover { background: var(--card); color: var(--text); }
+    #top-nav a.html { color: var(--accent-html); }
+    #top-nav a.css  { color: var(--accent-css); }
+    #top-nav a.json { color: var(--accent-js); }
+    #top-nav a.emmet { color: var(--green); }
+
+    /* ── Content ── */
+    .page { max-width: 1000px; margin: 0 auto; padding: 24px 20px 60px; }
+
+    h1.page-title {
+      font-size: 1.7rem; font-weight: 800; margin-bottom: 6px;
+      background: linear-gradient(90deg, var(--accent-html), var(--accent-css), var(--accent-js));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .page-sub { color: var(--muted); margin-bottom: 32px; font-size: .9rem; }
+
+    /* ── Section ── */
+    .section { margin-bottom: 48px; }
+    .section-header {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.25rem; font-weight: 800; margin-bottom: 20px;
+      padding-bottom: 10px; border-bottom: 2px solid var(--border);
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .dot-html { background: var(--accent-html); }
+    .dot-css  { background: var(--accent-css); }
+    .dot-json { background: var(--accent-js); }
+    .dot-emmet{ background: var(--green); }
+
+    /* ── Grid ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+    .grid-wide { grid-template-columns: 1fr; }
+
+    /* ── Card ── */
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px;
+      transition: border-color .2s;
+    }
+    .card:hover { border-color: #3e4570; }
+    .card h3 { font-size: .9rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .card p  { font-size: .82rem; color: var(--muted); margin-bottom: 8px; line-height: 1.5; }
+
+    /* ── Code ── */
+    pre, code { font-family: 'Cascadia Code', 'Consolas', monospace; font-size: .8rem; }
+    pre {
+      background: var(--code-bg); border: 1px solid var(--border);
+      border-radius: 6px; padding: 12px 14px;
+      overflow-x: auto; line-height: 1.55; margin-top: 6px;
+      white-space: pre;
+    }
+    code { color: #79c0ff; background: var(--code-bg); padding: 1px 5px; border-radius: 3px; }
+    .tag  { color: #7ee787; } .attr { color: #79c0ff; }
+    .val  { color: #a5d6ff; } .cmt  { color: #8b949e; font-style: italic; }
+    .kw   { color: #ff7b72; } .str  { color: #a5d6ff; }
+    .num  { color: #79c0ff; } .fn   { color: #d2a8ff; }
+    .prop { color: #89dceb; }
+
+    /* ── Table ── */
+    table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    th { background: var(--surface); color: var(--muted); text-align: left; padding: 7px 10px; font-weight: 600; }
+    td { padding: 6px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { font-family: 'Cascadia Code', monospace; color: #79c0ff; white-space: nowrap; }
+
+    /* ── Callouts ── */
+    .tip  { background: #1e3a2f; border-left: 3px solid var(--green);  padding: 9px 12px; border-radius: 0 6px 6px 0; font-size: .82rem; color: #86efac; margin-top: 10px; }
+    .warn { background: #3a2a1e; border-left: 3px solid #f59e0b; padding: 9px 12px; border-radius: 0 6px 6px 0; font-size: .82rem; color: #fcd34d; margin-top: 10px; }
+    .info { background: #1e2a3f; border-left: 3px solid var(--accent-css); padding: 9px 12px; border-radius: 0 6px 6px 0; font-size: .82rem; color: #93c5fd; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<nav id="top-nav">
+  <a href="#html" class="html">HTML</a>
+  <a href="#html-tags">Tags</a>
+  <a href="#html-forms">Formulários</a>
+  <a href="#html-tables">Tabelas</a>
+  <a href="#html-lists">Listas</a>
+  <a href="#css" class="css">CSS</a>
+  <a href="#css-selectors">Seletores</a>
+  <a href="#css-box">Box Model</a>
+  <a href="#css-layout">Layout</a>
+  <a href="#css-vars">Variáveis</a>
+  <a href="#json" class="json">JSON</a>
+  <a href="#emmet" class="emmet">Emmet</a>
+</nav>
+
+<div class="page">
+  <h1 class="page-title">Manual de Referência Web</h1>
+  <p class="page-sub">HTML · CSS · JSON · Emmet — Guia de referência rápida para Programação Web, UBI 2025/2026</p>
+
+  <!-- ═══════════════════════════ HTML ═══════════════════════════ -->
+  <section class="section" id="html">
+    <h2 class="section-header"><span class="dot dot-html"></span>HTML — HyperText Markup Language</h2>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🏗️ Estrutura Base de um Documento</h3>
+        <p>Todo o ficheiro HTML começa com esta estrutura. Usa <code>!</code> + Tab no VS Code (Emmet).</p>
+        <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"pt"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span>
+        <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;title&gt;</span>Título da Página<span class="tag">&lt;/title&gt;</span>
+  <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"style.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="cmt">&lt;!-- conteúdo aqui --&gt;</span>
+  <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"script.js"</span> <span class="attr">defer</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+      </div>
+
+      <div class="card" id="html-semantic">
+        <h3>🏷️ Tags Semânticas HTML5</h3>
+        <p>Melhoram SEO, acessibilidade e legibilidade do código.</p>
+        <table>
+          <tr><th>Tag</th><th>Significado</th></tr>
+          <tr><td>&lt;header&gt;</td><td>Cabeçalho da página/secção</td></tr>
+          <tr><td>&lt;nav&gt;</td><td>Menu de navegação</td></tr>
+          <tr><td>&lt;main&gt;</td><td>Conteúdo principal (único por página)</td></tr>
+          <tr><td>&lt;section&gt;</td><td>Secção temática</td></tr>
+          <tr><td>&lt;article&gt;</td><td>Conteúdo autónomo (post, card)</td></tr>
+          <tr><td>&lt;aside&gt;</td><td>Barra lateral / conteúdo secundário</td></tr>
+          <tr><td>&lt;footer&gt;</td><td>Rodapé da página/secção</td></tr>
+          <tr><td>&lt;figure&gt;</td><td>Imagem com legenda</td></tr>
+          <tr><td>&lt;figcaption&gt;</td><td>Legenda do &lt;figure&gt;</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tags de texto -->
+    <div style="margin-top:12px" id="html-tags">
+      <div class="card">
+        <h3>✍️ Tags de Texto e Formatação</h3>
+        <div class="grid" style="margin-top:10px">
+          <table>
+            <tr><th>Tag</th><th>Resultado</th></tr>
+            <tr><td>&lt;h1&gt;…&lt;h6&gt;</td><td>Títulos (6 níveis, 1 por página)</td></tr>
+            <tr><td>&lt;p&gt;</td><td>Parágrafo</td></tr>
+            <tr><td>&lt;strong&gt;</td><td><strong>Negrito</strong> semântico</td></tr>
+            <tr><td>&lt;em&gt;</td><td><em>Itálico</em> semântico</td></tr>
+            <tr><td>&lt;small&gt;</td><td>Texto mais pequeno</td></tr>
+            <tr><td>&lt;mark&gt;</td><td>Texto destacado</td></tr>
+            <tr><td>&lt;del&gt;</td><td>Texto riscado</td></tr>
+            <tr><td>&lt;ins&gt;</td><td>Texto inserido (sublinhado)</td></tr>
+            <tr><td>&lt;sub&gt; / &lt;sup&gt;</td><td>Subscrito / Superscrito</td></tr>
+            <tr><td>&lt;code&gt;</td><td>Código inline</td></tr>
+            <tr><td>&lt;pre&gt;</td><td>Texto pré-formatado</td></tr>
+            <tr><td>&lt;blockquote&gt;</td><td>Citação em bloco</td></tr>
+            <tr><td>&lt;br&gt;</td><td>Quebra de linha</td></tr>
+            <tr><td>&lt;hr&gt;</td><td>Linha divisória</td></tr>
+          </table>
+          <div>
+            <p style="margin-bottom:8px">Links e Media:</p>
+            <table>
+              <tr><th>Tag</th><th>Atributos principais</th></tr>
+              <tr><td>&lt;a&gt;</td><td>href, target="_blank", rel</td></tr>
+              <tr><td>&lt;img&gt;</td><td>src, alt (obrigatório!), width, loading="lazy"</td></tr>
+              <tr><td>&lt;video&gt;</td><td>src, controls, autoplay, muted, loop</td></tr>
+              <tr><td>&lt;audio&gt;</td><td>src, controls</td></tr>
+              <tr><td>&lt;iframe&gt;</td><td>src, width, height, title</td></tr>
+            </table>
+            <div class="tip">💡 Usa sempre <code>alt</code> nas imagens para acessibilidade e SEO.</div>
+            <div class="warn">⚠️ Links <code>target="_blank"</code> devem ter <code>rel="noopener noreferrer"</code> por segurança.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Listas -->
+    <div style="margin-top:12px" id="html-lists">
+      <div class="grid">
+        <div class="card">
+          <h3>📋 Listas</h3>
+          <pre><span class="cmt">&lt;!-- Lista não ordenada --&gt;</span>
+<span class="tag">&lt;ul&gt;</span>
+  <span class="tag">&lt;li&gt;</span>Item A<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span>Item B<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+
+<span class="cmt">&lt;!-- Lista ordenada --&gt;</span>
+<span class="tag">&lt;ol</span> <span class="attr">type</span>=<span class="val">"1"</span><span class="tag">&gt;</span>  <span class="cmt">&lt;!-- 1, A, a, I, i --&gt;</span>
+  <span class="tag">&lt;li&gt;</span>Primeiro<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span>Segundo<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span>
+
+<span class="cmt">&lt;!-- Lista de definições --&gt;</span>
+<span class="tag">&lt;dl&gt;</span>
+  <span class="tag">&lt;dt&gt;</span>HTML<span class="tag">&lt;/dt&gt;</span>
+  <span class="tag">&lt;dd&gt;</span>HyperText Markup Language<span class="tag">&lt;/dd&gt;</span>
+<span class="tag">&lt;/dl&gt;</span></pre>
+        </div>
+
+        <!-- Tabelas -->
+        <div class="card" id="html-tables">
+          <h3>📊 Tabelas</h3>
+          <pre><span class="tag">&lt;table&gt;</span>
+  <span class="tag">&lt;thead&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;th&gt;</span>Nome<span class="tag">&lt;/th&gt;</span>
+      <span class="tag">&lt;th&gt;</span>Nota<span class="tag">&lt;/th&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/thead&gt;</span>
+  <span class="tag">&lt;tbody&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td&gt;</span>Ana<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>18<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/tbody&gt;</span>
+<span class="tag">&lt;/table&gt;</span>
+
+<span class="cmt">&lt;!-- Mesclar células --&gt;</span>
+<span class="tag">&lt;td</span> <span class="attr">colspan</span>=<span class="val">"2"</span><span class="tag">&gt;</span>Ocupa 2 colunas<span class="tag">&lt;/td&gt;</span>
+<span class="tag">&lt;td</span> <span class="attr">rowspan</span>=<span class="val">"3"</span><span class="tag">&gt;</span>Ocupa 3 linhas<span class="tag">&lt;/td&gt;</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulários -->
+    <div style="margin-top:12px" id="html-forms">
+      <div class="card">
+        <h3>📝 Formulários — Guia Completo</h3>
+        <div class="grid" style="margin-top:10px">
+          <div>
+            <pre><span class="tag">&lt;form</span> <span class="attr">action</span>=<span class="val">"/enviar"</span> <span class="attr">method</span>=<span class="val">"POST"</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="val">"nome"</span><span class="tag">&gt;</span>Nome:<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">id</span>=<span class="val">"nome"</span>
+         <span class="attr">name</span>=<span class="val">"nome"</span> <span class="attr">required</span>
+         <span class="attr">placeholder</span>=<span class="val">"O seu nome"</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;select</span> <span class="attr">name</span>=<span class="val">"opcao"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">"a"</span><span class="tag">&gt;</span>Opção A<span class="tag">&lt;/option&gt;</span>
+  <span class="tag">&lt;/select&gt;</span>
+
+  <span class="tag">&lt;textarea</span> <span class="attr">name</span>=<span class="val">"msg"</span> <span class="attr">rows</span>=<span class="val">"4"</span><span class="tag">&gt;&lt;/textarea&gt;</span>
+
+  <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"submit"</span><span class="tag">&gt;</span>Enviar<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/form&gt;</span></pre>
+          </div>
+          <div>
+            <p style="margin-bottom:8px">Tipos de <code>&lt;input&gt;</code>:</p>
+            <table>
+              <tr><th>type=</th><th>Uso</th></tr>
+              <tr><td>"text"</td><td>Texto genérico</td></tr>
+              <tr><td>"email"</td><td>Valida formato e-mail</td></tr>
+              <tr><td>"password"</td><td>Esconde o texto</td></tr>
+              <tr><td>"number"</td><td>Número (min, max, step)</td></tr>
+              <tr><td>"tel"</td><td>Número de telefone</td></tr>
+              <tr><td>"url"</td><td>Valida formato URL</td></tr>
+              <tr><td>"date"</td><td>Seletor de data</td></tr>
+              <tr><td>"checkbox"</td><td>Caixa de verificação</td></tr>
+              <tr><td>"radio"</td><td>Seleção única no grupo</td></tr>
+              <tr><td>"file"</td><td>Upload de ficheiro</td></tr>
+              <tr><td>"range"</td><td>Slider (min, max)</td></tr>
+              <tr><td>"color"</td><td>Seletor de cor</td></tr>
+              <tr><td>"search"</td><td>Campo de pesquisa</td></tr>
+              <tr><td>"hidden"</td><td>Campo oculto</td></tr>
+            </table>
+            <div class="tip">💡 Atributos úteis: <code>required</code> <code>disabled</code> <code>readonly</code> <code>autofocus</code> <code>autocomplete</code> <code>min</code> <code>max</code> <code>pattern</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ CSS ═══════════════════════════ -->
+  <section class="section" id="css">
+    <h2 class="section-header"><span class="dot dot-css"></span>CSS — Cascading Style Sheets</h2>
+
+    <div class="grid">
+      <div class="card" id="css-selectors">
+        <h3>🎯 Seletores</h3>
+        <table>
+          <tr><th>Seletor</th><th>O que seleciona</th></tr>
+          <tr><td>p</td><td>Todos os &lt;p&gt;</td></tr>
+          <tr><td>.classe</td><td>Elementos com class="classe"</td></tr>
+          <tr><td>#id</td><td>Elemento com id="id"</td></tr>
+          <tr><td>div p</td><td>Todo &lt;p&gt; dentro de &lt;div&gt;</td></tr>
+          <tr><td>div > p</td><td>Filho direto &lt;p&gt; de &lt;div&gt;</td></tr>
+          <tr><td>h2 + p</td><td>Irmão imediato após &lt;h2&gt;</td></tr>
+          <tr><td>h2 ~ p</td><td>Todos os irmãos &lt;p&gt; após &lt;h2&gt;</td></tr>
+          <tr><td>[href]</td><td>Tem atributo href</td></tr>
+          <tr><td>[type="text"]</td><td>type exatamente "text"</td></tr>
+          <tr><td>:hover</td><td>Quando o cursor está em cima</td></tr>
+          <tr><td>:focus</td><td>Quando tem foco (input)</td></tr>
+          <tr><td>:nth-child(2n)</td><td>Filhos pares</td></tr>
+          <tr><td>:first-child</td><td>Primeiro filho</td></tr>
+          <tr><td>:last-child</td><td>Último filho</td></tr>
+          <tr><td>:not(.classe)</td><td>Exclui a classe</td></tr>
+          <tr><td>::before</td><td>Pseudo-elemento antes</td></tr>
+          <tr><td>::after</td><td>Pseudo-elemento depois</td></tr>
+          <tr><td>::placeholder</td><td>Placeholder de inputs</td></tr>
+        </table>
+      </div>
+
+      <div class="card" id="css-box">
+        <h3>📦 Box Model</h3>
+        <pre><span class="prop">box-sizing</span>: <span class="val">border-box</span>; <span class="cmt">/* recomendado */</span>
+<span class="prop">margin</span>:  <span class="num">10px 20px 10px 20px</span>; <span class="cmt">/* T R B L */</span>
+<span class="prop">padding</span>: <span class="num">1rem 2rem</span>;  <span class="cmt">/* TB LR */</span>
+<span class="prop">border</span>:  <span class="num">1px</span> <span class="val">solid</span> <span class="val">#ccc</span>;
+<span class="prop">border-radius</span>: <span class="num">8px</span>;
+<span class="prop">width</span>: <span class="num">100%</span>;  <span class="prop">max-width</span>: <span class="num">600px</span>;
+<span class="prop">height</span>: <span class="num">auto</span>;  <span class="prop">min-height</span>: <span class="num">200px</span>;
+<span class="prop">overflow</span>: <span class="val">hidden</span>; <span class="cmt">/* hidden | auto | scroll */</span></pre>
+
+        <h3 style="margin-top:14px">🎨 Cores e Fundos</h3>
+        <pre><span class="prop">color</span>: <span class="val">#003087</span>;       <span class="cmt">/* hex */</span>
+<span class="prop">color</span>: <span class="fn">rgb</span>(<span class="num">0, 48, 135</span>);
+<span class="prop">color</span>: <span class="fn">hsl</span>(<span class="num">220, 100%, 26%</span>);
+<span class="prop">color</span>: <span class="fn">rgba</span>(<span class="num">0, 0, 0, 0.5</span>); <span class="cmt">/* com transparência */</span>
+<span class="prop">background-color</span>: <span class="val">#f5f5f5</span>;
+<span class="prop">background</span>: <span class="fn">linear-gradient</span>(<span class="num">135deg</span>, <span class="val">#003087</span>, <span class="val">#4a9eff</span>);
+<span class="prop">opacity</span>: <span class="num">0.8</span>;  <span class="cmt">/* 0=transparente, 1=opaco */</span></pre>
+
+        <h3 style="margin-top:14px">📐 Unidades CSS</h3>
+        <table>
+          <tr><th>Unidade</th><th>Significado</th></tr>
+          <tr><td>px</td><td>Píxeis (absoluto)</td></tr>
+          <tr><td>rem</td><td>Relativo ao root (16px base)</td></tr>
+          <tr><td>em</td><td>Relativo ao elemento pai</td></tr>
+          <tr><td>%</td><td>Percentagem do pai</td></tr>
+          <tr><td>vw / vh</td><td>% da largura/altura da janela</td></tr>
+          <tr><td>fr</td><td>Fração (só em CSS Grid)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Layout -->
+    <div style="margin-top:12px" id="css-layout">
+      <div class="grid">
+        <div class="card">
+          <h3>🔲 Flexbox</h3>
+          <pre><span class="cmt">/* Contentor */</span>
+<span class="prop">display</span>: <span class="val">flex</span>;
+<span class="prop">flex-direction</span>: <span class="val">row</span>;  <span class="cmt">/* row | column */</span>
+<span class="prop">justify-content</span>: <span class="val">center</span>;  <span class="cmt">/* eixo principal */</span>
+<span class="prop">align-items</span>: <span class="val">center</span>;     <span class="cmt">/* eixo secundário */</span>
+<span class="prop">flex-wrap</span>: <span class="val">wrap</span>;
+<span class="prop">gap</span>: <span class="num">16px</span>;
+
+<span class="cmt">/* justify-content valores: */</span>
+<span class="cmt">/* flex-start | flex-end | center  */</span>
+<span class="cmt">/* space-between | space-around    */</span>
+
+<span class="cmt">/* Item */</span>
+<span class="prop">flex</span>: <span class="num">1 1 200px</span>; <span class="cmt">/* grow shrink basis */</span>
+<span class="prop">flex</span>: <span class="num">1</span>;         <span class="cmt">/* ocupa espaço disponível */</span>
+<span class="prop">align-self</span>: <span class="val">flex-end</span>;
+<span class="prop">order</span>: <span class="num">2</span>;</pre>
+        </div>
+
+        <div class="card">
+          <h3>⬛ CSS Grid</h3>
+          <pre><span class="cmt">/* Contentor */</span>
+<span class="prop">display</span>: <span class="val">grid</span>;
+<span class="prop">grid-template-columns</span>: <span class="num">1fr 2fr 1fr</span>;
+<span class="prop">grid-template-columns</span>:
+  <span class="fn">repeat</span>(<span class="val">auto-fill</span>, <span class="fn">minmax</span>(<span class="num">250px</span>, <span class="num">1fr</span>));
+<span class="prop">grid-template-rows</span>: <span class="val">auto</span> <span class="num">1fr</span> <span class="val">auto</span>;
+<span class="prop">gap</span>: <span class="num">16px</span>;
+
+<span class="cmt">/* Item */</span>
+<span class="prop">grid-column</span>: <span class="num">1</span> / <span class="num">3</span>;   <span class="cmt">/* span de col 1 a 3 */</span>
+<span class="prop">grid-column</span>: <span class="num">1</span> / <span class="val">-1</span>;  <span class="cmt">/* full width */</span>
+<span class="prop">grid-row</span>: <span class="num">2</span> / <span class="val">span</span> <span class="num">2</span>;</pre>
+        </div>
+
+        <div class="card">
+          <h3>📱 Posicionamento e Media Queries</h3>
+          <pre><span class="cmt">/* Position */</span>
+<span class="prop">position</span>: <span class="val">static</span>;    <span class="cmt">/* padrão */</span>
+<span class="prop">position</span>: <span class="val">relative</span>;  <span class="cmt">/* relativo a si */</span>
+<span class="prop">position</span>: <span class="val">absolute</span>;  <span class="cmt">/* relativo ao pai */</span>
+<span class="prop">position</span>: <span class="val">fixed</span>;     <span class="cmt">/* fixo na janela */</span>
+<span class="prop">position</span>: <span class="val">sticky</span>;    <span class="cmt">/* fica colado ao scroll */</span>
+<span class="prop">top</span>: <span class="num">0</span>; <span class="prop">left</span>: <span class="num">0</span>; <span class="prop">z-index</span>: <span class="num">100</span>;
+
+<span class="cmt">/* Mobile-first: estilos base para mobile,
+   aumenta para ecrãs maiores */</span>
+<span class="kw">@media</span> (<span class="prop">min-width</span>: <span class="num">768px</span>)  { <span class="cmt">/* tablet */</span> }
+<span class="kw">@media</span> (<span class="prop">min-width</span>: <span class="num">1024px</span>) { <span class="cmt">/* desktop */</span> }
+<span class="kw">@media</span> (<span class="prop">max-width</span>: <span class="num">480px</span>)  { <span class="cmt">/* telemóvel pequeno */</span> }</pre>
+        </div>
+
+        <div class="card">
+          <h3>✨ Transitions e Animações</h3>
+          <pre><span class="cmt">/* Transição suave */</span>
+<span class="prop">transition</span>: <span class="val">all</span> <span class="num">0.3s</span> <span class="val">ease</span>;
+<span class="prop">transition</span>: <span class="prop">color</span> <span class="num">0.2s</span>, <span class="prop">transform</span> <span class="num">0.3s</span>;
+
+<span class="kw">.btn:hover</span> {
+  <span class="prop">transform</span>: <span class="fn">translateY</span>(<span class="num">-3px</span>);
+  <span class="prop">box-shadow</span>: <span class="num">0 8px 20px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,.2</span>);
+}
+
+<span class="cmt">/* Animação com keyframes */</span>
+<span class="kw">@keyframes</span> <span class="fn">fadeIn</span> {
+  <span class="kw">from</span> { <span class="prop">opacity</span>: <span class="num">0</span>; <span class="prop">transform</span>: <span class="fn">translateY</span>(<span class="num">20px</span>); }
+  <span class="kw">to</span>   { <span class="prop">opacity</span>: <span class="num">1</span>; <span class="prop">transform</span>: <span class="fn">translateY</span>(<span class="num">0</span>); }
+}
+
+<span class="kw">.card</span> {
+  <span class="prop">animation</span>: <span class="val">fadeIn 0.4s ease forwards</span>;
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- CSS Variables & Typography -->
+    <div style="margin-top:12px" id="css-vars">
+      <div class="grid">
+        <div class="card">
+          <h3>🎨 Variáveis CSS (Custom Properties)</h3>
+          <pre><span class="cmt">/* Definir no root (global) */</span>
+<span class="kw">:root</span> {
+  <span class="prop">--cor-primaria</span>: <span class="val">#003087</span>;
+  <span class="prop">--cor-texto</span>:    <span class="val">#111</span>;
+  <span class="prop">--espacamento</span>: <span class="num">1rem</span>;
+  <span class="prop">--radius</span>:       <span class="num">8px</span>;
+  <span class="prop">--sombra</span>:       <span class="num">0 4px 16px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,.1</span>);
+}
+
+<span class="cmt">/* Usar */</span>
+<span class="kw">.botao</span> {
+  <span class="prop">background</span>: <span class="fn">var</span>(<span class="prop">--cor-primaria</span>);
+  <span class="prop">padding</span>: <span class="fn">var</span>(<span class="prop">--espacamento</span>);
+  <span class="prop">border-radius</span>: <span class="fn">var</span>(<span class="prop">--radius</span>);
+  <span class="prop">box-shadow</span>: <span class="fn">var</span>(<span class="prop">--sombra</span>);
+}
+
+<span class="cmt">/* Sobrescrever num componente */</span>
+<span class="kw">.tema-escuro</span> {
+  <span class="prop">--cor-texto</span>: <span class="val">#fff</span>;
+  <span class="prop">--cor-primaria</span>: <span class="val">#4a9eff</span>;
+}</pre>
+        </div>
+
+        <div class="card">
+          <h3>🔤 Tipografia</h3>
+          <pre><span class="cmt">/* Importar fonte Google */</span>
+<span class="kw">@import</span> <span class="fn">url</span>(<span class="str">'https://fonts.googleapis.com/
+  css2?family=Inter:wght@400;600;700'</span>);
+
+<span class="kw">body</span> {
+  <span class="prop">font-family</span>: <span class="val">'Inter'</span>, <span class="val">system-ui</span>, <span class="val">sans-serif</span>;
+  <span class="prop">font-size</span>: <span class="num">16px</span>;    <span class="cmt">/* base = 1rem */</span>
+  <span class="prop">font-weight</span>: <span class="num">400</span>;
+  <span class="prop">line-height</span>: <span class="num">1.6</span>;
+  <span class="prop">letter-spacing</span>: <span class="num">0.3px</span>;
+  <span class="prop">color</span>: <span class="val">#333</span>;
+}
+
+<span class="kw">h1</span> { <span class="prop">font-size</span>: <span class="num">2rem</span>;    <span class="prop">font-weight</span>: <span class="num">700</span>; }
+<span class="kw">h2</span> { <span class="prop">font-size</span>: <span class="num">1.5rem</span>;  <span class="prop">font-weight</span>: <span class="num">700</span>; }
+<span class="kw">h3</span> { <span class="prop">font-size</span>: <span class="num">1.25rem</span>; <span class="prop">font-weight</span>: <span class="num">600</span>; }
+
+<span class="prop">text-align</span>:      <span class="val">left | center | right | justify</span>;
+<span class="prop">text-decoration</span>: <span class="val">none | underline | line-through</span>;
+<span class="prop">text-transform</span>:  <span class="val">uppercase | capitalize | lowercase</span>;
+<span class="prop">white-space</span>:     <span class="val">nowrap | pre-wrap</span>;
+<span class="prop">text-overflow</span>:   <span class="val">ellipsis</span>;</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ JSON ═══════════════════════════ -->
+  <section class="section" id="json">
+    <h2 class="section-header"><span class="dot dot-json"></span>JSON — JavaScript Object Notation</h2>
+
+    <div class="grid">
+      <div class="card">
+        <h3>📋 Sintaxe e Tipos de Dados</h3>
+        <p>JSON é um formato de troca de dados legível por humanos e máquinas.</p>
+        <pre><span class="cmt">// Tipos de dados suportados:</span>
+{
+  <span class="str">"texto"</span>:    <span class="str">"Olá Mundo"</span>,        <span class="cmt">// string</span>
+  <span class="str">"inteiro"</span>:  <span class="num">42</span>,                  <span class="cmt">// number</span>
+  <span class="str">"decimal"</span>:  <span class="num">3.14</span>,                <span class="cmt">// number</span>
+  <span class="str">"ativo"</span>:    <span class="kw">true</span>,                <span class="cmt">// boolean</span>
+  <span class="str">"vazio"</span>:    <span class="kw">null</span>,                <span class="cmt">// null</span>
+  <span class="str">"lista"</span>:    [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>],           <span class="cmt">// array</span>
+  <span class="str">"objeto"</span>:   { <span class="str">"x"</span>: <span class="num">1</span> }           <span class="cmt">// object</span>
+}</pre>
+        <div class="warn">⚠️ As chaves (keys) <strong>devem ser</strong> strings com <code>"aspas duplas"</code>. Sem vírgula após o último elemento.</div>
+      </div>
+
+      <div class="card">
+        <h3>🔗 Objetos e Arrays Aninhados</h3>
+        <pre>{
+  <span class="str">"aluno"</span>: {
+    <span class="str">"nome"</span>:  <span class="str">"Ana Silva"</span>,
+    <span class="str">"numero"</span>: <span class="num">12345</span>,
+    <span class="str">"ativo"</span>: <span class="kw">true</span>,
+    <span class="str">"notas"</span>: [<span class="num">15</span>, <span class="num">17</span>, <span class="num">12</span>, <span class="num">18</span>],
+    <span class="str">"morada"</span>: {
+      <span class="str">"cidade"</span>: <span class="str">"Covilhã"</span>,
+      <span class="str">"cp"</span>:     <span class="str">"6200-001"</span>
+    }
+  }
+}</pre>
+        <p style="margin-top:8px">Aceder em JavaScript:</p>
+        <pre><span class="kw">const</span> dados = JSON.<span class="fn">parse</span>(jsonString);
+dados.aluno.nome;         <span class="cmt">// "Ana Silva"</span>
+dados.aluno.notas[<span class="num">0</span>];    <span class="cmt">// 15</span>
+dados.aluno.morada.cidade;<span class="cmt">// "Covilhã"</span></pre>
+      </div>
+
+      <div class="card">
+        <h3>⚙️ JSON em JavaScript</h3>
+        <pre><span class="cmt">// String JSON → Objeto JS</span>
+<span class="kw">const</span> obj = JSON.<span class="fn">parse</span>(<span class="str">'{"nome":"Ana"}'</span>);
+console.<span class="fn">log</span>(obj.nome); <span class="cmt">// "Ana"</span>
+
+<span class="cmt">// Objeto JS → String JSON</span>
+<span class="kw">const</span> str = JSON.<span class="fn">stringify</span>(obj);
+<span class="cmt">// '{"nome":"Ana"}'</span>
+
+<span class="cmt">// Formatado (indentado)</span>
+JSON.<span class="fn">stringify</span>(obj, <span class="kw">null</span>, <span class="num">2</span>);
+
+<span class="cmt">// Fetch de API JSON</span>
+<span class="kw">const</span> res  = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/dados'</span>);
+<span class="kw">const</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();
+
+<span class="cmt">// Guardar em localStorage</span>
+localStorage.<span class="fn">setItem</span>(<span class="str">'user'</span>, JSON.<span class="fn">stringify</span>(obj));
+<span class="kw">const</span> u = JSON.<span class="fn">parse</span>(localStorage.<span class="fn">getItem</span>(<span class="str">'user'</span>));</pre>
+      </div>
+
+      <div class="card">
+        <h3>📄 Exemplo: Resposta de API REST</h3>
+        <pre>{
+  <span class="str">"status"</span>: <span class="str">"success"</span>,
+  <span class="str">"total"</span>:  <span class="num">2</span>,
+  <span class="str">"dados"</span>: [
+    {
+      <span class="str">"id"</span>:    <span class="num">1</span>,
+      <span class="str">"nome"</span>: <span class="str">"Produto A"</span>,
+      <span class="str">"preco"</span>: <span class="num">9.99</span>,
+      <span class="str">"tags"</span>: [<span class="str">"web"</span>, <span class="str">"html"</span>]
+    },
+    {
+      <span class="str">"id"</span>:    <span class="num">2</span>,
+      <span class="str">"nome"</span>: <span class="str">"Produto B"</span>,
+      <span class="str">"preco"</span>: <span class="num">14.50</span>,
+      <span class="str">"tags"</span>: [<span class="str">"css"</span>]
+    }
+  ]
+}</pre>
+        <div class="info">ℹ️ JSON é o formato padrão de APIs REST. Não suporta comentários, funções, ou <code>undefined</code>.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ EMMET ═══════════════════════════ -->
+  <section class="section" id="emmet">
+    <h2 class="section-header"><span class="dot dot-emmet"></span>Emmet & Atalhos VS Code</h2>
+
+    <div class="grid">
+      <div class="card">
+        <h3>⚡ Abreviações Emmet (HTML)</h3>
+        <table>
+          <tr><th>Escreveres…</th><th>Resultado (Tab)</th></tr>
+          <tr><td>!</td><td>Estrutura base completa</td></tr>
+          <tr><td>div.classe</td><td>&lt;div class="classe"&gt;</td></tr>
+          <tr><td>div#id</td><td>&lt;div id="id"&gt;</td></tr>
+          <tr><td>ul&gt;li*5</td><td>&lt;ul&gt; com 5 &lt;li&gt;</td></tr>
+          <tr><td>table&gt;tr*3&gt;td*4</td><td>Tabela 3×4</td></tr>
+          <tr><td>input:email</td><td>&lt;input type="email"&gt;</td></tr>
+          <tr><td>input:checkbox</td><td>&lt;input type="checkbox"&gt;</td></tr>
+          <tr><td>link:css</td><td>&lt;link rel="stylesheet" href=""&gt;</td></tr>
+          <tr><td>script:src</td><td>&lt;script src=""&gt;&lt;/script&gt;</td></tr>
+          <tr><td>a[href=#]{Texto}</td><td>&lt;a href="#"&gt;Texto&lt;/a&gt;</td></tr>
+          <tr><td>p{Olá mundo}</td><td>&lt;p&gt;Olá mundo&lt;/p&gt;</td></tr>
+          <tr><td>h$*3{Título $}</td><td>h1, h2, h3 com texto numerado</td></tr>
+          <tr><td>(.item&gt;img+p)*3</td><td>3 grupos de img+p dentro de .item</td></tr>
+          <tr><td>form&gt;(label+input)*3+button</td><td>Form com 3 pares label/input</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>⌨️ Atalhos VS Code (Win/Linux)</h3>
+        <table>
+          <tr><th>Atalho</th><th>Ação</th></tr>
+          <tr><td>Ctrl+Shift+P</td><td>Paleta de comandos</td></tr>
+          <tr><td>Ctrl+P</td><td>Abrir ficheiro rapidamente</td></tr>
+          <tr><td>Ctrl+/</td><td>Comentar / descomentar linha</td></tr>
+          <tr><td>Alt+Shift+F</td><td>Formatar documento</td></tr>
+          <tr><td>Alt+↑/↓</td><td>Mover linha acima/abaixo</td></tr>
+          <tr><td>Alt+Shift+↑/↓</td><td>Copiar linha acima/abaixo</td></tr>
+          <tr><td>Ctrl+D</td><td>Selecionar próxima ocorrência</td></tr>
+          <tr><td>Ctrl+Shift+L</td><td>Selecionar todas as ocorrências</td></tr>
+          <tr><td>Ctrl+Alt+↑/↓</td><td>Multicursor (linha acima/abaixo)</td></tr>
+          <tr><td>Shift+Alt+drag</td><td>Seleção em coluna</td></tr>
+          <tr><td>Ctrl+G</td><td>Ir para linha número</td></tr>
+          <tr><td>F2</td><td>Renomear símbolo</td></tr>
+          <tr><td>Ctrl+`</td><td>Abrir terminal</td></tr>
+          <tr><td>Ctrl+B</td><td>Mostrar/ocultar barra lateral</td></tr>
+          <tr><td>Ctrl+Z / Ctrl+Y</td><td>Desfazer / Refazer</td></tr>
+          <tr><td>F5 (Live Server)</td><td>Abrir no browser com live reload</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>✍️ Emmet CSS (VS Code)</h3>
+        <table>
+          <tr><th>Abreviação</th><th>Resultado</th></tr>
+          <tr><td>df</td><td>display: flex</td></tr>
+          <tr><td>dg</td><td>display: grid</td></tr>
+          <tr><td>dn</td><td>display: none</td></tr>
+          <tr><td>jcc</td><td>justify-content: center</td></tr>
+          <tr><td>aic</td><td>align-items: center</td></tr>
+          <tr><td>m10</td><td>margin: 10px</td></tr>
+          <tr><td>p10-20</td><td>padding: 10px 20px</td></tr>
+          <tr><td>w100p</td><td>width: 100%</td></tr>
+          <tr><td>h100vh</td><td>height: 100vh</td></tr>
+          <tr><td>bgc</td><td>background-color: </td></tr>
+          <tr><td>fz1r</td><td>font-size: 1rem</td></tr>
+          <tr><td>fw700</td><td>font-weight: 700</td></tr>
+          <tr><td>bdr4</td><td>border-radius: 4px</td></tr>
+          <tr><td>pf</td><td>position: fixed</td></tr>
+          <tr><td>t0+l0</td><td>top: 0; left: 0</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>🧩 Estruturas Rápidas Úteis</h3>
+        <p style="margin-bottom:8px">Navbar com logo + links:</p>
+        <pre>header>(.logo>img)+nav>ul>li*4>a{Link $}</pre>
+        <p style="margin:10px 0 8px">Cards responsivos:</p>
+        <pre>section.cards>(.card>img+h3{Título}+p)*6</pre>
+        <p style="margin:10px 0 8px">Layout completo:</p>
+        <pre>body>header+main>(aside+article)+footer</pre>
+        <p style="margin:10px 0 8px">Formulário de contacto:</p>
+        <pre>form>(div.field>label+input)*3
+  +div.field>label+textarea
+  +button[type=submit]{Enviar}</pre>
+        <div class="tip">💡 Para múltiplas classes: <code>div.card.destaque.ativo</code></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

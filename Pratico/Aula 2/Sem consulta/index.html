@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <title>Inscrição para Evento</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" async></script>
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/pt/a/af/UBI_Logo_Symbol.png" alt="Logo da UBI">
+        <h1>Inscrição para Evento</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="about.html">Programação</a></li>
+            <li><a href="contact.html">Localização</a></li>
+            <li><a href="externfiles.html">Ficheiros Externos</a></li>
+            <li><a href="cssreference.html">Referência CSS/JSON</a></li>
+        </ul>
+    </nav>
+    <main>
+        <form action="">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" placeholder="O seu nome completo" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="exemplo@email.com" required>
+
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="+351 9XX XXX XXX" required>
+
+            <label for="paginapessoal">Página Pessoal:</label>
+            <input type="url" id="paginapessoal" name="paginapessoal" placeholder="https://..." required>
+
+            <label for="codigopostal">Código Postal:</label>
+            <input type="text" id="codigopostal" name="codigopostal" placeholder="0000-000" required>
+
+            <label>Tipo de Inscrição:</label>
+            <div class="radio-row">
+                <input type="radio" id="opcao_presencial" name="opcao" value="presencial" required>
+                <label for="opcao_presencial">Presencial</label>
+            </div>
+            <div class="radio-row">
+                <input type="radio" id="opcao_online" name="opcao" value="online">
+                <label for="opcao_online">Online</label>
+            </div>
+            <div class="radio-row">
+                <input type="radio" id="opcao_hibrido" name="opcao" value="hibrido">
+                <label for="opcao_hibrido">Híbrido</label>
+            </div>
+
+            <div class="check-row">
+                <input type="checkbox" id="termos" name="termos" required>
+                <label for="termos">Aceito os Termos e Condições</label>
+            </div>
+
+            <label for="ficheiro">Foto de Perfil:</label>
+            <input type="file" id="ficheiro" name="ficheiro" accept="image/*" required>
+
+            <button type="submit">Enviar Inscrição</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2026 UBI. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

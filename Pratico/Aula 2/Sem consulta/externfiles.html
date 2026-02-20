@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <title>Inclusão de ficheiros externos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" async></script>
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/pt/a/af/UBI_Logo_Symbol.png" alt="Logo da UBI">
+        <h1>Inclusão de ficheiros externos</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="about.html">Programação</a></li>
+            <li><a href="contact.html">Localização</a></li>
+            <li><a href="externfiles.html">Ficheiros Externos</a></li>
+            <li><a href="cssreference.html">Referência CSS/JSON</a></li>
+        </ul>
+    </nav>
+    <main>
+        <!-- Imagem -->
+        <img src="https://png.pngtree.com/thumb_back/fh260/background/20240522/pngtree-abstract-cloudy-background-beautiful-natural-streaks-of-sky-and-clouds-red-image_15684333.jpg"
+             alt="Imagem de fundo"
+             width="600"
+             loading="lazy">
+
+        <!-- Video -->
+        <iframe src="https://www.youtube.com/embed/JlRs78QS-2w"
+                title="Video 4k"
+                frameborder="0"
+                allowfullscreen
+                width="640"
+                height="360">
+        </iframe>
+
+        <!-- Audio -->
+        <iframe src="https://www.youtube.com/embed/JlRs78QS-2w"
+                title="Audio 4k"
+                frameborder="0"
+                allowfullscreen
+                width="640"
+                height="360">
+        </iframe>
+
+        <!-- Tabela de respostas -->
+        <table>
+            <tr>
+                <th>A tag &lt;link&gt; bloqueia a renderização da página?</th>
+                <th>Lazy Loading de imagens: quando deve ser utilizado?</th>
+                <th>Script assíncrono (async) vs diferido (defer): quando usar cada um?</th>
+            </tr>
+            <tr>
+                <td>
+                    Sim. A tag <code>&lt;link rel="stylesheet"&gt;</code> bloqueia a renderização da página
+                    (render-blocking) enquanto o ficheiro CSS é descarregado e processado. Este comportamento
+                    é intencional para evitar o FOUC (Flash of Unstyled Content), ou seja, a página aparecer
+                    momentaneamente sem estilos. Por isso, os ficheiros CSS devem sempre ser incluídos no
+                    <code>&lt;head&gt;</code>.
+                </td>
+                <td>
+                    O <code>loading="lazy"</code> deve ser usado em imagens que estão fora da área visível
+                    inicial da página (abaixo do "fold"). O browser só as carrega quando o utilizador se
+                    aproxima delas ao fazer scroll, poupando largura de banda e acelerando o carregamento
+                    inicial. <strong>Não deve</strong> ser usado em imagens críticas visíveis logo no topo
+                    da página (ex: logótipos, banners acima do fold), pois isso atrasaria o carregamento de
+                    conteúdo importante.
+                </td>
+                <td>
+                    <strong>async</strong>: o script é descarregado em paralelo com o HTML e executado
+                    assim que estiver disponível, interrompendo o parsing. Ideal para scripts independentes
+                    que não dependem do DOM nem de outros scripts (ex: Google Analytics, publicidade).<br><br>
+                    <strong>defer</strong>: o script é descarregado em paralelo, mas só é executado após
+                    o HTML estar completamente processado, respeitando a ordem de declaração. Ideal para
+                    scripts que manipulam o DOM ou que dependem de outros scripts (ex: lógica da aplicação,
+                    bibliotecas como jQuery).
+                </td>
+            </tr>
+        </table>
+    </main>
+    <footer>
+        <p>&copy; 2026 UBI. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

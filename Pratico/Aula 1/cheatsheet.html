@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheatsheet Web Dev + Node.js & MongoDB</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --surface: #1a1d27;
+            --card: #22263a;
+            --border: #2e3350;
+            --accent-html: #e44d26;
+            --accent-css: #264de4;
+            --accent-js: #f7df1e;
+            --accent-node: #68a063;
+            --accent-mongo: #4db33d;
+            --text: #e2e8f0;
+            --muted: #8892a4;
+            --code-bg: #0d1117;
+            --radius: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1d27 0%, #0f1117 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            color: var(--muted);
+            margin-top: .4rem;
+        }
+
+        .badges {
+            display: flex;
+            gap: .5rem;
+            justify-content: center;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: .25rem .75rem;
+            border-radius: 20px;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .5px;
+        }
+
+        .badge-html {
+            background: #e44d2622;
+            color: var(--accent-html);
+            border: 1px solid #e44d2644;
+        }
+
+        .badge-css {
+            background: #264de422;
+            color: #6b8ef5;
+            border: 1px solid #264de444;
+        }
+
+        .badge-js {
+            background: #f7df1e22;
+            color: #f7df1e;
+            border: 1px solid #f7df1e44;
+        }
+
+        .badge-node {
+            background: #68a06322;
+            color: var(--accent-node);
+            border: 1px solid #68a06344;
+        }
+
+        .badge-mongo {
+            background: #4db33d22;
+            color: var(--accent-mongo);
+            border: 1px solid #4db33d44;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #1a1d27ee;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: .25rem;
+            padding: .6rem 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            padding: .3rem .8rem;
+            border-radius: 6px;
+            font-size: .85rem;
+            font-weight: 600;
+            transition: all .2s;
+        }
+
+        nav a:hover {
+            background: var(--card);
+            color: var(--text);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            padding-bottom: .75rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot-html {
+            background: var(--accent-html);
+        }
+
+        .dot-css {
+            background: #6b8ef5;
+        }
+
+        .dot-js {
+            background: var(--accent-js);
+        }
+
+        .dot-node {
+            background: var(--accent-node);
+        }
+
+        .dot-mongo {
+            background: var(--accent-mongo);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            transition: border-color .2s, transform .2s;
+        }
+
+        .card:hover {
+            border-color: #3e4570;
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            font-size: .95rem;
+            font-weight: 700;
+            margin-bottom: .75rem;
+            color: var(--text);
+        }
+
+        .card p {
+            font-size: .85rem;
+            color: var(--muted);
+            margin-bottom: .5rem;
+        }
+
+        pre,
+        code {
+            font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+            font-size: .82rem;
+        }
+
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: .85rem 1rem;
+            overflow-x: auto;
+            margin-top: .5rem;
+            line-height: 1.5;
+        }
+
+        code {
+            color: #79c0ff;
+        }
+
+        .kw {
+            color: #ff7b72;
+        }
+
+        .str {
+            color: #a5d6ff;
+        }
+
+        .cm {
+            color: #8b949e;
+            font-style: italic;
+        }
+
+        .fn {
+            color: #d2a8ff;
+        }
+
+        .num {
+            color: #79c0ff;
+        }
+
+        .tag {
+            color: #7ee787;
+        }
+
+        .attr {
+            color: #79c0ff;
+        }
+
+        .val {
+            color: #a5d6ff;
+        }
+
+        .tip {
+            background: #1e3a2f;
+            border-left: 3px solid #4db33d;
+            border-radius: 0 6px 6px 0;
+            padding: .6rem 1rem;
+            font-size: .83rem;
+            color: #86efac;
+            margin-top: .75rem;
+        }
+
+        .warn {
+            background: #3a2a1e;
+            border-left: 3px solid #f59e0b;
+            border-radius: 0 6px 6px 0;
+            padding: .6rem 1rem;
+            font-size: .83rem;
+            color: #fcd34d;
+            margin-top: .75rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .84rem;
+            margin-top: .5rem;
+        }
+
+        th {
+            background: #1a1d27;
+            color: var(--muted);
+            text-align: left;
+            padding: .5rem .75rem;
+            font-weight: 600;
+        }
+
+        td {
+            padding: .45rem .75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        td:first-child {
+            font-family: 'Cascadia Code', monospace;
+            color: #79c0ff;
+        }
+
+        .step {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            margin-bottom: .75rem;
+        }
+
+        .step-num {
+            background: linear-gradient(135deg, #4db33d, #68a063);
+            color: #fff;
+            font-weight: 800;
+            font-size: .9rem;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: .95rem;
+            margin-bottom: .4rem;
+        }
+
+        .step-content p {
+            font-size: .83rem;
+            color: var(--muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+            font-size: .8rem;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>⚡ Web Dev Cheatsheet</h1>
+        <p>Técnicas, atalhos e melhores práticas para desenvolvimento web moderno</p>
+        <div class="badges">
+            <span class="badge badge-html">HTML5</span>
+            <span class="badge badge-css">CSS3</span>
+            <span class="badge badge-js">JavaScript</span>
+            <span class="badge badge-node">Node.js</span>
+            <span class="badge badge-mongo">MongoDB</span>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#html">HTML</a>
+        <a href="#css">CSS</a>
+        <a href="#js">JavaScript</a>
+        <a href="#nodejs">Node.js</a>
+        <a href="#mongodb">MongoDB</a>
+        <a href="#manual">Manual Ligação</a>
+        <a href="#atalhos">⌨️ Atalhos</a>
+    </nav>
+
+    <main>
+
+        <!-- ═══════════════════════════════ HTML ═══════════════════════════════ -->
+        <section id="html">
+            <h2 class="section-title"><span class="dot dot-html"></span>HTML — Estrutura &amp; Semântica</h2>
+            <div class="grid">
+
+                <div class="card">
+                    <h3>🏗️ Estrutura Base (Emmet: <code>!</code>)</h3>
+                    <p>Escreve <strong>!</strong> no VS Code e prime <kbd>Tab</kbd> para gerar:</p>
+                    <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"pt"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span>
+        <span class="attr">content</span>=<span class="val">"width=device-width,
+        initial-scale=1.0"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;title&gt;</span>Título<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+                </div>
+
+                <div class="card">
+                    <h3>🏷️ Tags Semânticas HTML5</h3>
+                    <p>Usa semântica para melhor SEO e acessibilidade:</p>
+                    <pre><span class="tag">&lt;header&gt;</span>  <span class="cm">— cabeçalho da página</span>
+<span class="tag">&lt;nav&gt;</span>     <span class="cm">— menu de navegação</span>
+<span class="tag">&lt;main&gt;</span>    <span class="cm">— conteúdo principal</span>
+<span class="tag">&lt;section&gt;</span> <span class="cm">— secção temática</span>
+<span class="tag">&lt;article&gt;</span> <span class="cm">— conteúdo independente</span>
+<span class="tag">&lt;aside&gt;</span>   <span class="cm">— barra lateral</span>
+<span class="tag">&lt;footer&gt;</span>  <span class="cm">— rodapé</span>
+<span class="tag">&lt;figure&gt;</span>  <span class="cm">— imagem com legenda</span></pre>
+                </div>
+
+                <div class="card">
+                    <h3>⚡ Atalhos Emmet no VS Code</h3>
+                    <table>
+                        <tr>
+                            <th>Emmet</th>
+                            <th>Resultado</th>
+                        </tr>
+                        <tr>
+                            <td>div.classe</td>
+                            <td>&lt;div class="classe"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>ul&gt;li*5</td>
+                            <td>ul com 5 li's</td>
+                        </tr>
+                        <tr>
+                            <td>a[href=#]</td>
+                            <td>&lt;a href="#"&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>p{Texto}</td>
+                            <td>&lt;p&gt;Texto&lt;/p&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>input:email</td>
+                            <td>input type="email"</td>
+                        </tr>
+                        <tr>
+                            <td>link:css</td>
+                            <td>tag link para CSS</td>
+                        </tr>
+                        <tr>
+                            <td>script:src</td>
+                            <td>tag script com src</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>📋 Formulário Completo</h3>
+                    <pre><span class="tag">&lt;form</span> <span class="attr">action</span>=<span class="val">"/enviar"</span> <span class="attr">method</span>=<span class="val">"POST"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="val">"nome"</span><span class="tag">&gt;</span>Nome:<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">id</span>=<span class="val">"nome"</span>
+         <span class="attr">name</span>=<span class="val">"nome"</span> <span class="attr">required</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="val">"email"</span><span class="tag">&gt;</span>Email:<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"email"</span> <span class="attr">id</span>=<span class="val">"email"</span>
+         <span class="attr">name</span>=<span class="val">"email"</span> <span class="attr">required</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"submit"</span><span class="tag">&gt;</span>Enviar<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/form&gt;</span></pre>
+                </div>
+
+                <div class="card">
+                    <h3>🖼️ Imagem Responsiva</h3>
+                    <pre><span class="tag">&lt;picture&gt;</span>
+  <span class="tag">&lt;source</span> <span class="attr">media</span>=<span class="val">"(min-width:800px)"</span>
+          <span class="attr">srcset</span>=<span class="val">"grande.webp"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"pequena.jpg"</span>
+       <span class="attr">alt</span>=<span class="val">"Descrição da imagem"</span>
+       <span class="attr">loading</span>=<span class="val">"lazy"</span>
+       <span class="attr">width</span>=<span class="val">"800"</span> <span class="attr">height</span>=<span class="val">"600"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/picture&gt;</span></pre>
+                    <div class="tip">💡 Usa sempre <code>loading="lazy"</code> para melhor performance.</div>
+                </div>
+
+                <div class="card">
+                    <h3>⌨️ Atalhos VS Code — HTML</h3>
+                    <table>
+                        <tr>
+                            <th>Atalho</th>
+                            <th>Ação</th>
+                        </tr>
+                        <tr>
+                            <td>Alt+Shift+F</td>
+                            <td>Formatar documento</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+/</td>
+                            <td>Comentar linha</td>
+                        </tr>
+                        <tr>
+                            <td>Alt+↑/↓</td>
+                            <td>Mover linha</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+D</td>
+                            <td>Selecionar próxima ocorrência</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+P</td>
+                            <td>Paleta de comandos</td>
+                        </tr>
+                        <tr>
+                            <td>F5 (Live Server)</td>
+                            <td>Abrir no browser</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════ CSS ═══════════════════════════════ -->
+        <section id="css">
+            <h2 class="section-title"><span class="dot dot-css"></span>CSS — Estilo &amp; Layout</h2>
+            <div class="grid">
+
+                <div class="card">
+                    <h3>🎨 Variáveis CSS (Custom Properties)</h3>
+                    <pre><span class="kw">:root</span> {
+  <span class="attr">--cor-primaria</span>: <span class="val">#3b82f6</span>;
+  <span class="attr">--cor-texto</span>:    <span class="val">#1e293b</span>;
+  <span class="attr">--espacamento</span>: <span class="val">1rem</span>;
+  <span class="attr">--radius</span>:       <span class="val">8px</span>;
+}
+
+<span class="kw">.botao</span> {
+  background: <span class="fn">var</span>(<span class="attr">--cor-primaria</span>);
+  padding: <span class="fn">var</span>(<span class="attr">--espacamento</span>);
+  border-radius: <span class="fn">var</span>(<span class="attr">--radius</span>);
+}</pre>
+                </div>
+
+                <div class="card">
+                    <h3>📦 Flexbox — Essencial</h3>
+                    <pre><span class="kw">.container</span> {
+  display: <span class="val">flex</span>;
+  justify-content: <span class="val">center</span>;  <span class="cm">/* eixo X */</span>
+  align-items: <span class="val">center</span>;     <span class="cm">/* eixo Y */</span>
+  flex-wrap: <span class="val">wrap</span>;
+  gap: <span class="val">1rem</span>;
+}
+<span class="kw">.item</span> {
+  flex: <span class="num">1 1 200px</span>; <span class="cm">/* grow shrink basis */</span>
+}</pre>
+                    <div class="tip">💡 <code>gap</code> substitui margins entre itens flex.</div>
+                </div>
+
+                <div class="card">
+                    <h3>🔲 CSS Grid — Layout</h3>
+                    <pre><span class="kw">.grid</span> {
+  display: <span class="val">grid</span>;
+  grid-template-columns:
+    <span class="fn">repeat</span>(<span class="val">auto-fill</span>, <span class="fn">minmax</span>(<span class="num">250px</span>, <span class="num">1fr</span>));
+  gap: <span class="val">1.5rem</span>;
+}
+<span class="cm">/* Layout de 3 colunas fixas */</span>
+<span class="kw">.grid-3</span> {
+  grid-template-columns: <span class="fn">repeat</span>(<span class="num">3</span>, <span class="num">1fr</span>);
+}</pre>
+                </div>
+
+                <div class="card">
+                    <h3>📱 Media Queries — Responsivo</h3>
+                    <pre><span class="cm">/* Mobile first */</span>
+<span class="kw">.card</span> { width: <span class="num">100%</span>; }
+
+<span class="kw">@media</span> (<span class="attr">min-width</span>: <span class="num">768px</span>) {
+  <span class="kw">.card</span> { width: <span class="num">48%</span>; }
+}
+<span class="kw">@media</span> (<span class="attr">min-width</span>: <span class="num">1024px</span>) {
+  <span class="kw">.card</span> { width: <span class="num">32%</span>; }
+}
+<span class="cm">/* Breakpoints comuns:
+   480px  — telemóvel
+   768px  — tablet
+   1024px — desktop
+   1280px — ecrã grande */</span></pre>
+                </div>
+
+                <div class="card">
+                    <h3>✨ Animações &amp; Transições</h3>
+                    <pre><span class="cm">/* Transição suave */</span>
+<span class="kw">.btn</span> {
+  transition: <span class="val">all 0.3s ease</span>;
+}
+<span class="kw">.btn:hover</span> {
+  transform: <span class="fn">translateY</span>(<span class="num">-3px</span>);
+  box-shadow: <span class="num">0 10px 20px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,.2</span>);
+}
+<span class="cm">/* Animação */</span>
+<span class="kw">@keyframes</span> fadeIn {
+  <span class="kw">from</span> { opacity: <span class="num">0</span>; transform: <span class="fn">translateY</span>(<span class="num">20px</span>); }
+  <span class="kw">to</span>   { opacity: <span class="num">1</span>; transform: <span class="fn">translateY</span>(<span class="num">0</span>); }
+}
+<span class="kw">.elemento</span> {
+  animation: <span class="val">fadeIn 0.5s ease forwards</span>;
+}</pre>
+                </div>
+
+                <div class="card">
+                    <h3>🎯 Seletores Avançados</h3>
+                    <pre><span class="kw">p:first-child</span>    <span class="cm">/* primeiro filho */</span>
+<span class="kw">li:nth-child(2n)</span> <span class="cm">/* pares */</span>
+<span class="kw">a:not(.ativo)</span>    <span class="cm">/* excluir classe */</span>
+<span class="kw">input:focus</span>      <span class="cm">/* quando focado */</span>
+<span class="kw">div > p</span>          <span class="cm">/* filho direto */</span>
+<span class="kw">h2 + p</span>           <span class="cm">/* irmão adjacente */</span>
+<span class="kw">[data-tipo="x"]</span>  <span class="cm">/* atributo */</span>
+<span class="kw">::before</span>         <span class="cm">/* pseudo-elemento */</span></pre>
+                </div>
+
+                <div class="card">
+                    <h3>📐 Box Model &amp; Reset</h3>
+                    <pre><span class="cm">/* Reset moderno */</span>
+<span class="kw">*, *::before, *::after</span> {
+  box-sizing: <span class="val">border-box</span>;
+  margin: <span class="num">0</span>;
+  padding: <span class="num">0</span>;
+}
+<span class="cm">/* Shorthand: top right bottom left */</span>
+<span class="kw">.caixa</span> {
+  margin: <span class="num">10px 20px 10px 20px</span>;
+  padding: <span class="num">1rem 2rem</span>; <span class="cm">/* top/bot left/right */</span>
+}</pre>
+                </div>
+
+                <div class="card">
+                    <h3>🌈 Gradientes &amp; Sombras</h3>
+                    <pre><span class="kw">.hero</span> {
+  background: <span class="fn">linear-gradient</span>(
+    <span class="num">135deg</span>, <span class="val">#667eea</span>, <span class="val">#764ba2</span>
+  );
+  <span class="cm">/* Sombra de texto */</span>
+  text-shadow: <span class="num">0 2px 4px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,.3</span>);
+  <span class="cm">/* Sombra de caixa */</span>
+  box-shadow:
+    <span class="num">0 4px 6px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,.1</span>),
+    <span class="num">0 10px 20px</span> <span class="fn">rgba</span>(<span class="num">0,0,0,.05</span>);
+}</pre>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════ JS ═══════════════════════════════ -->
+        <section id="js">
+            <h2 class="section-title"><span class="dot dot-js"></span>JavaScript — Lógica &amp; DOM</h2>
+            <div class="grid">
+
+                <div class="card">
+                    <h3>🔍 Selecionar Elementos</h3>
+                    <pre><span class="cm">// Moderno (recomendado)</span>
+<span class="kw">const</span> el  = document.<span class="fn">querySelector</span>(<span class="str">'#id'</span>);
+<span class="kw">const</span> els = document.<span class="fn">querySelectorAll</span>(<span class="str">'.classe'</span>);
+
+<span class="cm">// Iterar sobre NodeList</span>
+els.<span class="fn">forEach</span>(el => el.classList.<span class="fn">add</span>(<span class="str">'ativo'</span>));
+
+<span class="cm">// Manipular conteúdo</span>
+el.textContent = <span class="str">'Novo texto'</span>;
+el.innerHTML   = <span class="str">'&lt;strong&gt;Bold&lt;/strong&gt;'</span>;
+el.style.color = <span class="str">'red'</span>;</pre>
+                </div>
+
+                <div class="card">
+                    <h3>🎯 Eventos</h3>
+                    <pre><span class="cm">// Adicionar evento</span>
+btn.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, (e) => {
+  e.<span class="fn">preventDefault</span>(); <span class="cm">// evitar comportamento padrão</span>
+  console.<span class="fn">log</span>(<span class="str">'Clicado!'</span>);
+});
+
+<span class="cm">// Delegação de eventos (eficiente)</span>
+document.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, (e) => {
+  <span class="kw">if</span> (e.target.<span class="fn">matches</span>(<span class="str">'.btn'</span>)) {
+    <span class="cm">// lógica aqui</span>
+  }
+});</pre>
+                </div>
+
+                <div class="card">
+                    <h3>⚡ Fetch API — Pedidos HTTP</h3>
+                    <pre><span class="cm">// GET</span>
+<span class="kw">async function</span> <span class="fn">getData</span>() {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> res  = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/dados'</span>);
+    <span class="kw">const</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();
+    console.<span class="fn">log</span>(data);
+  } <span class="kw">catch</span> (err) {
+    console.<span class="fn">error</span>(<span class="str">'Erro:'</span>, err);
+  }
+}
+
+<span class="cm">// POST</span>
+<span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/criar'</span>, {
+  method: <span class="str">'POST'</span>,
+  headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+  body: JSON.<span class="fn">stringify</span>({ nome: <span class="str">'Ana'</span> })
+});</pre>
+                </div>
+
+                <div class="card">
+                    <h3>📦 Desestruturação &amp; Spread</h3>
+                    <pre><span class="cm">// Arrays</span>
+<span class="kw">const</span> [a, b, ...resto] = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>];
+
+<span class="cm">// Objetos</span>
+<span class="kw">const</span> { nome, idade = <span class="num">18</span> } = utilizador;
+
+<span class="cm">// Spread — copiar/juntar</span>
+<span class="kw">const</span> novo = { ...obj1, ...obj2 };
+<span class="kw">const</span> arr  = [...arr1, ...arr2];
+
+<span class="cm">// Parâmetros com default</span>
+<span class="kw">function</span> <span class="fn">saudar</span>(nome = <span class="str">'Mundo'</span>) {
+  <span class="kw">return</span> <span class="str">`Olá, ${nome}!`</span>;
+}</pre>
+                </div>
+
+                <div class="card">
+                    <h3>🔄 Array — Métodos Essenciais</h3>
+                    <pre><span class="kw">const</span> nums = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>];
+
+nums.<span class="fn">map</span>(n => n * <span class="num">2</span>);        <span class="cm">// [2,4,6,8,10]</span>
+nums.<span class="fn">filter</span>(n => n > <span class="num">2</span>);     <span class="cm">// [3,4,5]</span>
+nums.<span class="fn">reduce</span>((acc, n) =>
+  acc + n, <span class="num">0</span>);               <span class="cm">// 15</span>
+nums.<span class="fn">find</span>(n => n > <span class="num">3</span>);      <span class="cm">// 4</span>
+nums.<span class="fn">some</span>(n => n > <span class="num">4</span>);      <span class="cm">// true</span>
+nums.<span class="fn">every</span>(n => n > <span class="num">0</span>);     <span class="cm">// true</span>
+nums.<span class="fn">includes</span>(<span class="num">3</span>);           <span class="cm">// true</span>
+[...<span class="kw">new</span> <span class="fn">Set</span>(nums)];          <span class="cm">// remove duplicados</span></pre>
+                </div>
+
+                <div class="card">
+                    <h3>💾 LocalStorage</h3>
+                    <pre><span class="cm">// Guardar</span>
+localStorage.<span class="fn">setItem</span>(<span class="str">'user'</span>,
+  JSON.<span class="fn">stringify</span>({ nome: <span class="str">'Ana'</span> }));
+
+<span class="cm">// Ler</span>
+<span class="kw">const</span> user = JSON.<span class="fn">parse</span>(
+  localStorage.<span class="fn">getItem</span>(<span class="str">'user'</span>)
+);
+
+<span class="cm">// Remover</span>
+localStorage.<span class="fn">removeItem</span>(<span class="str">'user'</span>);
+localStorage.<span class="fn">clear</span>(); <span class="cm">// limpar tudo</span></pre>
+                    <div class="warn">⚠️ Nunca guardes senhas ou dados sensíveis no localStorage!</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════ NODE.JS ═══════════════════════════════ -->
+        <section id="nodejs">
+            <h2 class="section-title"><span class="dot dot-node"></span>Node.js — Servidor &amp; Backend</h2>
+            <div class="grid">
+
+                <div class="card">
+                    <h3>🚀 Servidor Express Básico</h3>
+                    <pre><span class="kw">const</span> express = <span class="fn">require</span>(<span class="str">'express'</span>);
+<span class="kw">const</span> app = <span class="fn">express</span>();
+
+<span class="cm">// Middleware para JSON</span>
+app.<span class="fn">use</span>(express.<span class="fn">json</span>());
+
+<span class="cm">// Rota GET</span>
+app.<span class="fn">get</span>(<span class="str">'/'</span>, (req, res) => {
+  res.<span class="fn">json</span>({ mensagem: <span class="str">'Olá!'</span> });
+});
+
+<span class="cm">// Iniciar servidor</span>
+app.<span class="fn">listen</span>(<span class="num">3000</span>, () => {
+  console.<span class="fn">log</span>(<span class="str">'Servidor em http://localhost:3000'</span>);
+});</pre>
+                </div>
+
+                <div class="card">
+                    <h3>📁 Estrutura de Projeto</h3>
+                    <pre><span class="cm">projeto/
+├── src/
+│   ├── routes/      # rotas da API
+│   ├── models/      # modelos MongoDB
+│   ├── controllers/ # lógica de negócio
+│   └── middleware/  # autenticação, etc.
+├── .env             # variáveis de ambiente
+├── .gitignore
+├── package.json
+└── server.js        # ponto de entrada</span></pre>
+                    <div class="tip">💡 Instala: <code>npm init -y</code> → <code>npm i express mongoose dotenv</code>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🔐 Variáveis de Ambiente (.env)</h3>
+                    <pre><span class="cm"># ficheiro .env</span>
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/minha_bd
+JWT_SECRET=segredo_super_secreto
+
+<span class="cm">// server.js</span>
+<span class="fn">require</span>(<span class="str">'dotenv'</span>).<span class="fn">config</span>();
+
+<span class="kw">const</span> port = process.env.PORT || <span class="num">3000</span>;
+<span class="kw">const</span> uri  = process.env.MONGODB_URI;</pre>
+                    <div class="warn">⚠️ Adiciona <code>.env</code> ao <code>.gitignore</code> sempre!</div>
+                </div>
+
+                <div class="card">
+                    <h3>🛣️ CRUD com Express Router</h3>
+                    <pre><span class="cm">// routes/utilizadores.js</span>
+<span class="kw">const</span> router = require(<span class="str">'express'</span>).<span class="fn">Router</span>();
+
+router.<span class="fn">get</span>(<span class="str">'/'</span>, <span class="fn">listarTodos</span>);
+router.<span class="fn">get</span>(<span class="str">'/:id'</span>, <span class="fn">obterUm</span>);
+router.<span class="fn">post</span>(<span class="str">'/'</span>, <span class="fn">criar</span>);
+router.<span class="fn">put</span>(<span class="str">'/:id'</span>, <span class="fn">atualizar</span>);
+router.<span class="fn">delete</span>(<span class="str">'/:id'</span>, <span class="fn">eliminar</span>);
+
+module.exports = router;
+
+<span class="cm">// server.js</span>
+app.<span class="fn">use</span>(<span class="str">'/api/utilizadores'</span>, router);</pre>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════ MONGODB ═══════════════════════════════ -->
+        <section id="mongodb">
+            <h2 class="section-title"><span class="dot dot-mongo"></span>MongoDB — Base de Dados NoSQL</h2>
+            <div class="grid">
+
+                <div class="card">
+                    <h3>🔌 Ligação com Mongoose</h3>
+                    <pre><span class="kw">const</span> mongoose = <span class="fn">require</span>(<span class="str">'mongoose'</span>);
+
+<span class="kw">async function</span> <span class="fn">ligar</span>() {
+  <span class="kw">try</span> {
+    <span class="kw">await</span> mongoose.<span class="fn">connect</span>(process.env.MONGODB_URI);
+    console.<span class="fn">log</span>(<span class="str">'✅ MongoDB ligado!'</span>);
+  } <span class="kw">catch</span> (err) {
+    console.<span class="fn">error</span>(<span class="str">'❌ Erro:'</span>, err);
+    process.<span class="fn">exit</span>(<span class="num">1</span>);
+  }
+}
+<span class="fn">ligar</span>();</pre>
+                </div>
+
+                <div class="card">
+                    <h3>📋 Definir Schema &amp; Model</h3>
+                    <pre><span class="kw">const</span> { Schema, model } = require(<span class="str">'mongoose'</span>);
+
+<span class="kw">const</span> utilizadorSchema = <span class="kw">new</span> <span class="fn">Schema</span>({
+  nome:  { type: String, required: <span class="kw">true</span> },
+  email: { type: String, required: <span class="kw">true</span>,
+           unique: <span class="kw">true</span>, lowercase: <span class="kw">true</span> },
+  idade: { type: Number, min: <span class="num">0</span> },
+  ativo: { type: Boolean, default: <span class="kw">true</span> }
+}, { timestamps: <span class="kw">true</span> }); <span class="cm">// createdAt, updatedAt</span>
+
+module.exports = <span class="fn">model</span>(<span class="str">'Utilizador'</span>, utilizadorSchema);</pre>
+                </div>
+
+                <div class="card">
+                    <h3>🔄 CRUD — Operações</h3>
+                    <pre><span class="kw">const</span> U = require(<span class="str">'./models/Utilizador'</span>);
+
+<span class="cm">// CREATE</span>
+<span class="kw">const</span> novo = <span class="kw">await</span> U.<span class="fn">create</span>({ nome: <span class="str">'Ana'</span>, email: <span class="str">'ana@mail.pt'</span> });
+
+<span class="cm">// READ</span>
+<span class="kw">const</span> todos = <span class="kw">await</span> U.<span class="fn">find</span>({ ativo: <span class="kw">true</span> });
+<span class="kw">const</span> um    = <span class="kw">await</span> U.<span class="fn">findById</span>(id);
+
+<span class="cm">// UPDATE</span>
+<span class="kw">await</span> U.<span class="fn">findByIdAndUpdate</span>(id,
+  { nome: <span class="str">'Ana Silva'</span> }, { <span class="kw">new</span>: <span class="kw">true</span> });
+
+<span class="cm">// DELETE</span>
+<span class="kw">await</span> U.<span class="fn">findByIdAndDelete</span>(id);</pre>
+                </div>
+
+                <div class="card">
+                    <h3>🔍 Queries Avançadas</h3>
+                    <pre><span class="cm">// Filtros</span>
+<span class="kw">await</span> U.<span class="fn">find</span>({ idade: { $gte: <span class="num">18</span>, $lte: <span class="num">65</span> } });
+<span class="kw">await</span> U.<span class="fn">find</span>({ nome: <span class="kw">new</span> <span class="fn">RegExp</span>(<span class="str">'ana'</span>, <span class="str">'i'</span>) });
+
+<span class="cm">// Ordenar, limitar, saltar</span>
+<span class="kw">await</span> U.<span class="fn">find</span>()
+  .<span class="fn">sort</span>({ nome: <span class="num">1</span> })   <span class="cm">// 1=ASC, -1=DESC</span>
+  .<span class="fn">limit</span>(<span class="num">10</span>)
+  .<span class="fn">skip</span>(<span class="num">20</span>)            <span class="cm">// paginação</span>
+  .<span class="fn">select</span>(<span class="str">'nome email'</span>); <span class="cm">// só estes campos</span>
+
+<span class="cm">// Contar</span>
+<span class="kw">const</span> total = <span class="kw">await</span> U.<span class="fn">countDocuments</span>();</pre>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════ MANUAL ═══════════════════════════════ -->
+        <section id="manual">
+            <h2 class="section-title"><span class="dot dot-mongo"></span>Manual — Ligação Node.js + MongoDB Passo a
+                Passo</h2>
+
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h4>Instalar Node.js e criar projeto</h4>
+                    <p>Descarrega o Node.js em <strong>nodejs.org</strong>. Depois cria o projeto:</p>
+                    <pre>mkdir meu-projeto && cd meu-projeto
+npm init -y</pre>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h4>Instalar dependências</h4>
+                    <pre>npm install express mongoose dotenv
+npm install --save-dev nodemon</pre>
+                    <p>Adiciona ao <code>package.json</code>: <code>"dev": "nodemon server.js"</code> nos scripts.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h4>Configurar MongoDB Atlas (cloud gratuito)</h4>
+                    <p>1. Cria conta em <strong>mongodb.com/atlas</strong> → Cria cluster gratuito (M0)<br>
+                        2. Em <em>Database Access</em> → cria utilizador com password<br>
+                        3. Em <em>Network Access</em> → adiciona IP <code>0.0.0.0/0</code> (ou o teu IP)<br>
+                        4. Em <em>Connect</em> → copia a connection string</p>
+                    <pre><span class="cm"># .env</span>
+MONGODB_URI=mongodb+srv://utilizador:password@cluster.mongodb.net/minha_bd</pre>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h4>Criar server.js principal</h4>
+                    <pre><span class="fn">require</span>(<span class="str">'dotenv'</span>).<span class="fn">config</span>();
+<span class="kw">const</span> express  = <span class="fn">require</span>(<span class="str">'express'</span>);
+<span class="kw">const</span> mongoose = <span class="fn">require</span>(<span class="str">'mongoose'</span>);
+
+<span class="kw">const</span> app = <span class="fn">express</span>();
+app.<span class="fn">use</span>(express.<span class="fn">json</span>());
+
+<span class="cm">// Ligar ao MongoDB</span>
+mongoose.<span class="fn">connect</span>(process.env.MONGODB_URI)
+  .<span class="fn">then</span>(() => console.<span class="fn">log</span>(<span class="str">'✅ MongoDB ligado'</span>))
+  .<span class="fn">catch</span>(err => console.<span class="fn">error</span>(err));
+
+<span class="cm">// Rota de teste</span>
+app.<span class="fn">get</span>(<span class="str">'/'</span>, (req, res) =>
+  res.<span class="fn">json</span>({ status: <span class="str">'ok'</span> }));
+
+app.<span class="fn">listen</span>(process.env.PORT || <span class="num">3000</span>);</pre>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">5</div>
+                <div class="step-content">
+                    <h4>Criar Model e Controller</h4>
+                    <pre><span class="cm">// models/Produto.js</span>
+<span class="kw">const</span> { Schema, model } = <span class="fn">require</span>(<span class="str">'mongoose'</span>);
+<span class="kw">const</span> schema = <span class="kw">new</span> <span class="fn">Schema</span>({
+  nome:  { type: String, required: <span class="kw">true</span> },
+  preco: { type: Number, required: <span class="kw">true</span> },
+  stock: { type: Number, default: <span class="num">0</span> }
+}, { timestamps: <span class="kw">true</span> });
+module.exports = <span class="fn">model</span>(<span class="str">'Produto'</span>, schema);</pre>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-num">6</div>
+                <div class="step-content">
+                    <h4>Testar a API</h4>
+                    <p>Inicia o servidor com <code>npm run dev</code> e testa com <strong>Postman</strong>,
+                        <strong>Insomnia</strong> ou <strong>Thunder Client</strong> (extensão VS Code):
+                    </p>
+                    <pre><span class="cm">GET    http://localhost:3000/api/produtos
+POST   http://localhost:3000/api/produtos
+PUT    http://localhost:3000/api/produtos/:id
+DELETE http://localhost:3000/api/produtos/:id</span></pre>
+                    <div class="tip">💡 Usa <code>npm run dev</code> com nodemon — reinicia automaticamente ao guardar
+                        ficheiros.</div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ═══════════════════════════════ ATALHOS ═══════════════════════════════ -->
+        <section id="atalhos">
+            <h2 class="section-title"><span class="dot" style="background:#a78bfa"></span>⌨️ Atalhos de Teclado &amp;
+                Formatações Rápidas</h2>
+
+            <!-- VS Code -->
+            <h3 style="color:#a78bfa; margin-bottom:.75rem; font-size:1.05rem;">🖥️ VS Code — Atalhos Essenciais</h3>
+            <div class="grid" style="margin-bottom:2rem">
+
+                <div class="card">
+                    <h3>✏️ Edição de Código</h3>
+                    <table>
+                        <tr>
+                            <th>Atalho</th>
+                            <th>Ação</th>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+/</td>
+                            <td>Comentar / descomentar linha</td>
+                        </tr>
+                        <tr>
+                            <td>Alt+↑ / Alt+↓</td>
+                            <td>Mover linha para cima/baixo</td>
+                        </tr>
+                        <tr>
+                            <td>Alt+Shift+↑/↓</td>
+                            <td>Duplicar linha acima/abaixo</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+K</td>
+                            <td>Apagar linha inteira</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Enter</td>
+                            <td>Nova linha abaixo (sem mover cursor)</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+Enter</td>
+                            <td>Nova linha acima</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Z / Ctrl+Y</td>
+                            <td>Desfazer / Refazer</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+X / Ctrl+C</td>
+                            <td>Cortar / Copiar linha (sem selecionar)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>🔍 Navegação &amp; Pesquisa</h3>
+                    <table>
+                        <tr>
+                            <th>Atalho</th>
+                            <th>Ação</th>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+P</td>
+                            <td>Abrir ficheiro rapidamente</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+P</td>
+                            <td>Paleta de comandos</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+F</td>
+                            <td>Pesquisar no ficheiro</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+H</td>
+                            <td>Substituir no ficheiro</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+F</td>
+                            <td>Pesquisar em todos os ficheiros</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+G</td>
+                            <td>Ir para linha número</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Tab</td>
+                            <td>Alternar entre ficheiros abertos</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+\</td>
+                            <td>Dividir editor</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>🖱️ Multi-cursor &amp; Seleção</h3>
+                    <table>
+                        <tr>
+                            <th>Atalho</th>
+                            <th>Ação</th>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+D</td>
+                            <td>Selecionar próxima ocorrência igual</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+L</td>
+                            <td>Selecionar TODAS as ocorrências</td>
+                        </tr>
+                        <tr>
+                            <td>Alt+Click</td>
+                            <td>Adicionar cursor extra</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Alt+↑/↓</td>
+                            <td>Adicionar cursor acima/abaixo</td>
+                        </tr>
+                        <tr>
+                            <td>Shift+Alt+drag</td>
+                            <td>Seleção em coluna (bloco)</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+L</td>
+                            <td>Selecionar linha inteira</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+[</td>
+                            <td>Fechar/Abrir bloco de código</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>🚀 Produtividade &amp; Interface</h3>
+                    <table>
+                        <tr>
+                            <th>Atalho</th>
+                            <th>Ação</th>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+`</td>
+                            <td>Abrir/fechar terminal integrado</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+B</td>
+                            <td>Mostrar/esconder barra lateral</td>
+                        </tr>
+                        <tr>
+                            <td>Alt+Shift+F</td>
+                            <td>Formatar documento inteiro</td>
+                        </tr>
+                        <tr>
+                            <td>F2</td>
+                            <td>Renomear símbolo (variável, função)</td>
+                        </tr>
+                        <tr>
+                            <td>F12</td>
+                            <td>Ir para definição</td>
+                        </tr>
+                        <tr>
+                            <td>Alt+F12</td>
+                            <td>Pré-visualizar definição</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+V</td>
+                            <td>Pré-visualizar Markdown</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+K Z</td>
+                            <td>Modo Zen (ecrã cheio)</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- Emmet Avançado -->
+            <h3 style="color:#a78bfa; margin-bottom:.75rem; font-size:1.05rem;">⚡ Emmet — Formatações Rápidas (Tab para
+                expandir)</h3>
+            <div class="grid" style="margin-bottom:2rem">
+
+                <div class="card">
+                    <h3>🏗️ Estruturas HTML Rápidas</h3>
+                    <table>
+                        <tr>
+                            <th>Emmet</th>
+                            <th>Resultado</th>
+                        </tr>
+                        <tr>
+                            <td>!</td>
+                            <td>Estrutura HTML completa</td>
+                        </tr>
+                        <tr>
+                            <td>nav>ul>li*4>a</td>
+                            <td>Nav com 4 links</td>
+                        </tr>
+                        <tr>
+                            <td>div.container>div.card*3</td>
+                            <td>3 cards dentro de container</td>
+                        </tr>
+                        <tr>
+                            <td>table>tr*3>td*4</td>
+                            <td>Tabela 3x4</td>
+                        </tr>
+                        <tr>
+                            <td>form>input:text+input:email+button</td>
+                            <td>Formulário básico</td>
+                        </tr>
+                        <tr>
+                            <td>ul>li.item$*5</td>
+                            <td>Lista com classes item1..item5</td>
+                        </tr>
+                        <tr>
+                            <td>h$*3{Título $}</td>
+                            <td>h1, h2, h3 com texto</td>
+                        </tr>
+                        <tr>
+                            <td>section#hero>h1+p+a.btn</td>
+                            <td>Secção hero completa</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>🎨 CSS Rápido (dentro de ficheiro .css)</h3>
+                    <table>
+                        <tr>
+                            <th>Abreviatura</th>
+                            <th>Propriedade</th>
+                        </tr>
+                        <tr>
+                            <td>df</td>
+                            <td>display: flex</td>
+                        </tr>
+                        <tr>
+                            <td>dg</td>
+                            <td>display: grid</td>
+                        </tr>
+                        <tr>
+                            <td>jcc</td>
+                            <td>justify-content: center</td>
+                        </tr>
+                        <tr>
+                            <td>aic</td>
+                            <td>align-items: center</td>
+                        </tr>
+                        <tr>
+                            <td>m:a</td>
+                            <td>margin: auto</td>
+                        </tr>
+                        <tr>
+                            <td>p10</td>
+                            <td>padding: 10px</td>
+                        </tr>
+                        <tr>
+                            <td>w100p</td>
+                            <td>width: 100%</td>
+                        </tr>
+                        <tr>
+                            <td>bgc</td>
+                            <td>background-color: #000</td>
+                        </tr>
+                        <tr>
+                            <td>tac</td>
+                            <td>text-align: center</td>
+                        </tr>
+                        <tr>
+                            <td>pos:r</td>
+                            <td>position: relative</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- Browser DevTools -->
+            <h3 style="color:#a78bfa; margin-bottom:.75rem; font-size:1.05rem;">🔧 Browser DevTools (F12)</h3>
+            <div class="grid" style="margin-bottom:2rem">
+
+                <div class="card">
+                    <h3>🌐 Atalhos do Browser (Chrome/Firefox)</h3>
+                    <table>
+                        <tr>
+                            <th>Atalho</th>
+                            <th>Ação</th>
+                        </tr>
+                        <tr>
+                            <td>F12</td>
+                            <td>Abrir DevTools</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+I</td>
+                            <td>Abrir DevTools (alternativo)</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+C</td>
+                            <td>Inspecionar elemento</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+J</td>
+                            <td>Abrir consola JavaScript</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+M</td>
+                            <td>Modo responsivo (mobile)</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+R</td>
+                            <td>Recarregar página</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+R</td>
+                            <td>Recarregar sem cache</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+U</td>
+                            <td>Ver código fonte da página</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>💻 Terminal / Linha de Comandos</h3>
+                    <table>
+                        <tr>
+                            <th>Comando</th>
+                            <th>Ação</th>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+C</td>
+                            <td>Parar processo em execução</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+L</td>
+                            <td>Limpar terminal</td>
+                        </tr>
+                        <tr>
+                            <td>↑ / ↓</td>
+                            <td>Navegar histórico de comandos</td>
+                        </tr>
+                        <tr>
+                            <td>Tab</td>
+                            <td>Auto-completar caminho/comando</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+A</td>
+                            <td>Ir para início da linha</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+E</td>
+                            <td>Ir para fim da linha</td>
+                        </tr>
+                        <tr>
+                            <td>npm run dev</td>
+                            <td>Iniciar servidor de desenvolvimento</td>
+                        </tr>
+                        <tr>
+                            <td>node -e "..."</td>
+                            <td>Executar JS diretamente</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>⚡ Web Dev Cheatsheet — HTML · CSS · JavaScript · Node.js · MongoDB</p>
+        <p style="margin-top:.4rem; font-size:.75rem;">Criado para fins educativos · 2026</p>
+    </footer>
+
+</body>
+
+</html>
