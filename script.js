@@ -15,73 +15,105 @@ const PORTAL_DATA = {
       pdf: "docs/Teorica-HTML5.pdf",
     },
     {
-      id: 't0',
-      titulo: 'Manual de Referência — HTML, CSS, JSON',
-      descricao: 'Guia de referência rápida: estrutura HTML, tags, formulários, tabelas, CSS (seletores, flexbox, grid, variáveis), JSON e atalhos Emmet.',
-      pdf: 'Teorico/web-manual.html'
+      id: "t0",
+      titulo: "Manual de Referência — HTML, CSS, JSON",
+      descricao:
+        "Guia de referência rápida: estrutura HTML, tags, formulários, tabelas, CSS (seletores, flexbox, grid, variáveis), JSON e atalhos Emmet.",
+      pdf: "Teorico/web-manual.html",
     },
     {
-      id: 'ref-w3',
-      titulo: 'W3Schools — Referência Online',
-      descricao: 'Tutorial e referência completa de HTML, CSS, JavaScript, SQL e muito mais. Inclui exemplos interactivos e editor Try it Yourself.',
-      pdf: 'https://www.w3schools.com'
+      id: "ref-w3",
+      titulo: "W3Schools — Referência Online",
+      descricao:
+        "Tutorial e referência completa de HTML, CSS, JavaScript, SQL e muito mais. Inclui exemplos interactivos e editor Try it Yourself.",
+      pdf: "https://www.w3schools.com",
     },
   ],
 
   praticas: [
     {
-      id: 'p1',
-      titulo: 'Aula 1 — HTML Básico',
-      descricao: 'Primeiros passos em HTML: títulos, parágrafos, listas, imagens e links.',
-      enunciado: 'docs/Pratica-Aula1-Tarefa.pdf',
+      id: "p1",
+      titulo: "Aula 1 — HTML Básico",
+      descricao:
+        "Primeiros passos em HTML: títulos, parágrafos, listas, imagens e links.",
+      enunciado: "docs/Pratica-Aula1-Tarefa.pdf",
       ficheiros: [
-        { nome: 'index.html',               path: 'Pratico/Aula 1/index.html',             tipo: 'html' },
-        { nome: 'cheatsheet.html',           path: 'Pratico/Aula 1/cheatsheet.html',         tipo: 'html' },
-        { nome: 'sem consulta / index.html', path: 'Pratico/Aula 1/sem consulta/index.html', tipo: 'html' }
+        { nome: "index.html", path: "Pratico/Aula 1/index.html", tipo: "html" },
+        {
+          nome: "cheatsheet.html",
+          path: "Pratico/Aula 1/cheatsheet.html",
+          tipo: "html",
+        },
+        {
+          nome: "sem consulta / index.html",
+          path: "Pratico/Aula 1/sem consulta/index.html",
+          tipo: "html",
+        },
       ],
-      resultado: 'Pratico/Aula 1/index.html'
+      resultado: [
+        { nome: "Resultado Principal", path: "Pratico/Aula 1/index.html" },
+        {
+          nome: "Resultado Sem Consulta",
+          path: "Pratico/Aula 1/sem consulta/index.html",
+        },
+      ],
     },
     {
-      id: 'p2',
-      titulo: 'Aula 2 — Formulários e Recursos Externos',
-      descricao: 'Formulários, CSS externo, JavaScript externo (async/defer), imagens lazy-loading, vídeo.',
-      enunciado: 'docs/Pratica-Aula2-Tarefa.pdf',
+      id: "p2",
+      titulo: "Aula 2 — Formulários e Recursos Externos",
+      descricao:
+        "Formulários, CSS externo, JavaScript externo (async/defer), imagens lazy-loading, vídeo.",
+      enunciado: "docs/Pratica-Aula2-Tarefa.pdf",
       ficheiros: [
-        { nome: 'index.html',                path: 'Pratico/Aula 2/index.html',                  tipo: 'html' },
-        { nome: 'style.css',                 path: 'Pratico/Aula 2/style.css',                   tipo: 'css'  },
-        { nome: 'script.js',                 path: 'Pratico/Aula 2/script.js',                   tipo: 'js'   },
-        { nome: 'sem consulta / index.html', path: 'Pratico/Aula 2/Sem consulta/index.html',     tipo: 'html' },
-        { nome: 'sem consulta / style.css',  path: 'Pratico/Aula 2/Sem consulta/style.css',      tipo: 'css'  }
+        { nome: "index.html", path: "Pratico/Aula 2/index.html", tipo: "html" },
+        { nome: "style.css", path: "Pratico/Aula 2/style.css", tipo: "css" },
+        { nome: "script.js", path: "Pratico/Aula 2/script.js", tipo: "js" },
+        {
+          nome: "sem consulta / index.html",
+          path: "Pratico/Aula 2/Sem consulta/index.html",
+          tipo: "html",
+        },
+        {
+          nome: "sem consulta / style.css",
+          path: "Pratico/Aula 2/Sem consulta/style.css",
+          tipo: "css",
+        },
       ],
-      resultado: 'Pratico/Aula 2/index.html'
+      resultado: [
+        { nome: "Resultado Principal", path: "Pratico/Aula 2/index.html" },
+        {
+          nome: "Resultado Sem Consulta",
+          path: "Pratico/Aula 2/Sem consulta/index.html",
+        },
+      ],
     },
     // ── Adicionar Aula 3, 4... aqui (ver MANUAL-DEVELOPER.md) ──────────────────
   ],
 
   prompts: [
     {
-      id: 'pr1',
-      titulo: 'Aula 1 — Prompt HTML Básico',
-      aula: 'Aula 1',
-      promptKey: 'Pratico/Aula 1/prompt.txt',
-      respostaKey: 'Pratico/Aula 1/resposta-ia.txt'
+      id: "pr1",
+      titulo: "Aula 1 — Prompt HTML Básico",
+      aula: "Aula 1",
+      promptKey: "Pratico/Aula 1/prompt.txt",
+      respostaKey: "Pratico/Aula 1/resposta-ia.txt",
     },
     {
-      id: 'pr2',
-      titulo: 'Aula 2 — Prompt PARTS HTML-02',
-      aula: 'Aula 2',
-      promptKey: 'Pratico/Aula 2/prompt.txt',
-      respostaKey: 'Pratico/Aula 2/resposta-ia.txt'
-    }
+      id: "pr2",
+      titulo: "Aula 2 — Prompt PARTS HTML-02",
+      aula: "Aula 2",
+      promptKey: "Pratico/Aula 2/prompt.txt",
+      respostaKey: "Pratico/Aula 2/resposta-ia.txt",
+    },
   ],
 };
 
 /* ── 2. ESTADO ─────────────────────────────────────── */
 let activeAsideItem = null;
-let currentSection  = 'home';
+let currentSection = "home";
 
 /* ── 3. INIT ───────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   setupHeaderNav();
   setupMenuToggle();
   showHome();
@@ -89,97 +121,122 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── 4. HEADER NAV ────────────────────────────────── */
 function setupHeaderNav() {
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', e => {
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
       e.preventDefault();
       const section = link.dataset.section;
+      if (!section) return;
       setActiveNavLink(link);
       navigateTo(section);
       // close mobile nav if open
-      document.getElementById('main-nav').classList.remove('open');
+      document.getElementById("main-nav").classList.remove("open");
+    });
+  });
+
+  // Footer navigation shortcuts
+  document.querySelectorAll(".footer-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const section = link.dataset.section;
+      if (!section) return;
+      // Sync header nav active state
+      const headerLink = document.querySelector(`.nav-link[data-section="${section}"]`);
+      if (headerLink) setActiveNavLink(headerLink);
+      navigateTo(section);
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
 }
 
 function setActiveNavLink(activeLink) {
-  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-  activeLink.classList.add('active');
+  document
+    .querySelectorAll(".nav-link")
+    .forEach((l) => l.classList.remove("active"));
+  activeLink.classList.add("active");
 }
 
 function navigateTo(section) {
   currentSection = section;
-  const aside = document.getElementById('aside');
+  const aside = document.getElementById("aside");
 
-  if (section === 'home') {
-    aside.classList.add('hidden');
-    aside.innerHTML = '';
+  if (section === "home") {
+    aside.classList.add("hidden");
+    aside.innerHTML = "";
+    addMobileAsideToggle();
     showHome();
     return;
   }
 
   // Show aside with section content
-  aside.classList.remove('hidden');
-  aside.innerHTML = '';
+  aside.classList.remove("hidden");
+  aside.innerHTML = "";
   activeAsideItem = null;
 
   const configs = {
     teoricas: {
-      title: '📚 Aulas Teóricas',
+      title: "📚 Aulas Teóricas",
       items: PORTAL_DATA.teoricas,
-      icon:  '📄',
-      onClickFn: showTeorica
+      icon: "📄",
+      onClickFn: showTeorica,
     },
     praticas: {
-      title: '💻 Aulas Práticas',
+      title: "💻 Aulas Práticas",
       items: PORTAL_DATA.praticas,
-      icon:  '🔬',
-      onClickFn: showPratica
+      icon: "🔬",
+      onClickFn: showPratica,
     },
     prompts: {
-      title: '🤖 Prompts de IA',
+      title: "🤖 Prompts de IA",
       items: PORTAL_DATA.prompts,
-      icon:  '💬',
-      onClickFn: showPrompt
-    }
+      icon: "💬",
+      onClickFn: showPrompt,
+    },
   };
 
   const cfg = configs[section];
   if (!cfg) return;
 
   // Section label
-  const label = document.createElement('div');
-  label.style.cssText = 'padding:14px 16px 8px;font-size:.72rem;font-weight:700;color:var(--ubi-gold);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--border);';
+  const label = document.createElement("div");
+  label.style.cssText =
+    "padding:14px 16px 8px;font-size:.72rem;font-weight:700;color:var(--ubi-gold);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--border);";
   label.textContent = cfg.title;
   aside.appendChild(label);
 
   // Items
   cfg.items.forEach((item, idx) => {
-    const el = document.createElement('div');
-    el.className = 'nav-item';
+    const el = document.createElement("div");
+    el.className = "nav-item";
     el.innerHTML = `<span class="item-icon">${cfg.icon}</span>${item.titulo}`;
-    el.addEventListener('click', () => {
+    el.addEventListener("click", () => {
       setActiveAsideItem(el);
       cfg.onClickFn(item);
-      if (window.innerWidth <= 768) aside.classList.remove('open');
+      if (window.innerWidth <= 768) aside.classList.remove("open");
     });
     aside.appendChild(el);
 
     // Auto-select first item
     if (idx === 0) {
-      setTimeout(() => { el.click(); }, 0);
+      setTimeout(() => {
+        el.click();
+      }, 0);
     }
   });
+
+  // Add mobile aside toggle button
+  addMobileAsideToggle();
 }
 
 function setActiveAsideItem(el) {
-  if (activeAsideItem) activeAsideItem.classList.remove('active');
-  el.classList.add('active');
+  if (activeAsideItem) activeAsideItem.classList.remove("active");
+  el.classList.add("active");
   activeAsideItem = el;
 }
 
 /* ── 5. HOME VIEW ───────────────────────────────────── */
 function showHome() {
-  document.getElementById('main-content').innerHTML = `
+  document.getElementById("main-content").innerHTML = `
     <div class="welcome-screen">
       <div class="big-icon">🎓</div>
       <h2>Portal de Programação Web</h2>
@@ -220,14 +277,16 @@ function showHome() {
 
 /* ── 6. VISTA TEÓRICA ──────────────────────────────────── */
 function showTeorica(t) {
-  const main = document.getElementById('main-content');
-  const isExternal = t.pdf && t.pdf.startsWith('http');
+  const main = document.getElementById("main-content");
+  const isExternal = t.pdf && t.pdf.startsWith("http");
 
   main.innerHTML = `
     <div class="section-title">📄 ${t.titulo}</div>
-    ${t.descricao ? `<p style="color:var(--text-muted);margin-bottom:20px;line-height:1.6">${t.descricao}</p>` : ''}
+    ${t.descricao ? `<p style="color:var(--text-muted);margin-bottom:20px;line-height:1.6">${t.descricao}</p>` : ""}
     <div class="pdf-block">
-      ${isExternal ? `
+      ${
+        isExternal
+          ? `
         <h3>🔗 Recurso Externo</h3>
         <div style="padding:32px;text-align:center;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
           <p style="color:var(--text-muted);margin-bottom:20px">Este recurso está alojado externamente e não pode ser exibido aqui inline.</p>
@@ -235,10 +294,12 @@ function showTeorica(t) {
             🌐&nbsp; Abrir ${t.titulo}
           </a>
         </div>
-      ` : `
+      `
+          : `
         <h3>📎 Documento</h3>
         <iframe class="pdf-frame" src="${t.pdf}#toolbar=1" title="${t.titulo}"></iframe>
-      `}
+      `
+      }
     </div>`;
 }
 
@@ -264,9 +325,17 @@ async function showPratica(p) {
 
     <div class="result-block">
       <h3 style="font-size:.9rem;font-weight:600;color:var(--text-muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px">🚀 Resultado Final</h3>
-      <a class="btn-result" href="${p.resultado}" target="_blank">
-        ▶&nbsp; Ver Resultado Final
-      </a>
+      <div class="result-buttons">
+        ${(Array.isArray(p.resultado)
+          ? p.resultado
+          : [{ nome: "Ver Resultado Final", path: p.resultado }]
+        )
+          .map(
+            (r) =>
+              `<a class="btn-result" href="${r.path}" target="_blank">▶&nbsp; ${r.nome}</a>`,
+          )
+          .join("")}
+      </div>
     </div>`;
 
   // Build tabs
@@ -274,21 +343,21 @@ async function showPratica(p) {
   const tabPanels = document.getElementById("tab-panels");
 
   p.ficheiros.forEach((f, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
+    const btn = document.createElement("button");
+    btn.className = "tab-btn" + (i === 0 ? " active" : "");
     btn.textContent = f.nome;
     btn.dataset.idx = i;
-    btn.addEventListener('click', () => activateTab(i, p.ficheiros.length));
+    btn.addEventListener("click", () => activateTab(i, p.ficheiros.length));
     tabsBar.appendChild(btn);
 
-    const panel = document.createElement('div');
-    panel.className = 'code-panel' + (i === 0 ? ' active' : '');
+    const panel = document.createElement("div");
+    panel.className = "code-panel" + (i === 0 ? " active" : "");
     panel.id = `panel-${i}`;
     panel.innerHTML = `<div class="loading-code">A carregar ${f.nome}…</div>`;
     tabPanels.appendChild(panel);
 
     // Fetch do ficheiro (requer Live Server ou servidor local)
-    fetchFileContent(f.path, f.tipo).then(html => {
+    fetchFileContent(f.path, f.tipo).then((html) => {
       panel.innerHTML = `
         <button class="copy-code-btn" onclick="copyCode(${i})">📋 Copiar</button>
         <pre id="code-${i}">${html}</pre>`;
@@ -377,7 +446,7 @@ function highlightJS(c) {
 
 /* ── 10. VISTA PROMPT DE IA ────────────────────────────── */
 function showPrompt(pr) {
-  const main = document.getElementById('main-content');
+  const main = document.getElementById("main-content");
   main.innerHTML = `
     <div class="section-title">🤖 ${pr.titulo}</div>
     <p style="color:var(--text-muted);margin-bottom:24px;line-height:1.6">
@@ -387,22 +456,30 @@ function showPrompt(pr) {
     </p>
     <div class="chat-view" id="chat-view"><div style="text-align:center;color:var(--text-muted);padding:40px">A carregar…</div></div>`;
 
-  const chatView = document.getElementById('chat-view');
-  chatView.innerHTML = '';
+  const chatView = document.getElementById("chat-view");
+  chatView.innerHTML = "";
 
   // Carregar prompt via fetch (requer Live Server)
   if (pr.promptKey) {
     fetch(pr.promptKey)
-      .then(r => r.ok ? r.text() : Promise.reject())
-      .then(text => chatView.appendChild(makeBubble('👤', 'user-bubble', 'Prompt enviado', text, true)))
+      .then((r) => (r.ok ? r.text() : Promise.reject()))
+      .then((text) =>
+        chatView.appendChild(
+          makeBubble("👤", "user-bubble", "Prompt enviado", text, true),
+        ),
+      )
       .catch(() => {});
   }
 
   // Carregar resposta via fetch
   if (pr.respostaKey) {
     fetch(pr.respostaKey)
-      .then(r => r.ok ? r.text() : Promise.reject())
-      .then(text => chatView.appendChild(makeBubble('🤖', 'ai-bubble', 'Resposta da IA', text, false)))
+      .then((r) => (r.ok ? r.text() : Promise.reject()))
+      .then((text) =>
+        chatView.appendChild(
+          makeBubble("🤖", "ai-bubble", "Resposta da IA", text, false),
+        ),
+      )
       .catch(() => chatView.appendChild(makePlaceholder()));
   } else {
     chatView.appendChild(makePlaceholder());
@@ -446,26 +523,51 @@ function copyText(btn, text) {
 
 /* ── 11. MENU MOBILE ───────────────────────────────────── */
 function setupMenuToggle() {
-  const btn  = document.getElementById('menu-toggle');
-  const nav  = document.getElementById('main-nav');
-  const aside = document.getElementById('aside');
+  const btn = document.getElementById("menu-toggle");
+  const nav = document.getElementById("main-nav");
+  const aside = document.getElementById("aside");
 
-  btn.addEventListener('click', () => {
-    // On Home (aside hidden): toggle the header nav
-    if (aside.classList.contains('hidden')) {
-      nav.classList.toggle('open');
-    } else {
-      // On a section: toggle the aside
-      aside.classList.toggle('open');
-      nav.classList.remove('open');
-    }
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    // Always toggle the main nav
+    nav.classList.toggle("open");
+    aside.classList.remove("open");
   });
 
   // Close nav on outside click
-  document.addEventListener('click', e => {
+  document.addEventListener("click", (e) => {
     if (!nav.contains(e.target) && e.target !== btn)
-      nav.classList.remove('open');
-    if (!aside.contains(e.target) && e.target !== btn)
-      aside.classList.remove('open');
+      nav.classList.remove("open");
+    const arrowBtn = document.getElementById("aside-arrow-toggle");
+    if (!aside.contains(e.target) && e.target !== btn && e.target !== arrowBtn) {
+      aside.classList.remove("open");
+      if (arrowBtn) arrowBtn.classList.remove("aside-open");
+    }
   });
+}
+
+/* ── 12. BOTÃO SETA ASIDE MOBILE ──────────────────────── */
+function addMobileAsideToggle() {
+  const aside = document.getElementById("aside");
+
+  // Remove previous toggle if exists
+  const prev = document.getElementById("aside-arrow-toggle");
+  if (prev) prev.remove();
+
+  // Only show if we're in a section (aside not hidden)
+  if (aside.classList.contains("hidden")) return;
+
+  const arrow = document.createElement("button");
+  arrow.id = "aside-arrow-toggle";
+  arrow.setAttribute("aria-label", "Abrir menu lateral");
+  arrow.innerHTML = "❯";
+  arrow.addEventListener("click", (e) => {
+    e.stopPropagation();
+    aside.classList.toggle("open");
+    arrow.classList.toggle("aside-open", aside.classList.contains("open"));
+  });
+  document.body.appendChild(arrow);
+
+  // Close aside when clicking outside
+  aside.addEventListener("click", (e) => e.stopPropagation());
 }
