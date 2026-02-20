@@ -76,7 +76,7 @@ body {
 }
 
 #site-header .logo-wrap {
-  width: 46px; height: 46px; flex-shrink: 0;
+  width: 175px; height: 75px; flex-shrink: 0;
   background: #fff; border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
   padding: 3px;

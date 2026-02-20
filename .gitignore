@@ -14,3 +14,7 @@ npm-debug.log*
 *.tmp
 *.log
 *.swp
+
+# Manuais pessoais (só para uso local, não vão para o repositório)
+MANUAL-SCRIPT.md
+MANUAL-DEVELOPER.md

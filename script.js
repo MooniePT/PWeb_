@@ -63,15 +63,15 @@ const PORTAL_DATA = {
       id: 'pr1',
       titulo: 'Aula 1 — Prompt HTML Básico',
       aula: 'Aula 1',
-      promptKey: 'pr1_prompt',
-      respostaKey: null
+      promptKey: 'Pratico/Aula 1/prompt.txt',
+      respostaKey: 'Pratico/Aula 1/resposta-ia.txt'
     },
     {
       id: 'pr2',
       titulo: 'Aula 2 — Prompt PARTS HTML-02',
       aula: 'Aula 2',
-      promptKey: 'pr2_prompt',
-      respostaKey: null
+      promptKey: 'Pratico/Aula 2/prompt.txt',
+      respostaKey: 'Pratico/Aula 2/resposta-ia.txt'
     }
   ],
 };
@@ -391,16 +391,16 @@ function showPrompt(pr) {
   chatView.innerHTML = '';
 
   // Carregar prompt via fetch (requer Live Server)
-  if (pr.promptFile) {
-    fetch(pr.promptFile)
+  if (pr.promptKey) {
+    fetch(pr.promptKey)
       .then(r => r.ok ? r.text() : Promise.reject())
       .then(text => chatView.appendChild(makeBubble('👤', 'user-bubble', 'Prompt enviado', text, true)))
       .catch(() => {});
   }
 
   // Carregar resposta via fetch
-  if (pr.respostaFile) {
-    fetch(pr.respostaFile)
+  if (pr.respostaKey) {
+    fetch(pr.respostaKey)
       .then(r => r.ok ? r.text() : Promise.reject())
       .then(text => chatView.appendChild(makeBubble('🤖', 'ai-bubble', 'Resposta da IA', text, false)))
       .catch(() => chatView.appendChild(makePlaceholder()));
