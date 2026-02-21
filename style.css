@@ -800,6 +800,9 @@ body {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, background 0.2s ease;
 }
+#aside-arrow-toggle[hidden] {
+  display: none !important;
+}
 #aside-arrow-toggle:hover {
   background: var(--bg-card);
 }

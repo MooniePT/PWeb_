@@ -163,7 +163,7 @@ function navigateTo(section) {
   if (section === "home") {
     aside.classList.add("hidden");
     aside.innerHTML = "";
-    addMobileAsideToggle();
+    hideMobileAsideToggle();
     showHome();
     return;
   }
@@ -225,7 +225,7 @@ function navigateTo(section) {
   });
 
   // Add mobile aside toggle button
-  addMobileAsideToggle();
+  showMobileAsideToggle();
 }
 
 function setActiveAsideItem(el) {
@@ -526,20 +526,34 @@ function setupMenuToggle() {
   const btn = document.getElementById("menu-toggle");
   const nav = document.getElementById("main-nav");
   const aside = document.getElementById("aside");
+  const arrowBtn = document.getElementById("aside-arrow-toggle");
 
+  // Hamburger: abre/fecha nav principal
   btn.addEventListener("click", (e) => {
     e.stopPropagation();
-    // Always toggle the main nav
     nav.classList.toggle("open");
     aside.classList.remove("open");
+    if (arrowBtn) arrowBtn.classList.remove("aside-open");
   });
 
-  // Close nav on outside click
+  // Botão seta: abre/fecha o aside lateral
+  if (arrowBtn) {
+    arrowBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      aside.classList.toggle("open");
+      arrowBtn.classList.toggle("aside-open", aside.classList.contains("open"));
+    });
+  }
+
+  // Fechar ao clicar fora
   document.addEventListener("click", (e) => {
     if (!nav.contains(e.target) && e.target !== btn)
       nav.classList.remove("open");
-    const arrowBtn = document.getElementById("aside-arrow-toggle");
-    if (!aside.contains(e.target) && e.target !== btn && e.target !== arrowBtn) {
+    if (
+      !aside.contains(e.target) &&
+      e.target !== btn &&
+      e.target !== arrowBtn
+    ) {
       aside.classList.remove("open");
       if (arrowBtn) arrowBtn.classList.remove("aside-open");
     }
@@ -547,27 +561,20 @@ function setupMenuToggle() {
 }
 
 /* ── 12. BOTÃO SETA ASIDE MOBILE ──────────────────────── */
-function addMobileAsideToggle() {
-  const aside = document.getElementById("aside");
+// Mostra o botão seta apenas quando estamos numa secção (aside visível)
+function showMobileAsideToggle() {
+  const arrowBtn = document.getElementById("aside-arrow-toggle");
+  if (arrowBtn) {
+    arrowBtn.hidden = false;
+    arrowBtn.classList.remove("aside-open");
+  }
+}
 
-  // Remove previous toggle if exists
-  const prev = document.getElementById("aside-arrow-toggle");
-  if (prev) prev.remove();
-
-  // Only show if we're in a section (aside not hidden)
-  if (aside.classList.contains("hidden")) return;
-
-  const arrow = document.createElement("button");
-  arrow.id = "aside-arrow-toggle";
-  arrow.setAttribute("aria-label", "Abrir menu lateral");
-  arrow.innerHTML = "❯";
-  arrow.addEventListener("click", (e) => {
-    e.stopPropagation();
-    aside.classList.toggle("open");
-    arrow.classList.toggle("aside-open", aside.classList.contains("open"));
-  });
-  document.body.appendChild(arrow);
-
-  // Close aside when clicking outside
-  aside.addEventListener("click", (e) => e.stopPropagation());
+// Esconde o botão seta (Home: aside oculto)
+function hideMobileAsideToggle() {
+  const arrowBtn = document.getElementById("aside-arrow-toggle");
+  if (arrowBtn) {
+    arrowBtn.hidden = true;
+    arrowBtn.classList.remove("aside-open");
+  }
 }

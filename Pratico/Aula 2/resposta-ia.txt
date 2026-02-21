@@ -1,391 +1,401 @@
-RESPOSTAS DO ESTUDANTE — Tarefa HTML-02
-Contrato PARTS: Desenvolvimento Guiado de HTML Semântico, Formulários e Recursos Externos
-=============================================================================================
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-CONFIRMAÇÃO INICIAL DE COMPREENSÃO
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-O que é HTML semântico?
------------------------
-HTML semântico significa utilizar tags que transmitem o significado do conteúdo que
-contêm, não apenas a sua aparência. Por exemplo, <article> indica um artigo independente,
-<nav> indica navegação, e <footer> indica o rodapé. Ao contrário de usar <div> para tudo,
-as tags semânticas comunicam a intenção ao browser, aos motores de busca e às tecnologias
-de apoio (como leitores de ecrã).
-
-Por que razão a estrutura semântica melhora a acessibilidade e a manutenção?
-----------------------------------------------------------------------------
-• Acessibilidade: os leitores de ecrã (ex: NVDA, VoiceOver) utilizam os landmarks
-  semânticos para permitir que utilizadores com deficiência visual naveguem rapidamente
-  entre secções da página (ex: saltar diretamente para o <main> ou para o <nav>).
-• Manutenção: o código torna-se mais legível e auto-documentado. Um programador que
-  leia o HTML percebe imediatamente a estrutura da página sem precisar de comentários.
-• SEO: os motores de busca atribuem maior relevância ao conteúdo dentro de tags
-  semânticas adequadas (ex: <h1>, <article>, <main>).
-
-Diferença entre estrutura, apresentação e comportamento:
----------------------------------------------------------
-• HTML (estrutura): define o conteúdo e a sua organização lógica.
-• CSS (apresentação): define o aspeto visual — cores, tipografia, layout.
-• JavaScript (comportamento): define a interatividade e a lógica dinâmica.
-  Esta separação de responsabilidades (Separation of Concerns) facilita a manutenção,
-  os testes e a colaboração em equipa.
-
-Já criei formulários HTML anteriormente? Sim.
-Entendo a diferença entre tags semânticas e não semânticas? Sim — <div> é um
-contentor genérico sem significado; <main> indica o conteúdo principal da página.
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-FASE 1 — ESTRUTURA SEMÂNTICA E FORMULÁRIO
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-── Passo 1: Estrutura Básica ──────────────────────────────────────────────────────────────
-
-Propósito de cada elemento:
-
-• <!DOCTYPE html>
-  Declara ao browser que o documento segue o padrão HTML5. Sem esta declaração, o browser
-  pode entrar em "quirks mode" e interpretar o HTML de forma inconsistente entre browsers.
-
-• <html lang="pt-PT">
-  O atributo lang define o idioma do documento. É essencial para:
-  - Acessibilidade: os leitores de ecrã usam o idioma para selecionar a voz e pronúncia
-    correta, melhorando a experiência de utilizadores com deficiência visual.
-  - SEO: os motores de busca utilizam o idioma para indexar e apresentar o conteúdo
-    nos resultados corretos por região/idioma.
-  - Tradução automática: ferramentas como o Google Translate detetam o idioma original
-    corretamente.
-
-• <meta charset="UTF-8">
-  Define a codificação de caracteres. UTF-8 suporta praticamente todos os caracteres
-  de todas as línguas, incluindo acentos do Português (ã, ç, é, etc.). Sem esta
-  declaração, caracteres especiais podem aparecer corrompidos.
-
-• <title>
-  Define o título da página exibido no separador do browser e nos resultados de pesquisa.
-  É um dos fatores de SEO mais importantes e também é lido pelos leitores de ecrã ao
-  carregar a página.
-
-Por que é importante definir o idioma do documento para acessibilidade e SEO?
-Resposta já incluída acima no ponto <html lang="pt-PT">.
-
-
-── Passo 2: Cabeçalho (<header>) ──────────────────────────────────────────────────────────
-
-Por que colocar o título do evento e o logótipo dentro de <header>?
-O <header> representa o cabeçalho introdutório de uma página ou secção. Colocar o
-título e o logótipo aqui é semanticamente correto porque são os elementos de identificação
-da página — o que a página "é" e "de quem é". Alternativa não semântica seria usar <div>,
-mas perderia-se o significado estrutural.
-
-Significado semântico de <header>:
-<header> é um landmark HTML5 que agrupa conteúdo introdutório ou de navegação. Pode
-aparecer no topo da página (cabeçalho global) ou dentro de <article>/<section>
-(cabeçalho local). Não deve conter o conteúdo principal.
-
-Como os leitores de ecrã interpretam o <header>?
-Os leitores de ecrã expõem o <header> como um landmark "banner" (quando é filho direto
-de <body>). Utilizadores com deficiência visual podem navegar diretamente para este
-landmark, saltando o conteúdo principal se necessário, ou ignorá-lo para ir diretamente
-ao conteúdo. Isto melhora significativamente a eficiência de navegação.
-
-
-── Passo 3: Navegação (<nav>) ─────────────────────────────────────────────────────────────
-
-Por que usar <nav> em vez de um simples <div>?
-<nav> é um landmark semântico que indica ao browser e às tecnologias de apoio que o
-conteúdo dentro dele é um conjunto de links de navegação. Um <div> não transmite essa
-informação — é apenas um contentor genérico. Com <nav>, os leitores de ecrã anunciam
-"navegação" ao utilizador, que pode saltar para esse landmark ou ignorá-lo.
-
-Que tipo de conteúdo pertence ao <nav>?
-Apenas os principais conjuntos de links de navegação — menus principais, navegação
-secundária, breadcrumbs, paginação. Não deve ser usado para todos os grupos de links
-(ex: links no rodapé de redes sociais não precisam de <nav>).
-
-Como a estrutura de navegação melhora a usabilidade?
-• Utilizadores de teclado podem saltar diretamente para o menu.
-• Leitores de ecrã listam os landmarks disponíveis, permitindo navegação eficiente.
-• Motores de busca entendem a hierarquia do site através dos links de navegação.
-• Consequência de usar <div>: perde-se toda a semântica — o conteúdo torna-se
-  invisível para tecnologias de apoio como landmark de navegação.
-
-
-── Passo 4: Conteúdo Principal (<main>) ───────────────────────────────────────────────────
-
-Por que deve o formulário estar dentro de <main>?
-<main> representa o conteúdo principal e único da página — o conteúdo diretamente
-relacionado com o propósito central do documento. O formulário de inscrição é o
-conteúdo principal desta página, logo pertence ao <main>.
-
-Por que deve existir apenas um <main> por página?
-Porque <main> identifica o conteúdo único e central. Ter múltiplos <main> seria
-semanticamente incoerente — qual seria o conteúdo principal? Os leitores de ecrã
-expõem <main> como o landmark "main", e os utilizadores esperam encontrar o conteúdo
-principal aí. Ter mais do que um causaria confusão.
-
-Document landmarks e a sua importância:
-Os landmarks HTML5 (<header>, <nav>, <main>, <aside>, <footer>) criam uma estrutura
-de navegação que permite aos utilizadores de tecnologias de apoio saltar entre secções
-sem ler todo o conteúdo. É equivalente a um índice de navegação invisível mas funcional.
-
-
-── Passo 5: Criação do Formulário ─────────────────────────────────────────────────────────
-
-CAMPO: Nome completo — input type="text"
-• Por que este tipo? "text" aceita qualquer sequência de caracteres, adequado para nomes.
-• Validação nativa: verifica se o campo está preenchido (com required).
-• Restrições adicionais: minlength="3" e maxlength="50" garantem que o nome tem entre
-  3 e 50 caracteres, evitando entradas demasiado curtas (ex: "A") ou longas.
-• Impacto: melhora a integridade dos dados e a usabilidade (feedback imediato ao utilizador).
-
-CAMPO: Email — input type="email"
-• Por que este tipo? O browser valida automaticamente o formato de email (ex: exige "@"
-  e um domínio). Em dispositivos móveis, apresenta um teclado adaptado com "@" visível.
-• Validação nativa: formato de email, campo obrigatório (com required).
-• Alternativa: type="text" — mas perderia-se a validação automática de formato.
-• Impacto: reduz erros de digitação e melhora a qualidade dos dados recolhidos.
-
-CAMPO: Telefone — input type="tel"
-• Por que este tipo? Indica semanticamente que o campo é para um número de telefone.
-  Em dispositivos móveis, apresenta o teclado numérico.
-• Validação nativa: nenhuma validação de formato automática (os formatos variam por país).
-  Pode-se adicionar pattern para validar um formato específico.
-• Alternativa: type="text" — funcionaria, mas perderia-se a otimização para mobile.
-• Impacto: melhora a usabilidade em dispositivos móveis.
-
-CAMPO: Página pessoal — input type="url"
-• Por que este tipo? Valida automaticamente que o valor é um URL válido (ex: exige
-  "http://" ou "https://").
-• Validação nativa: formato de URL.
-• Alternativa: type="text" — sem validação de formato de URL.
-• Impacto: garante que o URL introduzido é tecnicamente válido.
-
-CAMPO: Código postal — input type="text" com pattern
-• Por que usar pattern? O formato português (XXXX-XXX) é específico e não existe um
-  type nativo para códigos postais. O atributo pattern="^\d{4}-\d{3}$" define uma
-  expressão regular que valida exatamente esse formato.
-• Validação nativa: verifica se o valor corresponde ao padrão definido.
-• Alternativa: type="number" — inadequado, pois o hífen não é um número.
-• Impacto: garante que apenas códigos postais no formato correto são aceites.
-
-CAMPO: Tipo de ingresso — select
-• Por que select? Limita as opções a valores predefinidos, eliminando erros de digitação
-  e garantindo integridade dos dados. O utilizador escolhe de uma lista controlada.
-• Validação nativa: com required, garante que uma opção válida é selecionada.
-• Alternativa: type="text" — permitiria qualquer valor, comprometendo a integridade.
-• Impacto: simplifica a experiência do utilizador e garante dados consistentes.
-
-CAMPO: Termos e condições — input type="checkbox"
-• Por que checkbox? É o elemento semântico correto para uma escolha binária (aceitar/não
-  aceitar). Com required, o formulário não pode ser submetido sem o checkbox estar marcado.
-• Validação nativa: com required, o campo é obrigatório.
-• Alternativa: não há alternativa semântica equivalente para consentimento binário.
-• Impacto: garante consentimento explícito do utilizador, com implicações legais (RGPD).
-
-CAMPO: Foto de perfil — input type="file"
-• Por que file? Permite ao utilizador selecionar um ficheiro do seu dispositivo.
-  O atributo accept="image/*" limita a seleção a ficheiros de imagem.
-• Validação nativa: verifica o tipo de ficheiro (com accept).
-• Nota: a validação do tamanho do ficheiro deve ser feita no servidor.
-• Impacto: melhora a usabilidade ao filtrar tipos de ficheiro inválidos.
-
-CAMPO: Botão de envio — input type="submit"
-• Por que submit? É o elemento semântico correto para submeter um formulário.
-  Aciona automaticamente a validação HTML5 nativa antes de enviar os dados.
-• Alternativa: <button type="submit"> — equivalente e mais flexível para estilização.
-• Impacto: desencadeia a validação do lado do cliente antes do envio.
-
-
-── Passo 6: Validação Obrigatória ─────────────────────────────────────────────────────────
-
-Como funciona o atributo required?
-O atributo required impede a submissão do formulário se o campo estiver vazio (ou não
-selecionado, no caso de checkbox). O browser exibe uma mensagem de erro nativa ao
-utilizador. É validação do lado do cliente (client-side).
-
-O que acontece se a validação do lado do cliente for contornada?
-A validação client-side pode ser facilmente contornada (ex: desativando JavaScript,
-usando ferramentas de developer, ou enviando pedidos HTTP diretamente com ferramentas
-como curl ou Postman). Por isso:
-• A validação client-side serve apenas para melhorar a experiência do utilizador
-  (feedback imediato, sem recarregar a página).
-• A validação server-side é OBRIGATÓRIA para garantir segurança e integridade dos dados.
-• Sem validação no servidor, um atacante pode enviar dados maliciosos (ex: injeção SQL,
-  XSS, ficheiros maliciosos) que o servidor processaria sem verificação.
-• Conclusão: nunca confiar exclusivamente na validação client-side para segurança.
-
-
-── Passo 7: Rodapé (<footer>) ─────────────────────────────────────────────────────────────
-
-Que tipo de conteúdo pertence ao <footer>?
-Informações de contacto, copyright, links legais (política de privacidade, termos),
-links para redes sociais, informações sobre o autor/organização. É conteúdo
-complementar que não faz parte do conteúdo principal.
-
-Por que é semanticamente separado do <main>?
-<footer> e <main> têm propósitos distintos. <main> contém o conteúdo central e único
-da página. <footer> contém informação contextual e complementar. Misturá-los violaria
-a semântica e confundiria leitores de ecrã e motores de busca. O <footer> é exposto
-como landmark "contentinfo" pelos leitores de ecrã.
-
-
-── Passo 8: Validação do HTML ─────────────────────────────────────────────────────────────
-
-Por que é importante validar o HTML?
-• Compatibilidade: HTML inválido pode ser interpretado de forma diferente por cada
-  browser, causando comportamentos inesperados.
-• Acessibilidade: erros de estrutura podem impedir que tecnologias de apoio interpretem
-  corretamente a página.
-• Manutenção: código válido é mais previsível e fácil de manter.
-• SEO: motores de busca preferem código bem estruturado.
-
-Que tipos de erros pode um validador detetar?
-• Tags não fechadas ou mal aninhadas (ex: <p><strong></p></strong>).
-• Atributos inválidos ou com valores incorretos.
-• Elementos obrigatórios em falta (ex: <title> dentro de <head>).
-• Uso de atributos obsoletos (ex: align, bgcolor).
-• Elementos aninhados incorretamente (ex: <p> dentro de <p>).
-• Ferramenta recomendada: https://validator.w3.org/
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-FASE 2 — RECURSOS EXTERNOS E PERFORMANCE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-── Passo 1: JavaScript Externo ────────────────────────────────────────────────────────────
-
-Por que colocar <script> dentro de <head>?
-Colocar o <script> no <head> permite que o browser inicie o download do ficheiro
-JavaScript mais cedo. No entanto, sem atributos de carregamento (async ou defer),
-o browser bloqueia o parsing do HTML enquanto descarrega e executa o script — o que
-pode atrasar a renderização da página.
-
-O que acontece se não for definida nenhuma estratégia de carregamento?
-Sem async ou defer, o script é carregado de forma síncrona: o browser para de analisar
-o HTML, descarrega o script, executa-o, e só depois retoma o parsing. Isto pode causar
-atrasos significativos na renderização, especialmente com scripts grandes ou servidores
-lentos. Por isso, a prática recomendada é sempre usar async ou defer.
-
-async — quando usar?
-• O script é descarregado em paralelo com o parsing do HTML.
-• É executado imediatamente quando o download termina, podendo interromper o parsing.
-• A ordem de execução entre múltiplos scripts async NÃO é garantida.
-• Cenários ideais: scripts completamente independentes que não dependem do DOM nem de
-  outros scripts — ex: Google Analytics, Hotjar, scripts de publicidade, widgets de
-  terceiros.
-• Consequência de usar incorretamente: se o script depende do DOM e este ainda não
-  estiver carregado, ocorrerão erros de execução.
-
-defer — quando usar?
-• O script é descarregado em paralelo com o parsing do HTML.
-• É executado APENAS após o HTML estar completamente analisado (antes de DOMContentLoaded).
-• A ordem de execução entre múltiplos scripts defer É garantida (ordem de aparição).
-• Cenários ideais: scripts que manipulam o DOM, frameworks JavaScript (ex: Vue, React,
-  jQuery), scripts que dependem de outros scripts.
-• Consequência de usar incorretamente: se usar defer num script de analytics, o script
-  pode executar mais tarde do que o necessário, perdendo eventos iniciais.
-
-Resumo comparativo:
-  Sem atributo → bloqueia parsing, executa imediatamente
-  async        → paralelo, executa assim que disponível (pode interromper parsing)
-  defer        → paralelo, executa após parsing completo (ordem garantida)
-
-
-── Passo 2: Imagens ───────────────────────────────────────────────────────────────────────
-
-Como carregar uma imagem externa?
-Usando a tag <img> com o atributo src apontando para o URL da imagem:
-  <img src="https://exemplo.com/imagem.jpg" alt="Descrição da imagem">
-O atributo alt é obrigatório para acessibilidade — descreve a imagem para leitores
-de ecrã e é exibido se a imagem não carregar.
-
-O que é lazy loading?
-Lazy loading é uma técnica que adia o carregamento de recursos (imagens, vídeos) até
-que sejam necessários — tipicamente quando estão prestes a entrar na área visível do
-ecrã (viewport). Implementa-se com o atributo loading="lazy":
-  <img src="imagem.jpg" alt="..." loading="lazy">
-
-Quando usar loading="lazy"?
-• Em imagens abaixo da dobra (below the fold) — fora da área visível sem scroll.
-• Em páginas com muitas imagens (galerias, feeds, lojas online).
-• Para reduzir o tempo de carregamento inicial (melhora LCP e performance geral).
-• Para reduzir o consumo de dados em dispositivos móveis.
-• NÃO usar em imagens críticas acima da dobra (hero images, logótipos) — causaria
-  um atraso visível e prejudicaria as métricas de performance (LCP — Largest
-  Contentful Paint).
-• Impacto na experiência: o utilizador vê a página carregar mais rapidamente, com
-  as imagens a aparecer progressivamente à medida que faz scroll.
-
-
-── Passo 3: Vídeo ─────────────────────────────────────────────────────────────────────────
-
-Atributos que melhoram a usabilidade:
-• controls: exibe os controlos nativos do browser (play, pausa, volume, fullscreen).
-  Sem este atributo, o utilizador não consegue interagir com o vídeo.
-• autoplay: inicia a reprodução automaticamente. Deve ser usado com cautela — pode
-  ser intrusivo e é bloqueado por muitos browsers sem muted.
-• muted: silencia o vídeo. Necessário para que autoplay funcione na maioria dos browsers
-  modernos (política anti-autoplay com som).
-• preload="metadata": carrega apenas os metadados (duração, dimensões) sem descarregar
-  o ficheiro completo — bom equilíbrio entre usabilidade e performance.
-• poster: define uma imagem de pré-visualização exibida antes da reprodução.
-• loop: repete o vídeo automaticamente.
-
-Considerações de performance ao incorporar vídeo:
-• Ficheiros de vídeo são grandes — podem consumir muita largura de banda.
-• Usar preload="none" ou preload="metadata" em vez de preload="auto" para evitar
-  descarregar o vídeo completo desnecessariamente.
-• Fornecer múltiplos formatos (<source>) para compatibilidade entre browsers
-  (ex: MP4 para Chrome/Safari, OGG para Firefox).
-• Considerar hospedar vídeos em plataformas externas (YouTube, Vimeo) e incorporar
-  via <iframe> — transfere o custo de largura de banda para a plataforma.
-• Usar lazy loading para vídeos abaixo da dobra (atributo loading="lazy" em <iframe>
-  ou técnicas JavaScript para <video>).
-• Alternativa: usar o atributo poster com uma imagem estática e carregar o vídeo
-  apenas quando o utilizador clicar (melhora significativamente o tempo de carregamento).
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-ARQUITETURA COMPLETA DA PÁGINA — RESUMO FINAL
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Estrutura semântica:
-  <html lang="pt-PT">         → idioma para acessibilidade e SEO
-    <head>
-      <meta charset="UTF-8">  → codificação de caracteres
-      <title>                 → título da página (SEO + leitores de ecrã)
-      <link rel="stylesheet"> → CSS externo (bloqueia renderização — crítico)
-      <script async>          → JS externo independente (não bloqueia parsing)
-    </head>
-    <body>
-      <header>                → landmark "banner" — identificação da página
-      <nav>                   → landmark "navigation" — links de navegação
-      <main>                  → landmark "main" — conteúdo principal (único)
-        <div>                 → contentor do formulário
-          <form>              → formulário com validação HTML5 nativa
-        </div>
-        <div>                 → secção de recursos externos
-          <img loading="lazy">→ imagem com carregamento diferido
-          <video controls>    → vídeo com controlos nativos
-        </div>
-      </main>
-      <footer>                → landmark "contentinfo" — informação complementar
-
-Decisões de performance:
-  • CSS via <link>: bloqueia renderização (necessário para evitar FOUC)
-  • JS via <script async>: não bloqueia parsing (script independente)
-  • Imagens com loading="lazy": carregamento diferido para imagens below the fold
-  • Vídeo com preload="metadata": evita download desnecessário do ficheiro completo
-  • Validação client-side: melhora UX com feedback imediato
-  • Validação server-side: obrigatória para segurança (não implementada neste exercício)
-
-Princípios de acessibilidade aplicados:
-  • lang="pt-PT" no <html>
-  • Atributo alt em todas as imagens
-  • Labels associados a todos os inputs (for/id)
-  • Landmarks semânticos para navegação por teclado/leitor de ecrã
-  • Atributo required com feedback nativo do browser
-  • aria-label no <nav> para identificação adicional
+LAB HTML-02 — Respostas Guiadas (PT-PT)
+Semântica, Formulários e Recursos Externos (HTML5)
+
+============================================================
+0) Conceitos base
+============================================================
+
+Q: O que significa “HTML semântico”?
+A: HTML semântico é usar elementos (tags) cujo nome descreve o papel do conteúdo no documento (ex.: <header>, <nav>, <main>, <footer>, <section>, <article>, <form>, <label>). Em vez de usar apenas <div>/<span> (genéricos), escolhem-se elementos que comunicam significado para humanos, motores de pesquisa e tecnologias de apoio.
+
+Q: Porque é que uma estrutura semântica melhora acessibilidade e manutenibilidade?
+A: 
+- Acessibilidade: leitores de ecrã e navegação por teclado usam “landmarks” (marcos) e a hierarquia semântica para permitir saltos rápidos (ex.: “ir para a navegação”, “ir para o conteúdo principal”), além de melhorar a compreensão de contexto.
+- Manutenibilidade: o código fica auto-explicativo (menos comentários para explicar “o que é este bloco”), facilita refactor e trabalho em equipa, e reduz risco de alterações acidentais.
+
+Q: Qual é a diferença entre estrutura (HTML), apresentação (CSS) e comportamento (JavaScript)?
+A:
+- HTML: estrutura e significado (o que cada parte “é”).
+- CSS: apresentação/estilo (como “parece”).
+- JavaScript: comportamento/interacção (o que “faz” em resposta ao utilizador).
+
+============================================================
+FASE 1 — Estrutura Semântica e Formulário
+============================================================
+
+------------------------------------------------------------
+Passo 1) Estrutura base
+------------------------------------------------------------
+
+Q: Para que serve <!DOCTYPE html>?
+A: Indica HTML5 e força o browser a renderizar em “Standards Mode” (modo de padrões). Sem DOCTYPE válido, alguns browsers podem entrar em “Quirks Mode”, que imita comportamentos antigos e pode causar inconsistências no CSS/layout (ex.: cálculos de largura, margens, box model).
+
+Q: Para que serve <html lang="pt-PT">?
+A: Define a língua principal do documento. Impactos:
+- Acessibilidade: leitores de ecrã escolhem pronúncia/voz adequada e regras linguísticas (ex.: leitura de abreviaturas, hifenização, dicionários).
+- SEO/Indexação: motores de busca entendem a língua e servem a página para utilizadores/queries relevantes; melhora a interpretação do conteúdo.
+
+Q: Para que serve <meta charset="UTF-8">?
+A: Define a codificação de caracteres (UTF-8). Evita caracteres “corrompidos” (mojibake) em acentos e símbolos (ç, ã, €, etc.). Deve estar cedo no <head> para o browser interpretar correctamente desde o início.
+
+Q: Para que serve <title> ... </title>?
+A: Define o título da página (separador do browser, favoritos) e é usado como título nos resultados de pesquisa. Melhora usabilidade e SEO.
+
+------------------------------------------------------------
+Passo 2) Header
+------------------------------------------------------------
+
+Q: Porque é que o título do evento e o logótipo devem estar dentro de <header>?
+A: O <header> representa o conteúdo introdutório/cabeçalho do documento (ou de uma secção). Título e identidade visual (logótipo) são tipicamente elementos introdutórios; colocá-los em <header> torna a estrutura mais clara e navegável.
+
+Q: Qual é o significado semântico de <header>?
+A: É um contentor semântico para conteúdo introdutório: título, subtítulo, resumo, logótipo, metainformação inicial. Nota: pode existir mais do que um <header> (por exemplo, dentro de <article>), porque o significado é contextual.
+
+Q: Como é que leitores de ecrã interpretam <header>?
+A: É entendido como região estrutural (conteúdo de cabeçalho). Ajuda o utilizador a perceber o início/introdução do documento/da secção. Em conjunto com <nav>, <main> e <footer>, melhora a navegação por marcos.
+
+Alternativas e consequências:
+- Alternativa: <div class="header"> (não semântico).
+- Consequência negativa: perde-se significado; navegação por landmarks fica mais pobre; maior dependência de classes/ARIA para comunicar o papel.
+
+------------------------------------------------------------
+Passo 3) Navegação
+------------------------------------------------------------
+
+Q: Porque usar <nav> em vez de <div>?
+A: <nav> identifica explicitamente uma secção de navegação (links principais). Tecnologias de apoio conseguem listar/“saltar para” a navegação. Um <div> não comunica intenção.
+
+Q: Que tipo de conteúdo pertence dentro de <nav>?
+A: Ligações de navegação principais (ex.: âncoras para secções “Sobre”, “Programa”, “Inscrição”, “Contactos”, ou links para páginas). Pode conter listas (<ul><li><a>...), botões de menu, etc., desde que o propósito seja navegar.
+
+Q: Como é que a estrutura de navegação melhora usabilidade?
+A: 
+- Facilita orientação do utilizador (onde estou e para onde posso ir).
+- Permite acesso rápido a secções (especialmente em páginas longas).
+- Para acessibilidade, permite a leitores de ecrã e teclados saltar directamente para a navegação, evitando tabulação excessiva.
+
+Alternativas e consequências:
+- Alternativa: links soltos fora de <nav>.
+- Consequência negativa: pior organização; leitores de ecrã não reconhecem “isto é navegação”; menos previsibilidade.
+
+------------------------------------------------------------
+Passo 4) Conteúdo principal
+------------------------------------------------------------
+
+Q: Porque o formulário deve estar dentro de <main>?
+A: <main> deve conter o conteúdo principal e único da página — aqui, o objectivo principal é a inscrição no evento, logo o formulário é núcleo do conteúdo. Isto cria um landmark essencial para acessibilidade (“saltar para o conteúdo principal”).
+
+Q: Porque deve existir apenas um <main> por página?
+A: Porque o documento deve ter um único conteúdo principal. Múltiplos <main> criam ambiguidade para leitores de ecrã e para a estrutura do documento (não fica claro qual é “o” conteúdo principal). A regra melhora consistência e acessibilidade.
+
+Q: O que são “document landmarks” e porque importam?
+A: São marcos semânticos/estruturais (ex.: <header>, <nav>, <main>, <footer>, e também ARIA landmarks) que permitem navegação rápida e compreensão da estrutura por tecnologias de apoio.
+
+------------------------------------------------------------
+Passo 5) Criação do formulário (campos e validação)
+------------------------------------------------------------
+
+Notas gerais (boas práticas):
+- Usar <label for="..."> associado ao id do campo.
+- Preferir validação nativa do browser (type, required, minlength, maxlength, pattern) como primeira linha, mas nunca confiar só nela.
+- Definir autocomplete (ex.: name, email, tel), inputmode quando útil (ex.: numeric para códigos).
+- Acessibilidade: mensagens de erro claras e, se necessário, aria-describedby para ajudar a explicar requisitos.
+
+(1) Nome completo
+Q: Porque type="text" é apropriado?
+A: O nome é texto livre. type="text" permite entrada geral, compatível com leitores de ecrã e teclados.
+
+Q: Que validação nativa oferece?
+A: Não valida formato por defeito, mas permite:
+- required (obrigatório),
+- minlength/maxlength (tamanho),
+- pattern (se quiseres restringir).
+
+Q: Restrições recomendadas?
+A:
+- required
+- minlength (ex.: 2 ou 3) para evitar entradas vazias/curtas
+- maxlength (ex.: 80 ou 120) para evitar abuso e problemas no backend
+- pattern (opcional e com cuidado): evitar ser demasiado rígido (nomes têm hífen, apóstrofo, acentos). Se usado, deve aceitar letras Unicode e espaços/hífens.
+- autocomplete="name"
+
+Impacto em usabilidade/integridade:
+- Limites impedem lixo/inputs absurdos.
+- Pattern demasiado rígido pode excluir nomes reais (impacto negativo na usabilidade).
+
+(2) Email
+Q: Porque type="email"?
+A: O browser aplica validação de formato de email e em mobile apresenta teclado optimizado com “@”.
+
+Q: Que validação nativa oferece?
+A: Verifica se parece um email (contém “@” e domínio num formato aceitável). Pode usar multiple se aceitasse vários, mas aqui tipicamente não.
+
+Q: Restrições recomendadas?
+A:
+- required
+- maxlength (ex.: 254, limite comum em emails)
+- autocomplete="email"
+
+Impacto:
+- Melhor usabilidade (teclado e validação).
+- Ainda assim pode passar emails inválidos do ponto de vista real (ex.: domínio inexistente). Backend deve confirmar.
+
+(3) Telefone
+Q: Porque type="tel"?
+A: Não impõe formato rígido (porque telefones variam), mas em mobile mostra teclado telefónico.
+
+Q: Que validação nativa oferece?
+A: Por defeito, praticamente nenhuma (a não ser required). Para formato, usa-se pattern.
+
+Q: Restrições recomendadas?
+A:
+- required (se for obrigatório)
+- pattern (ex.: aceitar “+351” opcional e 9 dígitos para PT, se o evento for nacional)
+- minlength/maxlength (ex.: 9 a 15, dependendo do padrão)
+- autocomplete="tel"
+- inputmode="tel" (ou numeric, consoante abordagem)
+
+Impacto:
+- Usabilidade melhora em mobile.
+- Pattern demasiado nacional pode frustrar utilizadores estrangeiros; escolher consoante público-alvo.
+
+(4) Página pessoal
+Q: Porque type="url"?
+A: O browser valida se o formato parece um URL e em mobile pode sugerir teclado adequado.
+
+Q: Que validação nativa oferece?
+A: Verifica formato de URL (ex.: requer esquema em muitos browsers, como https://). Ainda assim não garante que o site exista.
+
+Q: Restrições recomendadas?
+A:
+- required (se obrigatório) ou opcional
+- pattern (normalmente não necessário)
+- placeholder com exemplo (ex.: https://exemplo.pt)
+- autocomplete="url"
+- maxlength (para evitar abuso)
+
+Impacto:
+- Ajuda a recolher dados consistentes.
+- Pode haver fricção se o utilizador introduzir “www...” sem esquema; UX deve orientar (placeholder/ajuda).
+
+(5) Código postal (Portugal)
+Q: Porque usar pattern?
+A: Código postal PT tem formato típico NNNN-NNN. pattern permite impor este formato no cliente.
+
+Q: Validação nativa?
+A: Sem pattern, seria texto livre. Com pattern, o browser valida contra regex.
+
+Q: Restrições recomendadas?
+A:
+- required
+- inputmode="numeric" (ou text com pattern; numeric não permite hífen nativamente em alguns teclados)
+- pattern="\d{4}-\d{3}" (exemplo)
+- maxlength=8
+- placeholder="1234-567"
+- aria-describedby com explicação curta do formato
+
+Impacto:
+- Melhora integridade do dado.
+- Se o evento for internacional, este formato pode não servir; nesse caso, o campo deve ser adaptado (ou permitir formatos diferentes).
+
+(6) Tipo de bilhete (select)
+Q: Porque <select>?
+A: Quando existe um conjunto finito de opções, <select> garante consistência e evita erros de escrita.
+
+Q: Validação nativa?
+A: Com required, o browser obriga a escolher uma opção diferente do placeholder (se configurado).
+
+Q: Restrições recomendadas?
+A:
+- required
+- primeira opção desactivada e com value vazio (ex.: “Escolhe um tipo…”)
+- opções claras (ex.: Normal, Estudante, VIP)
+
+Impacto:
+- Excelente integridade de dados.
+- Alternativa: radio buttons (melhor quando poucas opções e queres visibilidade imediata). Consequência de escolher mal: se forem poucas opções, radio pode ser mais rápido e acessível do que select.
+
+(7) Termos e condições (checkbox)
+Q: Porque checkbox?
+A: É uma aceitação binária (aceito/não aceito). Checkbox representa exactamente isso.
+
+Q: Validação nativa?
+A: required em checkbox exige que esteja marcado para submeter.
+
+Q: Restrições recomendadas?
+A:
+- required
+- texto com link para termos
+- label grande e claro (clicável)
+- se necessário, aria-describedby para clarificar
+
+Impacto:
+- Garante consentimento no cliente.
+- Backend deve registar consentimento e versionamento dos termos (segurança/legal).
+
+(8) Upload de foto (file)
+Q: Porque <input type="file">?
+A: É o mecanismo nativo para anexar ficheiros.
+
+Q: Validação nativa?
+A: Permite seleccionar ficheiro; validações adicionais:
+- accept limita tipos (ex.: image/* ou .jpg,.png)
+- required se obrigatório
+
+Q: Restrições recomendadas?
+A:
+- accept="image/*" (ou tipos específicos)
+- (opcional) limitar tamanho e dimensões no frontend via JS, mas o essencial é no backend
+- explicar requisitos (tamanho máximo, formatos) via texto associado
+
+Impacto:
+- Usabilidade melhora com accept.
+- Segurança: o tipo MIME e extensão podem ser falsificados; backend deve validar, sanitizar e controlar armazenamento.
+
+(9) Botão de submissão (submit)
+Q: Porque type="submit"?
+A: Submete o formulário e activa validação nativa do browser antes do envio (a não ser que exista novalidate).
+
+Q: Restrições recomendadas?
+A:
+- Texto claro (ex.: “Submeter inscrição”)
+- Considerar disabled/spinner via JS (com cuidado) para evitar duplo envio
+
+Impacto:
+- UX previsível.
+- Backend deve ser idempotente ou proteger contra reenvios.
+
+------------------------------------------------------------
+Passo 6) Validação obrigatória e segurança
+------------------------------------------------------------
+
+Q: Como funciona o atributo required?
+A: required impede a submissão do formulário se o campo estiver vazio (ou, no caso de checkbox, não marcado; no caso de select, se mantiver value vazio). O browser mostra uma mensagem de erro e foca o campo.
+
+Q: O que acontece se a validação do cliente for contornada?
+A: É possível contornar (desactivar JS, enviar pedidos via ferramentas, alterar HTML). Resultado: o servidor pode receber dados inválidos/maliciosos. Portanto, toda validação importante deve existir também no backend.
+
+Q: Porque é que isto é relevante para segurança?
+A: Sem validação no servidor, há risco de:
+- dados corruptos/inconsistentes na base de dados,
+- ataques de injecção (dependendo do sistema),
+- upload de ficheiros perigosos,
+- abuso (spam, inputs gigantes, etc.).
+
+------------------------------------------------------------
+Passo 7) Footer
+------------------------------------------------------------
+
+Q: Que tipo de conteúdo pertence em <footer>?
+A: Informação de rodapé: direitos de autor, contactos, morada, links secundários, política de privacidade, termos, redes sociais, nota legal.
+
+Q: Porque é semanticamente separado do <main>?
+A: <main> contém o conteúdo principal; <footer> contém informação de suporte/encerramento. Separar melhora estrutura, navegação e manutenção.
+
+Alternativas e consequências:
+- Alternativa: colocar tudo no <main> ou <div>.
+- Consequência: mistura-se conteúdo principal com metainformação, piorando acessibilidade e clareza.
+
+------------------------------------------------------------
+Passo 8) Validação HTML (W3C Validator, etc.)
+------------------------------------------------------------
+
+Q: Porque é importante validar HTML?
+A: Para garantir conformidade com standards, evitar bugs de renderização, melhorar acessibilidade e compatibilidade entre browsers. HTML inválido pode quebrar estrutura, labels, foco, e leitores de ecrã.
+
+Q: Que erros um validador detecta?
+A: 
+- Tags mal aninhadas, não fechadas, atributos inválidos/duplicados
+- IDs repetidos
+- Estruturas semânticas incorrectas
+- Problemas com forms (ex.: labels sem for/id, types inválidos)
+- Uso de elementos/atributos obsoletos
+- Alguns problemas que afectam acessibilidade (embora para acessibilidade haja ferramentas específicas adicionais)
+
+============================================================
+FASE 2 — Recursos Externos e Performance
+============================================================
+
+------------------------------------------------------------
+Passo 1) JavaScript externo no <head>
+------------------------------------------------------------
+
+Q: Porque colocar <script> no <head>?
+A: Pode ser necessário quando o script define configurações iniciais, polyfills, ou precisa estar disponível cedo. Porém, por defeito, um <script> no <head> sem estratégia bloqueia o parser do HTML.
+
+Q: O que acontece se não houver estratégia de carregamento?
+A: Por defeito, <script src="..."> bloqueia a construção do DOM: o browser pára de analisar o HTML, descarrega e executa o JS, e só depois continua. Isto pode atrasar renderização (piorar LCP/TTI).
+
+Q: O que é async?
+A: O script é descarregado em paralelo e executado assim que terminar o download, sem esperar pela análise completa do HTML. Pode executar antes de o DOM estar pronto e a ordem entre scripts async não é garantida.
+
+Q: O que é defer?
+A: O script é descarregado em paralelo, mas a execução é adiada até o HTML estar totalmente analisado (DOMContentLoaded). A ordem entre scripts defer é preservada.
+
+Q: Quando usar async?
+A: Para scripts independentes, que não dependem do DOM nem de outros scripts e não são críticos para a lógica da página (ex.: analytics, trackers, widgets isolados). Risco: se depender do DOM, pode falhar por executar cedo.
+
+Q: Quando usar defer?
+A: Para scripts que dependem do DOM e/ou quando existe dependência entre scripts e ordem importa (ex.: script principal da página, scripts que manipulam o formulário após o DOM existir). Geralmente é a escolha mais segura para JS de aplicação.
+
+Alternativas e consequências:
+- Alternativa: colocar <script> no fim do <body> (evita bloquear o parsing quase sempre).
+- Consequência de escolher mal:
+  - async em script que precisa do DOM: erros/intermitência.
+  - sem defer/sem mover para o fim: atraso na renderização.
+
+------------------------------------------------------------
+Passo 2) Imagens
+------------------------------------------------------------
+
+Q: Como carregar uma imagem externa?
+A: Usar <img src="URL-ou-caminho" alt="...">. O src pode ser caminho relativo (assets locais) ou absoluto (CDN/domínio). Sempre incluir alt apropriado.
+
+Q: O que é lazy loading (loading="lazy")?
+A: É um mecanismo para adiar o carregamento de imagens fora do ecrã (below the fold) até estarem perto de entrar na viewport. Reduz consumo inicial de rede e acelera a renderização inicial.
+
+Q: Quando usar loading="lazy"?
+A: Em imagens não críticas para a primeira renderização (ex.: galeria abaixo do primeiro ecrã). Evitar em imagens “hero” acima do fold, pois pode atrasar a imagem principal e piorar métricas de performance e experiência.
+
+Impacto em performance/UX:
+- Positivo: menos bytes iniciais e carregamento mais rápido do conteúdo visível.
+- Negativo se mal usado: imagem importante aparece tarde, “saltos” visuais, pior LCP.
+
+Boas práticas adicionais:
+- Definir width/height (ou aspect-ratio via CSS) para reduzir CLS (layout shift).
+- Usar formatos modernos (WebP/AVIF) e tamanhos adequados.
+
+------------------------------------------------------------
+Passo 3) Vídeo
+------------------------------------------------------------
+
+Q: Que atributos melhoram usabilidade? (controls, autoplay, muted)
+A:
+- controls: mostra controlos (play/pause/volume) — essencial para usabilidade.
+- autoplay: tenta iniciar automaticamente, mas muitas vezes é bloqueado.
+- muted: frequentemente necessário para permitir autoplay (políticas de browsers).
+- loop: repete automaticamente (opcional).
+- preload: controla pré-carregamento (auto/metadata/none).
+
+Q: Quais são considerações de performance ao embutir vídeo?
+A:
+- Vídeo é pesado: pode consumir muita largura de banda e bloquear recursos.
+- Autoplay pode prejudicar dados móveis e bateria; também pode ser intrusivo.
+- Usar poster (imagem inicial) para boa UX antes do play.
+- Considerar carregar vídeo apenas quando necessário (lazy, ou só quando o utilizador interage).
+- Preferir streaming/host adequado (CDN) e formatos compatíveis.
+- Se for um embed (ex.: iframe), pode carregar scripts adicionais (impacto no desempenho e privacidade).
+
+Alternativas e consequências:
+- Alternativa: imagem + link para vídeo (carregar só quando clicado).
+- Consequência de embutir sempre: maior tempo de carregamento, pior experiência em redes lentas.
+
+============================================================
+Checklist final (resumo do que importa)
+============================================================
+
+- Semântica: <header>, <nav>, <main>, <footer> com propósito correcto.
+- Acessibilidade: labels associados, alt correcto, landmarks claros, textos de ajuda para padrões.
+- Validação: usar validação nativa, mas validar sempre no backend (segurança).
+- Recursos externos: scripts com defer/async conforme dependências; evitar bloqueios.
+- Performance: lazy para imagens fora do ecrã; cuidado com vídeo (peso e autoplay).
