@@ -28,6 +28,12 @@ const PORTAL_DATA = {
         "Tutorial e referência completa de HTML, CSS, JavaScript, SQL e muito mais. Inclui exemplos interactivos e editor Try it Yourself.",
       pdf: "https://www.w3schools.com",
     },
+    {
+      id: "t2",
+      titulo: "Bloqueio de Renderização",
+      descricao: "Gestão do Bloqueio de Renderização.",
+      pdf: "docs/Bloqueio_Renderizacao.pdf",
+    }
   ],
 
   praticas: [
